@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,34 +25,27 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class Department {
+public class Course {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="IdDe")
+    @Column(name="IdCou")
     @Setter(value = AccessLevel.NONE)
-    private int idDe;
+    private int idCou;
 
-    // TODO: validācijas
     @Column(name = "Title")
     private String title;
 
     @ManyToOne
-    @JoinColumn(name="IdCo")
-    private Company company;
+    @JoinColumn(name="IdTy")
+    private CourseType coType;
 
-    @OneToMany(mappedBy="department")
+    @ManyToMany(mappedBy="courses")
     @ToString.Exclude
-    private Collection<Employee> employees;
+    private Collection<Department> departments = new ArrayList<Department>();
 
-    @ManyToMany
-    @JoinTable(
-        joinColumns=@JoinColumn(name="IdDe"),
-        inverseJoinColumns=@JoinColumn(name="IdCou"))
+    @OneToMany(mappedBy="course")
     @ToString.Exclude
-    private Collection<Course> courses = new ArrayList<Course>();
+    private Collection<EmployeeCourse> emCourse;
 
-    public void addNewCourse(Course course) {
-        courses.add(course);
-    }
 }
