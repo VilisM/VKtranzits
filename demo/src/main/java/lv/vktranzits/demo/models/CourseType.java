@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,7 +35,10 @@ public class CourseType {
 
     @Column(name="IsObligatory")
     private boolean isObligatory;
-    //TODO parejie mainigie
+    
+    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+    @Column(name = "Description")
+    private String description;
 
     @OneToMany(mappedBy="coType")
     @ToString.Exclude

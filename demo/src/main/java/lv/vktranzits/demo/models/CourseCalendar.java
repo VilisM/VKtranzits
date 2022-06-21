@@ -1,5 +1,4 @@
 package lv.vktranzits.demo.models;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -23,23 +21,16 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class EmployeeCourse {
+public class CourseCalendar {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="idEmCo")
-    @Setter(value=AccessLevel.NONE)
-    private int idEmCo;
+    @Column(name="IdCal")
+    @Setter(value = AccessLevel.NONE)
+    private int idCal;
 
-    @Column(name="ValuePr")
-    private float valuePr;
-
-    @ManyToOne
-    @JoinColumn(name="IdEm")
-    private Employee employee;
-
+    
     @ManyToOne
     @JoinColumn(name="IdCou")
-    private Course emCourse;
-
+    private Course courseCal;
 }

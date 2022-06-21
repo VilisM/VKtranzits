@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,19 +34,27 @@ public class Course {
     @Setter(value = AccessLevel.NONE)
     private int idCou;
 
+    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
     @Column(name = "Title")
     private String title;
+
+    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+    @Column(name = "Description")
+    private String description;
 
     @ManyToOne
     @JoinColumn(name="IdTy")
     private CourseType coType;
 
     @ManyToMany(mappedBy="courses")
-    @ToString.Exclude
     private Collection<Department> departments = new ArrayList<Department>();
 
     @OneToMany(mappedBy="course")
     @ToString.Exclude
     private Collection<EmployeeCourse> emCourse;
+
+    @OneToMany(mappedBy = "course")
+    @ToString.Exclude
+    private Collection<CourseCalendar> courseCal;
 
 }
