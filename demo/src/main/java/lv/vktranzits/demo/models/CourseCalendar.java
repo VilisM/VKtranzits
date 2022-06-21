@@ -1,6 +1,4 @@
 package lv.vktranzits.demo.models;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,23 +21,16 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class CourseType {
-    
+public class CourseCalendar {
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="IdTy")
+    @Column(name="IdCal")
     @Setter(value = AccessLevel.NONE)
-    private int idTy;
+    private int idCal;
 
-    @Column(name="IsObligatory")
-    private boolean isObligatory;
     
-    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
-    @Column(name = "Description")
-    private String description;
-
-    @OneToMany(mappedBy="coType")
-    @ToString.Exclude
-    private Collection<Course> courses;
-
+    @ManyToOne
+    @JoinColumn(name="IdCou")
+    private Course course;
 }
