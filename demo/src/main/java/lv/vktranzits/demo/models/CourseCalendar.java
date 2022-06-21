@@ -32,5 +32,5 @@ public class CourseCalendar {
     
     @ManyToOne
     @JoinColumn(name="IdCou")
-    private Course course;
+    private Course courseCal;
 }

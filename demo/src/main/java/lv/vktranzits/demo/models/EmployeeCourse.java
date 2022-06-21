@@ -40,6 +40,6 @@ public class EmployeeCourse {
 
     @ManyToOne
     @JoinColumn(name="IdCou")
-    private Course course;
+    private Course emCourse;
 
 }

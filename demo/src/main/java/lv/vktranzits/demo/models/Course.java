@@ -46,7 +46,7 @@ public class Course {
     @JoinColumn(name="IdTy")
     private CourseType coType;
 
-    @ManyToMany(mappedBy="course")
+    @ManyToMany(mappedBy="courses")
     private Collection<Department> departments = new ArrayList<Department>();
 
     @OneToMany(mappedBy="course")
