@@ -1,20 +1,16 @@
 package lv.vktranzits.demo.models;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,14 +24,26 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class CourseImplementer {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="IdCImpl")
-    @Setter(value = AccessLevel.NONE)
-    private int IdCImpl;
-
+public class Position {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="IdPos")
+    @Setter(value = AccessLevel.NONE)
+    private int IdPos;
+
+    @Column(name = "Title")
+    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+    private String title;
+
+    @Column(name = "Description")
+    private String description;
+
+    @OneToMany(mappedBy = "position")
+    @ToString.Exclude
+    private Collection<Employee> employees;
+
+    @ManyToMany(mappedBy="positions")
+    private Collection<CourseCalendar> courseCal = new ArrayList<CourseCalendar>();
 
 }
