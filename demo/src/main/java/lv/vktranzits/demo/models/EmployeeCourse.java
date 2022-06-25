@@ -33,6 +33,10 @@ public class EmployeeCourse {
     @Setter(value=AccessLevel.NONE)
     private int idEmCo;
 
+    
+    @Column(name="Title")
+    private String title;
+    
     @Column(name="ValuePr")
     @Size(min = 0, max = 10)
     private float valuePr;

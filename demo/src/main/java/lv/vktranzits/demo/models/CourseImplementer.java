@@ -35,7 +35,16 @@ public class CourseImplementer {
     @Column(name="IdCImpl")
     @Setter(value = AccessLevel.NONE)
     private int IdCImpl;
-
     
+	@Column(name="Notes")
+    private String notes;
+
+    @ManyToOne
+    @JoinColumn(name="IdImp")
+    private Implementer impl;
+    
+    @ManyToOne
+    @JoinColumn(name="IdCal")
+    private CourseCalendar courseCal;
 
 }
