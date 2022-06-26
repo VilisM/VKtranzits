@@ -36,7 +36,7 @@ public class Implementer {
     @Column(name = "Title")
     private String title;
 
-    @OneToMany(mappedBy = "Implementer")
+    @OneToMany(mappedBy = "impl")
     @ToString.Exclude
     private Collection<CourseImplementer> cImplementers = new ArrayList<CourseImplementer>();
 }

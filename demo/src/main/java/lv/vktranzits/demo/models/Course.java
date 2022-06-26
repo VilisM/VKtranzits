@@ -49,12 +49,12 @@ public class Course {
     @ManyToMany(mappedBy="courses")
     private Collection<Department> departments = new ArrayList<Department>();
 
-    @OneToMany(mappedBy="course")
+    @OneToMany(mappedBy="emCourse")
     @ToString.Exclude
-    private Collection<EmployeeCourse> emCourse;
+    private Collection<EmployeeCourse> courses;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "courseCal")
     @ToString.Exclude
-    private Collection<CourseCalendar> courseCal;
+    private Collection<CourseCalendar> courseCalendars;
 
 }

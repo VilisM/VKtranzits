@@ -45,6 +45,6 @@ public class CourseImplementer {
     
     @ManyToOne
     @JoinColumn(name="IdCal")
-    private CourseCalendar courseCal;
+    private CourseCalendar courseimplementer;
 
 }

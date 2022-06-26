@@ -57,11 +57,10 @@ public class CourseCalendar {
     @ToString.Exclude
     private Collection<CourseImplementer> coImplementer;
     
-
     @ManyToMany
     @JoinTable(
-        joinColumns=@JoinColumn(name="IdPos"),
-        inverseJoinColumns=@JoinColumn(name="IdCal"))
+        joinColumns=@JoinColumn(name="IdCal"),
+        inverseJoinColumns=@JoinColumn(name="IdPos"))
     @ToString.Exclude
     private Collection<Position> positions = new ArrayList<Position>();
 

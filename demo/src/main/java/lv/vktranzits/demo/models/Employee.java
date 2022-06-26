@@ -63,8 +63,9 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @ToString.Exclude
     private Collection<EmployeeCourse> emCourse;
-    
-    
-    
+
+    @ManyToOne
+    @JoinColumn(name="IdPos")
+    private Position position;
     
 }
