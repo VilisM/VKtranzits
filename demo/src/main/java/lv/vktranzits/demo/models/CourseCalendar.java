@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,6 +39,8 @@ public class CourseCalendar {
     private int idCal;
 
     @Column(name="Year")
+    @Min(1900)
+    @Max(2023)
     private int year;
 
     @Column(name="StartDate")
@@ -49,7 +53,9 @@ public class CourseCalendar {
     @JoinColumn(name="IdCou")
     private Course courseCal;
 
-    @OneToMany
+    @OneToMany(mappedBy="courseimplementer")
+    @ToString.Exclude
+    private Collection<CourseImplementer> coImplementer;
     
 
     @ManyToMany

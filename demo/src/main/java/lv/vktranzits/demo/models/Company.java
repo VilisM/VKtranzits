@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,7 +32,8 @@ public class Company {
     @Setter(value = AccessLevel.NONE)
     private int idCo;
 
-    // TODO: validācijas
+    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+    @Size(min = 4, max = 40)
     @Column(name = "Title")
     private String title;
 
