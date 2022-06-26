@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,7 +37,24 @@ public class Employee {
     private int idEm;
 
     @Column(name="Name")
+    @Size(min=1, max=20)
+	@Pattern (regexp = "[A-Z,Ā,Ē,Ī,Ū,Š,Ģ,Ķ,Ļ,Ž,Č,Ņ]{1}[a-z,ā,ē,ū,ī,š,ģ,ķ,ļ,ž,č,ņ]+")
     private String name;
+    
+    @Column(name="Surname")
+    @Size(min=1, max=20)
+	@Pattern (regexp = "[A-Z,Ā,Ē,Ī,Ū,Š,Ģ,Ķ,Ļ,Ž,Č,Ņ]{1}[a-z,ā,ē,ū,ī,š,ģ,ķ,ļ,ž,č,ņ]+")
+    private String surname;
+
+    @Column(name = "PhoneNumber")
+	@Min (20000000)
+	@Max (29999999)
+    private int phone;
+    
+    @Column(name="Email")
+    @Size(min=5, max=30)
+	@Pattern (regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,10}$")
+    private String email;
 
     @ManyToOne
     @JoinColumn(name="IdDe")
@@ -42,5 +63,8 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @ToString.Exclude
     private Collection<EmployeeCourse> emCourse;
+    
+    
+    
     
 }
