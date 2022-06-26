@@ -36,12 +36,12 @@ public class CourseCalendar {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="IdCal")
     @Setter(value = AccessLevel.NONE)
-    private int idCal;
+    private int IdCal;
 
-    @Column(name="Year")
+    @Column(name="calYear")
     @Min(1900)
     @Max(2023)
-    private int year;
+    private int calYear;
 
     @Column(name="StartDate")
     private Date start_date;
