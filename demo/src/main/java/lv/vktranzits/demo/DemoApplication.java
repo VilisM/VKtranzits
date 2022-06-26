@@ -21,7 +21,9 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner runner(ICompanyRepo companyRepo, ICourseCalendarRepo courseCalRepo, ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo)
+	public CommandLineRunner runner(ICompanyRepo companyRepo, ICourseCalendarRepo courseCalRepo,
+	 ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo,
+	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo)
 	{
 
 		return new CommandLineRunner() {
