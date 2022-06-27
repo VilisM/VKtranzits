@@ -21,7 +21,7 @@ public class CourseController {
 
     @GetMapping("/course/showAll")
     public String selectAllCourses(Model model){
-        model.addAttribute("Object", courseService.selectAllCourses());
+        model.addAttribute("object", courseService.selectAllCourses());
         return "course-show-all";
     }
 
