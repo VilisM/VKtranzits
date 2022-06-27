@@ -47,4 +47,10 @@ public class CourseImplementer {
     @JoinColumn(name="IdCal")
     private CourseCalendar courseimplementer;
 
+    public CourseImplementer(String notes, Implementer impl, CourseCalendar courseimplementer) {
+        setNotes(notes);
+    }
+
+
+
 }

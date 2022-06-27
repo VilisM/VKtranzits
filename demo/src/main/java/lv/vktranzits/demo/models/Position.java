@@ -46,6 +46,9 @@ public class Position {
     @ManyToMany(mappedBy="positions")
     private Collection<CourseCalendar> courseCal = new ArrayList<CourseCalendar>();
 
-    
+    public Position(String title, String description) {
+        setTitle(title);
+        setDescription(description);
+    }
 
 }

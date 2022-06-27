@@ -40,4 +40,8 @@ public class Company {
     @OneToMany(mappedBy="company")
     @ToString.Exclude
     private Collection<Department> departments;
+
+    public Company(String title) {
+        setTitle(title);
+    }
 }

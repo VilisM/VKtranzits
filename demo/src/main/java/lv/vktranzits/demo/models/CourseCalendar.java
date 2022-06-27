@@ -64,4 +64,12 @@ public class CourseCalendar {
     @ToString.Exclude
     private Collection<Position> positions = new ArrayList<Position>();
 
+    public CourseCalendar(int calYear, Date start_date, Date end_date) {
+        setCalYear(calYear);
+        setStart_date(start_date);
+        setEnd_date(end_date);
+    }
+
+
+
 }

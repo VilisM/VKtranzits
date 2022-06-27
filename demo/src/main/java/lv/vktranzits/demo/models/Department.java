@@ -70,4 +70,8 @@ public class Department {
     public void addNewCourse(Course course) {
         courses.add(course);
     }
+
+    public Department(String title) {
+        setTitle(title);
+    }
 }

@@ -52,4 +52,12 @@ public class EmployeeCourse {
     @JoinColumn(name="IdCou")
     private Course emCourse;
 
+    public EmployeeCourse(String title, float valuePr, Date date, Employee employee, Course emCourse) {
+        setTitle(title);
+        setValuePr(valuePr);
+        setDate(date);
+        setEmployee(employee);
+        setEmCourse(emCourse);
+    }
+
 }

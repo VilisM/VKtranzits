@@ -57,4 +57,10 @@ public class Course {
     @ToString.Exclude
     private Collection<CourseCalendar> courseCalendars;
 
+    public Course(String title, String description, CourseType coType) {
+        setTitle(title);
+        setDescription(description);
+        setCoType(coType);
+    }
+
 }
