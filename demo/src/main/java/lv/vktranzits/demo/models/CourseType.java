@@ -33,7 +33,7 @@ public class CourseType {
     @Column(name="IsObligatory")
     private boolean isObligatory;
     
-    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+    @Pattern(regexp="[A-Z]{1}[a-z\\s]+")
     @Column(name = "Description")
     private String description;
 

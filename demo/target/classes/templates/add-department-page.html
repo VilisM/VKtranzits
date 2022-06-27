@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+
+
+<body>
+
+<h1> Ievadi Struktūrvienību</h1>
+
+<form action="#" th:action="@{/addDepartment}" th:object="${department}" method="post">
+  
+     <table>
+        <tr>
+                <td><label>Struktūrvienības nosaukums</label></td>
+                <td><input type="text" th:field="*{title}"/></td> <!-- tiek saglabāts teksts department.title -->
+                <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+        </tr>
+        
+        <tr>
+                <td><label>Vadītāja vārds</label></td>
+                <td><input type="text" th:field="*{V_name}"/></td>
+                <td th:if="${#fields.hasErrors('V_name')}" th:errors="*{V_name}" />
+        </tr>
+        
+        <tr>
+                <td><label>Vadītāja uzvārds</label></td>
+                <td><input type="text" th:field="*{V_surname}"/></td>
+                <td th:if="${#fields.hasErrors('V_surname')}" th:errors="*{V_surname}" />
+                
+        </tr>
+     
+        </table>
+        
+  
+ 
+  <input type="submit" value="Submit">
+</form>
+
+
+
+</body>
+</html>

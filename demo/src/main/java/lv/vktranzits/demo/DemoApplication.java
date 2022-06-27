@@ -43,11 +43,13 @@ public class DemoApplication {
 				// // Create position
 				// Position position = new Position("Junior Java developer", "Random description");
 				// posRepo.save(position);
+				CourseType t1 = new CourseType(true, "Vienu reizi gadā");
+				courseTypeRepo.save(t1);
+				
+				Course c1 = new Course("Java tests", "Tests par Java pamatiem", t1);
+				courseRepo.save(c1);
 
-				// // Create course type
-				// CourseType courseType = new CourseType(true, "Java");
-				// courseTypeRepo.save(courseType);
-
+				
 			}
 		};
 	}
