@@ -54,6 +54,10 @@ public class DemoApplication {
 				courseRepo.save(c2);
 				courseRepo.save(c3);
 				courseRepo.save(c4);
+				Position position = new Position("IT", "Informacijas tehnologijas");
+				Employee employee = new Employee("Janis", "Berzins", 22222222, "janisberzins@inbox.lv", "test123");
+				employee.setPosition(position);
+				employeeRepo.save(employee);
 				
 			}
 		};

@@ -2,6 +2,7 @@ package lv.vktranzits.demo.models;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,8 +57,6 @@ public class Employee {
     private String surname;
 
     @Column(name = "PhoneNumber")
-    @NonNull
-    @NotBlank(message = "Telefona numurs ir obligāts")
 	@Min (20000000)
 	@Max (29999999)
     private int phone;
@@ -82,7 +81,7 @@ public class Employee {
     @ToString.Exclude
     private Collection<EmployeeCourse> emCourse;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="IdPos")
     private Position position;
     
