@@ -19,13 +19,15 @@ public class DepartmentController {
 	
 	@Autowired
 	private DepartmentService departmentService; //te liek tikai interface, lai sasaitītu ar impl lieto autowired
-			
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 
 	
 //1. uztaisīt kontrolējošo funkciju, kas pados allDepartments uz frontend
 	
-@GetMapping("/allDepartments")
+@GetMapping("/department/showAll")
 public String getAllDepartments (Model model) // localhost:8080/allDepartments
 {
 	model.addAttribute("object", departmentService.readAllDepartments()); // bija allDepartments
@@ -61,7 +63,7 @@ public String getAllDepartmentFilter (@RequestParam(name ="id")int id, Model mod
 
 	//3. Apskatīties, kas ir @RequestParam un @PathVariable un uztaisīt kontrolējošās
 	// funkcijas
-@GetMapping ("/allDepartments/{id}")
+@GetMapping ("/department/showAll/{id}")
 public String getAllDepartmentsById (@PathVariable (name = "id")int id, Model model)
 {
 	try {
@@ -185,7 +187,33 @@ public String getDeleteDepartment (@PathVariable (name = "id")int id, Model mode
 	
 }
 
+//@GetMapping ("/allDepartmentEmployees/{id}")
+//public String getAllEmployeesInDepartmentByDepartmentId (@PathVariable (name = "id")int id, Model model)
+//{
+//	try {
+//		model.addAttribute("object", departmentService.readDepartmentById(id));
+//		
+//		return "one-department-page";
+//		
+//		
+//		
+//	} catch (Exception e) {
+//		// TODO: handle exception
+//		return "error-page";
+//	}
+//	
+	
+	
+	
+}
 
+//@GetMapping("/employees/dept/{id}") //localhost:8080/employees/dept/3
+//public String getEmployeesByDepartmentId(Model model, 
+//                @PathVariable(name="id") int id)
+//{
+//        model.addAttribute("object", employeeService.getAllEmployeesFromDepartmentById(id));
+//        return "employees-page";//atvers grades-page.html
+//}
 
 
 }
