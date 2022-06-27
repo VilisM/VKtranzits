@@ -33,7 +33,6 @@ public class Position {
     private int IdPos;
 
     @Column(name = "Title")
-    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
     private String title;
 
     @Column(name = "Description")
