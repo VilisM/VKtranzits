@@ -12,7 +12,7 @@ public interface DepartmentService {
 	public abstract boolean insertNewEmployeeInDepartmentById  (int departmentId, Employee employee) throws Exception;
 	
 	//atgriež visus darbiniekus, kas ir struktūrvienībā, ja ir zināms struktūrvienības id
-	public abstract ArrayList<Employee> selectAllEmployeesInDepartmentByDepartmentId  (int departmentId) throws Exception;
+	public abstract ArrayList<Employee> selectAllEmployeesInDepartmentById  (int departmentId) throws Exception;
 	
 	
 

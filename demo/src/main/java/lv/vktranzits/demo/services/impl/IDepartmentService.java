@@ -40,7 +40,7 @@ public class IDepartmentService implements DepartmentService {
 		
 	
 	@Override
-	public ArrayList<Employee> selectAllEmployeesInDepartmentByDepartmentId  (int departmentId)  throws Exception {
+	public ArrayList<Employee> selectAllEmployeesInDepartmentById  (int departmentId)  throws Exception {
 
 		if(employeeRepo.existsById(departmentId)) {
 			

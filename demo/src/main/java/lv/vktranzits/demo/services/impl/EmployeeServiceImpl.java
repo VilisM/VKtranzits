@@ -15,6 +15,18 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     @Autowired
     private IEmployeeRepo employeeRepo;
 
+    private static boolean isLoggedIn = false;
+
+    @Override
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    @Override
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
+    }
+
     @Override
     public ArrayList<Employee> selectAllEmployees() {
         return (ArrayList<Employee>) employeeRepo.findAll();
@@ -65,6 +77,11 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     @Override
     public ArrayList<Employee> selectAllEmployeesByPosition(String position) {
         return employeeRepo.findAllByPositionTitle(position);
+    }
+
+    @Override
+    public boolean getEmployeeByEmailAndPassword(String email, String password) {
+        return employeeRepo.existsByEmailAndPassword(email, password);
     }
     
 }
