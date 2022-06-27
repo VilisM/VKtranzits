@@ -23,9 +23,9 @@ import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
-import lv.venta.demo.models.Subject;
 
 @Setter
 @Getter
@@ -70,10 +70,9 @@ public class Employee {
 	@Pattern (regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,10}$")
     private String email;
     
-	   @ValidPassword
-	   @NonNull
-	   @NotBlank(message = "New password is mandatory")
-	   private String password;
+	@NonNull
+	@NotBlank(message = "New password is mandatory")
+	private String password;
 
     @ManyToOne
     @JoinColumn(name="IdDe")
@@ -87,19 +86,13 @@ public class Employee {
     @JoinColumn(name="IdPos")
     private Position position;
     
-//    public Employee (String name, String surname, int phone, String email) {
-//        this.name =         name;
-//        this.surname =         surname; 
-//        this.phone =         phone;
-//        this.email =         email;
-//}
-
-
-public void addEmployee (Employee employee)
-{
-	employees.add(employee);
-
-}
+    public Employee(String name, String surname, int phone, String email, String password) {
+        setName(name);
+        setSurname(surname);
+        setPhone(phone);
+        setEmail(email);
+        setPassword(password);
+    }
 
 
 //int strength = 10; // work factor of bcrypt

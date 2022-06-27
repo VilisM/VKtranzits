@@ -1,16 +1,20 @@
-package lv.venta.demo.services.impl;
-
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import lv.venta.demo.models.Child;
 import lv.venta.demo.models.ChildrenGroup;
 import lv.venta.demo.models.department;
 import lv.venta.demo.repos.IChildRepo;
 import lv.venta.demo.repos.IChildreGroupRepo;
 import lv.venta.demo.services.ChildService;
+=======
+import lv.vktranzits.demo.models.*;
+import lv.vktranzits.demo.repos.*;
+import lv.vktranzits.demo.services.*;
+>>>>>>> refs/remotes/origin/main
 
 @Service
 
@@ -95,6 +99,7 @@ public class IDepartmentService implements DepartmentService {
 			
 		}
 		
+<<<<<<< HEAD
 
 		throw new Exception("Struktūrvienība neeksistē");
 	}
@@ -140,6 +145,26 @@ public class IDepartmentService implements DepartmentService {
 		
 		
 	
+=======
+//		for (Product temp: allProducts)
+//		{
+//			if (temp.getId()==id)
+//			{
+//				
+//				allProducts.remove (temp);
+//		return true;
+//	}
+//		}
+			throw new Exception("Bērns neeksistē");
+		}
+
+
+	@Override
+	public boolean insertNewEmployeeInDepartmentById(int departmentId, Employee employee) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}	
+>>>>>>> refs/remotes/origin/main
 }
 	
 

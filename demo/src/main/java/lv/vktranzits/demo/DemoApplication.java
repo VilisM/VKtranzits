@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import lv.vktranzits.demo.repos.*;
+import lv.vktranzits.demo.models.*;
 
 @SpringBootApplication
 @EnableJpaRepositories("lv.vktranzits.demo.*")
@@ -23,13 +24,29 @@ public class DemoApplication {
 	@Bean
 	public CommandLineRunner runner(ICompanyRepo companyRepo, ICourseCalendarRepo courseCalRepo,
 	 ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo,
-	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo)
+	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo, IEmployeeRepo employeeRepo)
 	{
 
 		return new CommandLineRunner() {
 
 			@Override
 			public void run(String... args) throws Exception {
+				
+				// Create company
+				Company company = new Company("VK tranzits");
+				companyRepo.save(company);
+
+				// Create department
+				Department department = new Department("IT");
+				departmentRepo.save(department);
+
+				// Create position
+				Position position = new Position("Junior Java developer", "Random description");
+				posRepo.save(position);
+
+				// Create course type
+				CourseType courseType = new CourseType(true, "Java");
+				courseTypeRepo.save(courseType);
 
 			}
 		};

@@ -39,4 +39,9 @@ public class Implementer {
     @OneToMany(mappedBy = "impl")
     @ToString.Exclude
     private Collection<CourseImplementer> cImplementers = new ArrayList<CourseImplementer>();
+
+    public Implementer(String title) {
+        setTitle(title);
+    }
+    
 }

@@ -2,9 +2,13 @@ package lv.vktranzits.demo.services;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import lv.venta.demo.models.Child;
 import lv.venta.demo.models.ChildrenGroup;
 import lv.venta.demo.models.Product;
+=======
+import lv.vktranzits.demo.models.Employee;
+>>>>>>> refs/remotes/origin/main
 
 
 public interface DepartmentService {

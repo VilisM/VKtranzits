@@ -44,4 +44,9 @@ public class CourseType {
     @ToString.Exclude
     private Collection<Course> courses;
 
+    public CourseType(boolean isObligatory, String description) {
+        setObligatory(isObligatory);
+        setDescription(description);
+    }
+
 }
