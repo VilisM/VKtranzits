@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lv.venta.demo.models.Child;
 import lv.venta.demo.models.ChildrenGroup;
+import lv.venta.demo.models.Product;
 
 
 public interface DepartmentService {
@@ -17,12 +18,35 @@ public interface DepartmentService {
 	public abstract ArrayList<Employee> selectAllEmployeesInDepartmentByDepartmentId  (int departmentId) throws Exception;
 	
 	
-//	
-//	//- nomaina esošā bērna grupiņu uz jaunu, ja ir zināms jaunās grupiņas id
+
+// pievieno jaunu struktūrvienību
 //	public abstract boolean changeChildByIdGroupById (int childId, int groupId) throws Exception;
 //	
 //	
 //	//izdzēš bērnu no grupiņas, ja ir zināms grupiņas id un bērna id
 //	public abstract boolean deleteChildByIdFromGroupById  (int childId, int groupId)throws Exception;
 
+	
+	
+	
+	//CRUD
+	//C - create a department
+	public abstract boolean createNewDepartment (Department department);
+	
+	
+	//R - read or retrieve all departments
+	
+	public abstract ArrayList<Department> readAllDepartments ();
+	
+	
+	//R - read or retrieve one department
+
+	public abstract Department readDepartmentById (int departmentId) throws Exception;
+	
+	//U - update department
+	public abstract boolean updateDepartmentById (int departmentId, Product product);
+	
+	
+	//D - delete department
+	public abstract boolean deleteDepartmentById (int departmentId);
 }

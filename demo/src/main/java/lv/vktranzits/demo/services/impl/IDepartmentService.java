@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.demo.models.Child;
 import lv.venta.demo.models.ChildrenGroup;
+import lv.venta.demo.models.department;
 import lv.venta.demo.repos.IChildRepo;
 import lv.venta.demo.repos.IChildreGroupRepo;
 import lv.venta.demo.services.ChildService;
@@ -57,83 +58,88 @@ public class IDepartmentService implements DepartmentService {
 	
 	}
 	
-	
 	@Override
-	public boolean changeEmployeeByIdDepartmentById (int childId, int groupId) throws Exception {
+    public boolean createNewDepartment(Department department) {
 		
 		
-		if(childRepo.existsById(childId))
-		{
-			if(childrenGroupRepo.existsById(groupId))
-			{
-				Child chi = childRepo.findById(childId).get();
-				ChildrenGroup group = childrenGroupRepo.findById(groupId).get();
-				chi.setChildrenGroup(group);
-
-				return true;
-			}
+		if (departmentRepo.existsByTitle(department.getTitle())
 			
+		{
 			return false;
-	
-			
-		
-			
 		}
-		throw new Exception("Bērns neeksistē");
-		}
-	
-	
-	
-//	@Override
-//	public boolean updateTeacherById(int teacherID, Teacher teacher) {
-//	
-//		
-//		
-//		if(teacherRepo.existsById(teacherID))
-//		{
-//			
-//			Teacher teach = teacherRepo.findById(teacherID).get();
-//			teach.setName(teacher.getName());
-//			teach.setSurname(teacher.getSurname());
-//			
-//			teacherRepo.save(teach);
-//	
-//			return true;
-//			
-//		}
-//		
-//	
-//		return false;
-//	}
-	
-	@Override
-	public boolean deleteChildByIdFromGroupById  (int childId, int groupId)throws Exception {
-		// TODO Auto-generated method stub
-		
-		
-
-		if(childRepo.existsById(childId))
-		{
-			if(childrenGroupRepo.existsById(groupId))
-			{
-			childrenGroupRepo.deleteById(childId);
+		else {
+			departmentRepo.save(department);
 			return true;
-			}
+		}
+            
+    }
 
+
+	@Override
+	public ArrayList<Department> readAllDepartments() {
+	
+//		return alldepartments;
+		
+		return(ArrayList<Department>) departmentRepo.findAll();
+	}
+
+	@Override
+	public Department readDepartmentById(int departmentId) throws Exception {
+		// throws Exception arī jāpievieno interfacam 
+		
+		if(departmentRepo.existsById(departmentId))
+		{
+			
+			department dep = departmentRepo.findById(departmentId).get();
+			return dep;
 			
 		}
 		
-//		for (Product temp: allProducts)
-//		{
-//			if (temp.getId()==id)
-//			{
-//				
-//				allProducts.remove (temp);
-//		return true;
-//	}
-//		}
-			throw new Exception("Bērns neeksistē");
-		}	
+
+		throw new Exception("Struktūrvienība neeksistē");
+	}
+
+	@Override
+	public boolean updateDepartmentById(int departmentId, Department department) {
+		
+		
+		if(departmentRepo.existsById(departmentId))
+		{
+			
+			Department dep = departmentRepo.findById(departmentId).get();
+			dep.setTitle(department.getTitle());
+			dep.setVname(department.getVname());
+			dep.setVSurname(department.getVSurname());
+			
+			departmentRepo.save(dep);
+	
+			return true;
+			
+		}
+		
+		
+
+		return false;
+	}
+
+	@Override
+	public boolean deleteDepartmentById(int departmentId) {
+	
+
+		if(departmentRepo.existsById(departmentId))
+		{
+			departmentRepo.deleteById(departmentId);
+			return true;
+		}
+		
+
+			return false;
+		
+}
+
+		
+		
+	
 }
 	
 
