@@ -1,8 +1,4 @@
 package lv.vktranzits.demo.controllers;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
 import lv.vktranzits.demo.models.Department;
 import lv.vktranzits.demo.services.DepartmentService;
 
@@ -176,7 +171,7 @@ public String getError ()
 public String getDeleteDepartment (@PathVariable (name = "id")int id, Model model)// model backend uz frontend sūtīšana
 {
 	
-		if (departmentCRUDService.deleteDepartmentById(id))
+		if (departmentService.deleteDepartmentById(id))
 		{	
 			model.addAttribute("object", departmentService.readAllDepartments());
 			return "all-department-page";

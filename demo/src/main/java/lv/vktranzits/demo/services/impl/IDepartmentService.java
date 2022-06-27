@@ -1,20 +1,11 @@
-import java.util.ArrayList;
+package lv.vktranzits.demo.services.impl;
 
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-<<<<<<< HEAD
-import lv.venta.demo.models.Child;
-import lv.venta.demo.models.ChildrenGroup;
-import lv.venta.demo.models.department;
-import lv.venta.demo.repos.IChildRepo;
-import lv.venta.demo.repos.IChildreGroupRepo;
-import lv.venta.demo.services.ChildService;
-=======
 import lv.vktranzits.demo.models.*;
 import lv.vktranzits.demo.repos.*;
 import lv.vktranzits.demo.services.*;
->>>>>>> refs/remotes/origin/main
 
 @Service
 
@@ -35,8 +26,7 @@ public class IDepartmentService implements DepartmentService {
 		if(departmentRepo.existsById(departmentId))
 		{
 			
-			if (employeeRepo.existsByNameAndSurname (employee.getName(),employee.getSurname()))
-				
+			if (employeeRepo.existsByNameAndSurname(employee.getName(), employee.getSurname()))
 			{
 				return false;
 			}
@@ -66,7 +56,7 @@ public class IDepartmentService implements DepartmentService {
     public boolean createNewDepartment(Department department) {
 		
 		
-		if (departmentRepo.existsByTitle(department.getTitle())
+		if (departmentRepo.existsByTitle(department.getTitle()))
 			
 		{
 			return false;
@@ -94,12 +84,11 @@ public class IDepartmentService implements DepartmentService {
 		if(departmentRepo.existsById(departmentId))
 		{
 			
-			department dep = departmentRepo.findById(departmentId).get();
+			Department dep = departmentRepo.findById(departmentId).get();
 			return dep;
 			
 		}
 		
-<<<<<<< HEAD
 
 		throw new Exception("Struktūrvienība neeksistē");
 	}
@@ -113,8 +102,8 @@ public class IDepartmentService implements DepartmentService {
 			
 			Department dep = departmentRepo.findById(departmentId).get();
 			dep.setTitle(department.getTitle());
-			dep.setVname(department.getVname());
-			dep.setVSurname(department.getVSurname());
+			dep.setV_name(department.getV_name());
+			dep.setV_surname(department.getV_surname());
 			
 			departmentRepo.save(dep);
 	
@@ -129,8 +118,6 @@ public class IDepartmentService implements DepartmentService {
 
 	@Override
 	public boolean deleteDepartmentById(int departmentId) {
-	
-
 		if(departmentRepo.existsById(departmentId))
 		{
 			departmentRepo.deleteById(departmentId);
@@ -140,31 +127,7 @@ public class IDepartmentService implements DepartmentService {
 
 			return false;
 		
-}
-
-		
-		
-	
-=======
-//		for (Product temp: allProducts)
-//		{
-//			if (temp.getId()==id)
-//			{
-//				
-//				allProducts.remove (temp);
-//		return true;
-//	}
-//		}
-			throw new Exception("Bērns neeksistē");
-		}
-
-
-	@Override
-	public boolean insertNewEmployeeInDepartmentById(int departmentId, Employee employee) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}	
->>>>>>> refs/remotes/origin/main
+	}
 }
 	
 
