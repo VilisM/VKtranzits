@@ -34,11 +34,11 @@ public class Course {
     @Setter(value = AccessLevel.NONE)
     private int idCou;
 
-    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+   
     @Column(name = "Title")
     private String title;
 
-    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
+    
     @Column(name = "Description")
     private String description;
 

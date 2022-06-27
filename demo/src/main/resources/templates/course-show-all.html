@@ -33,12 +33,16 @@
           <table class="table table-bordered table-striped">
             <tr>
               <th>Id</th>
+			  <th>Type Id</th>
+			  <th>Department Id</th> 
               <th>Title</th>
               <th>Description</th>
             </tr>
             <tr th:each="temp : ${object}">
             
               <td th:text="${temp.getIdCou()}"/>
+			  <td th:text="${temp.getIdTy()}"/>
+			  <td th:text="${temp.getIdDe()}"/>
               <td th:text="${temp.getTitle()}"/>
               <td th:text="${temp.getDescription()}"/>
               <td class="col-md-4">
