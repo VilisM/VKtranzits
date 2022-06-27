@@ -59,6 +59,20 @@ public class DemoApplication {
 				employee.setPosition(position);
 				employeeRepo.save(employee);
 				
+				Department d1 = new Department("Krāvēji", "Joņs", "Joņs");
+				Department d2 = new Department("Cēlēji", "Pēters", "Peters");
+				Department d3 = new Department("Stiepēji", "Džonis", "Bravo");
+				Department d4 = new Department("Forklift dievi", "Antons", "Leons");
+				departmentRepo.save(d1);
+				departmentRepo.save(d2);
+				departmentRepo.save(d3);
+				departmentRepo.save(d4);
+				
+				
+				
+				
+				
+				
 			}
 		};
 	}
