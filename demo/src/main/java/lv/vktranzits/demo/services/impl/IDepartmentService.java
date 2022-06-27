@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package lv.vktranzits.demo.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import lv.vktranzits.demo.models.*;
 import lv.vktranzits.demo.repos.*;
 import lv.vktranzits.demo.services.*;
+import java.util.ArrayList;
 
 @Service
-
 public class IDepartmentService implements DepartmentService {
 	
 	
@@ -25,7 +25,6 @@ public class IDepartmentService implements DepartmentService {
 		
 		if(departmentRepo.existsById(departmentId))
 		{
-			
 			if (employeeRepo.existsByVNameAndVSurname (employee.getName(),employee.getSurname()))
 				
 			{
