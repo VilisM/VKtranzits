@@ -36,20 +36,16 @@ public class Department {
     @Setter(value = AccessLevel.NONE)
     private int idDe;
 
-    @Pattern(regexp="[A-Z]{1}[a-z\s]+")
     @Column(name = "Title")
     @Size(min = 4, max = 30)
-    @Pattern(regexp="[A-Z]{1}[a-z\\s]+")
     private String title;
 
     @Column(name = "VName")
     @Size(min = 4, max = 30)
-    @Pattern(regexp="[A-Z]{1}[a-z\\s]+")
     private String V_name;
 
     @Column(name = "VSurname")
     @Size(min = 4, max = 30)
-    @Pattern(regexp="[A-Z]{1}[a-z\\s]+")
     private String V_surname;
 
     @ManyToOne

@@ -9,8 +9,8 @@ import lv.vktranzits.demo.models.Employee;
 public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
 
     boolean existsByNameAndSurname(String name, String surname);
-    
-	public abstract ArrayList<Employee> findByDepartmentId(int departmentId);
+
+	public abstract ArrayList<Employee> findByDepartmentIdDe(int departmentId);
 
     ArrayList<Employee> findAllByPositionTitle(String position);
 
