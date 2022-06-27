@@ -1,13 +1,15 @@
-package lv.vktranzits.demo.services;
+package lv.vktranzits.demo.services.impl;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Course;
 import lv.vktranzits.demo.repos.ICourseRepo;
-import lv.vktranzits.demo.services.impl.ICourseService;
+import lv.vktranzits.demo.services.ICourseService;
 
+@Service
 public class CourseServiceImpl implements ICourseService {
     
     @Autowired

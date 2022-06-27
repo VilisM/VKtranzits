@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import lv.vktranzits.demo.models.*;
 import lv.vktranzits.demo.repos.*;
 import lv.vktranzits.demo.services.*;
-
 @Service
-
 public class IDepartmentService implements DepartmentService {
 	
 	

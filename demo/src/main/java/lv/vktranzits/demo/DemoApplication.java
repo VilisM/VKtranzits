@@ -32,21 +32,21 @@ public class DemoApplication {
 			@Override
 			public void run(String... args) throws Exception {
 				
-				// Create company
-				Company company = new Company("VK tranzits");
-				companyRepo.save(company);
+				// // Create company
+				// Company company = new Company("VK tranzits");
+				// companyRepo.save(company);
 
-				// Create department
-				Department department = new Department("IT", "Janis", "Berzins");
-				departmentRepo.save(department);
+				// // Create department
+				// Department department = new Department("IT", "Janis", "Berzins");
+				// departmentRepo.save(department);
 
-				// Create position
-				Position position = new Position("Junior Java developer", "Random description");
-				posRepo.save(position);
+				// // Create position
+				// Position position = new Position("Junior Java developer", "Random description");
+				// posRepo.save(position);
 
-				// Create course type
-				CourseType courseType = new CourseType(true, "Java");
-				courseTypeRepo.save(courseType);
+				// // Create course type
+				// CourseType courseType = new CourseType(true, "Java");
+				// courseTypeRepo.save(courseType);
 
 			}
 		};

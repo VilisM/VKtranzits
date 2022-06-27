@@ -1,6 +1,8 @@
-package lv.vktranzits.demo.services.impl;
+package lv.vktranzits.demo.services;
 
 import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Course;
 

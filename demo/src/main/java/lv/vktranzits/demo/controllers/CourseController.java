@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lv.vktranzits.demo.models.Course;
-import lv.vktranzits.demo.services.impl.ICourseService;
+import lv.vktranzits.demo.services.ICourseService;
 
 @Controller
 public class CourseController {
