@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>One Departments</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>info par produktu </h1>
+    
+    <p> ID</p>
+  
+  <p th:text="${object.getId()}" />
+    <p> Title</p>
+  
+  <p th:text="${object.getTitle()}" />
+    <p> Description</p>
+  
+  <p th:text="${object.getVname()}" />
+    <p> Quantity</p>
+  
+  <p th:text="${object.getVsurname()}" />
+   <p> Price</p>
+  
+    
+    
+    <p th:text="${object.toString()}" />
+
+ 
+  
+  </body>
+</html>
+
