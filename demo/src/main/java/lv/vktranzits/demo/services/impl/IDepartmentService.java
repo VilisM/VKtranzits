@@ -155,7 +155,7 @@ public class IDepartmentService implements DepartmentService {
 //		return true;
 //	}
 //		}
-			throw new Exception("Struktūrvienība neeksistē");
+			throw new Exception("Bērns neeksistē");
 		}
 
 

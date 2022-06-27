@@ -37,7 +37,7 @@ public class DemoApplication {
 				companyRepo.save(company);
 
 				// Create department
-				Department department = new Department("IT");
+				Department department = new Department("IT", "Janis", "Berzins");
 				departmentRepo.save(department);
 
 				// Create position

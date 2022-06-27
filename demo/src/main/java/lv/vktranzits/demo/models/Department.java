@@ -71,7 +71,9 @@ public class Department {
         courses.add(course);
     }
 
-    public Department(String title) {
+    public Department(String title, String V_name, String V_surname) {
         setTitle(title);
+        setV_name(V_name);
+        setV_surname(V_surname);
     }
 }
