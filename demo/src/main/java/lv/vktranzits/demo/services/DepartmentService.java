@@ -2,8 +2,7 @@ package lv.vktranzits.demo.services;
 
 import java.util.ArrayList;
 
-import lv.venta.demo.models.Child;
-import lv.venta.demo.models.ChildrenGroup;
+import lv.vktranzits.demo.models.Employee;
 
 
 public interface DepartmentService {

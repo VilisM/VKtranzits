@@ -1,15 +1,11 @@
-package lv.venta.demo.services.impl;
-
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lv.venta.demo.models.Child;
-import lv.venta.demo.models.ChildrenGroup;
-import lv.venta.demo.repos.IChildRepo;
-import lv.venta.demo.repos.IChildreGroupRepo;
-import lv.venta.demo.services.ChildService;
+import lv.vktranzits.demo.models.*;
+import lv.vktranzits.demo.repos.*;
+import lv.vktranzits.demo.services.*;
 
 @Service
 
@@ -133,7 +129,14 @@ public class IDepartmentService implements DepartmentService {
 //	}
 //		}
 			throw new Exception("Bērns neeksistē");
-		}	
+		}
+
+
+	@Override
+	public boolean insertNewEmployeeInDepartmentById(int departmentId, Employee employee) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}	
 }
 	
 
