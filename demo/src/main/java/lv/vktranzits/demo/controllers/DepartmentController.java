@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.vktranzits.demo.models.Department;
 import lv.vktranzits.demo.services.DepartmentService;
+import lv.vktranzits.demo.services.IEmployeeService;
 
 @Controller
 
@@ -19,17 +20,25 @@ public class DepartmentController {
 	
 	@Autowired
 	private DepartmentService departmentService; //te liek tikai interface, lai sasaitītu ar impl lieto autowired
+
+	@Autowired
+	private IEmployeeService employeeService;
 			
 	
 
 	
 //1. uztaisīt kontrolējošo funkciju, kas pados allDepartments uz frontend
 	
-@GetMapping("/allDepartments")
+@GetMapping("/department/showAll")
 public String getAllDepartments (Model model) // localhost:8080/allDepartments
 {
-	model.addAttribute("object", departmentService.readAllDepartments()); // bija allDepartments
-	return "all-department-page";
+	if (employeeService.isLoggedIn()) {
+		model.addAttribute("object", departmentService.readAllDepartments());
+		return "all-department-page";
+	}
+	else {
+		return "redirect:/login";
+	}
 	
 }
 	
@@ -38,21 +47,17 @@ public String getAllDepartments (Model model) // localhost:8080/allDepartments
 @GetMapping ("/allDepartmentsFilter") //localhost:8080/allDepartmentsFilter?id=2
 public String getAllDepartmentFilter (@RequestParam(name ="id")int id, Model model)
 {
-	try {
-		model.addAttribute("object", departmentService.readDepartmentById(id));
-		
+	if (employeeService.isLoggedIn()) {
+		try {
+			model.addAttribute("object", departmentService.readDepartmentById(id));
+		} catch (Exception e) {
+			return "error-page";
+		}
 		return "one-department-page";
-		
-		
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-		return "error-page";
 	}
-		
-
-		
-
+	else {
+		return "redirect:/login";
+	}
 }
 
 
@@ -64,21 +69,17 @@ public String getAllDepartmentFilter (@RequestParam(name ="id")int id, Model mod
 @GetMapping ("/allDepartments/{id}")
 public String getAllDepartmentsById (@PathVariable (name = "id")int id, Model model)
 {
-	try {
-		model.addAttribute("object", departmentService.readDepartmentById(id));
-		
+	if (employeeService.isLoggedIn()) {
+		try {
+			model.addAttribute("object", departmentService.readDepartmentById(id));
+		} catch (Exception e) {
+			return "error-page";
+		}
 		return "one-department-page";
-		
-		
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-		return "error-page";
 	}
-	
-	
-	
-	
+	else {
+		return "redirect:/login";
+	}
 }
 
 
@@ -88,8 +89,12 @@ public String getAllDepartmentsById (@PathVariable (name = "id")int id, Model mo
 public String getAddDepartment (Department department)
 
 {
-	
-	return"add-department-page";
+	if (employeeService.isLoggedIn()) {
+		return "add-department-page";
+	}
+	else {
+		return "redirect:/login";
+	}
 }
 
 //2. uztaisīt produktu kur var iecvadīt visus objekta parametrus izņemot id
@@ -99,18 +104,19 @@ public String getAddDepartment (Department department)
 @PostMapping ("/addDepartment")
 public String postAddDepartment (@Valid Department department, BindingResult result) //Aizpildītais produkts
 {
-	
-	if (!result.hasErrors()) {
-		
-		if(departmentService.createNewDepartment(department))
+	if (employeeService.isLoggedIn()) {
+		if (result.hasErrors()) {
+			if(departmentService.createNewDepartment(department))
 			return "redirect:/allDepartments"; //post norāda uz kuru adresi pāradresēt produktus
 			else 
 				return "redirect:/error";
-		
+		}
+		else {
+			return"add-department-page";
+		}
 	}
 	else {
-		
-		return"add-department-page";
+		return "redirect:/login";
 	}
 	
 }
@@ -119,21 +125,18 @@ public String postAddDepartment (@Valid Department department, BindingResult res
 @GetMapping ("/updateDepartment/{id}")
 public String getUpdateDepartment (@PathVariable (name = "id")int id, Model model)
 {
-	
-	
-	try {
-		model.addAttribute("department", departmentService.readDepartmentById(id));
-		
+	if (employeeService.isLoggedIn()) {
+		try {
+			model.addAttribute("object", departmentService.readDepartmentById(id));
+		} catch (Exception e) {
+			return "error-page";
+		}
 		return "update-department-page";
-		
-		
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-		return "error-page";
 	}
-	
-	
+	else {
+		return "redirect:/login";
+	}
+
 }
 
 
@@ -141,23 +144,23 @@ public String getUpdateDepartment (@PathVariable (name = "id")int id, Model mode
 public String postUpdateDepartment (@PathVariable (name = "id")int id, @Valid Department department, BindingResult result)
 	
 {
-	
-if (!result.hasErrors())
-{if (departmentService.updateDepartmentById(id, department))
-	
-	
-	return "redirect:/allDepartments/"+id;
-	
-else 
-return "redirect:/error";
+	if (employeeService.isLoggedIn()) {
+		if (result.hasErrors()) {
+			if(departmentService.updateDepartmentById(id, department))
+			return "redirect:/allDepartments" + id;
+			else 
+				return "redirect:/error";
+		}
+		else {
+			return"update-department-page";
+		}
+	}
+	else {
+		return "redirect:/login";
+	}
 	
 }
 
-else {
-	return"update-department-page";
-}
-		
-}
 @GetMapping ("/error")
 public String getError ()
 {
@@ -170,6 +173,7 @@ public String getError ()
 @GetMapping ("/deleteDepartment/{id}")
 public String getDeleteDepartment (@PathVariable (name = "id")int id, Model model)// model backend uz frontend sūtīšana
 {
+	if (employeeService.isLoggedIn()) {
 	
 		if (departmentService.deleteDepartmentById(id))
 		{	
@@ -182,10 +186,11 @@ public String getDeleteDepartment (@PathVariable (name = "id")int id, Model mode
 		
 	return "error-page";
 	}
+	}
+	else {
+		return "redirect:/login";
+	}
 	
 }
-
-
-
 
 }
