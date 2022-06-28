@@ -50,6 +50,7 @@ public String getAllDepartmentFilter (@RequestParam(name ="id")int id, Model mod
 	if (employeeService.isLoggedIn()) {
 		try {
 			model.addAttribute("object", departmentService.readDepartmentById(id));
+			model.addAttribute("employees", employeeService.selectAllEmployeesByDepartmentId(id));
 		} catch (Exception e) {
 			return "error-page";
 		}
@@ -105,9 +106,9 @@ public String getAddDepartment (Department department)
 public String postAddDepartment (@Valid Department department, BindingResult result) //Aizpildītais produkts
 {
 	if (employeeService.isLoggedIn()) {
-		if (result.hasErrors()) {
+		if (!result.hasErrors()) {
 			if(departmentService.createNewDepartment(department))
-			return "redirect:/allDepartments"; //post norāda uz kuru adresi pāradresēt produktus
+			return "redirect:/department/showAll"; //post norāda uz kuru adresi pāradresēt produktus
 			else 
 				return "redirect:/error";
 		}
@@ -127,11 +128,12 @@ public String getUpdateDepartment (@PathVariable (name = "id")int id, Model mode
 {
 	if (employeeService.isLoggedIn()) {
 		try {
-			model.addAttribute("object", departmentService.readDepartmentById(id));
+			model.addAttribute("department", departmentService.readDepartmentById(id));
+			return "update-department-page";
+
 		} catch (Exception e) {
 			return "error-page";
 		}
-		return "update-department-page";
 	}
 	else {
 		return "redirect:/login";
@@ -142,23 +144,21 @@ public String getUpdateDepartment (@PathVariable (name = "id")int id, Model mode
 
 @PostMapping ("/updateDepartment/{id}")
 public String postUpdateDepartment (@PathVariable (name = "id")int id, @Valid Department department, BindingResult result)
-	
 {
 	if (employeeService.isLoggedIn()) {
-		if (result.hasErrors()) {
+		if (!result.hasErrors()) {
 			if(departmentService.updateDepartmentById(id, department))
-			return "redirect:/allDepartments" + id;
+				return "redirect:/allDepartmentsFilter?id=" + id;
 			else 
 				return "redirect:/error";
 		}
 		else {
-			return"update-department-page";
+			return "update-department-page";
 		}
 	}
 	else {
 		return "redirect:/login";
 	}
-	
 }
 
 @GetMapping ("/error")

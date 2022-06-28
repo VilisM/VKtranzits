@@ -23,5 +23,7 @@ public interface IEmployeeService {
     public abstract void setLoggedIn(boolean loggedIn);
 
     public abstract boolean isLoggedIn();
+
+    public abstract ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
     
 }

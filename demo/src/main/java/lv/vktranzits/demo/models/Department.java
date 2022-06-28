@@ -67,6 +67,10 @@ public class Department {
         courses.add(course);
     }
 
+    public void addNewEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
     public Department(String title, String V_name, String V_surname) {
         setTitle(title);
         setV_name(V_name);

@@ -1,46 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-<title>
-Update Department
-</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darbinieku labošana</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 
-
-
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
+        <div class="container">		        
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/employee/showAll">Darbinieki</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/department/showAll">Strukturvienības</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/course/showAll">Kursi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Iziet no konta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    <h1>Lūdzu ievadiet darbinieka parametrus</h1>
+                        <form action="#" th:action="@{/updateDepartment/__${id}__}" th:object="${department}" method="post">
+                            <div class="form-group">
+                                <label for="title">Nosaukums</label>
+                                <input type="text" id="title" th:field="*{title}" class="form-control">
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                            </div>
 
-<h1> Rediģēt struktūrvienību</h1>
+                            <div class="form-group">
+                                <label for="V_name">Vadītāja vārds</label>
+                                <input type="text" id="V_name" th:field="*{V_name}" class="form-control">
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('V_name')}" th:errors="*{V_name}"></div>
+                            </div>
 
-<form action="#" th:action="@{/updateDepartment/__${id}__}" th:object="${department}" method="post">
+                            <div class="form-group">
+                                <label for="V_surname">Vadītāja uzvārds</label>
+                                <input type="text" id="V_surname" th:field="*{V_surname}" class="form-control">
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('V_surname')}" th:errors="*{V_surname}"></div>
+                            </div>
 
- <table>
-        <tr>
-                <td><label>Nosaukums</label></td>
-                <td><input type="text" th:field="*{title}"/></td> <!-- tiek saglabāts teksts department.title -->
-                <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
-        </tr>
-        
-        <tr>
-                <td><label>Vadītāja vārds</label></td>
-                <td><input type="text" th:field="*{V_name}"/></td>
-                <td th:if="${#fields.hasErrors('V_name')}" th:errors="*{V_name}" />
-        </tr>
-        
-        <tr>
-                <td><label>Vadītāja uzvārds</label></td>
-                <td><input type="text" th:field="*{V_surname}"/></td>
-                <td th:if="${#fields.hasErrors('V_surname')}" th:errors="*{V_surname}" />
-                
-        </tr>
-      
-        </table>
-        
-</form>
-
-
-
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
+                        </form>
+                </div>
+            </div>
+        </div>
 </body>
+
 </html>

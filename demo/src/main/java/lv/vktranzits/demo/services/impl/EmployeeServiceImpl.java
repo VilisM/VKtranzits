@@ -83,5 +83,10 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     public boolean getEmployeeByEmailAndPassword(String email, String password) {
         return employeeRepo.existsByEmailAndPassword(email, password);
     }
+
+    @Override
+    public ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId) {
+        return employeeRepo.findAllByDepartmentIdDe(departmentId);
+    }
     
 }
