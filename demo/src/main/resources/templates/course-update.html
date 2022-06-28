@@ -49,9 +49,9 @@
 
                             <div class="form-group">
                                 <label for="coursetype">Kursa tips</label>
-                                <select class="form-control" id="coursetype" th:field="*{coType.description}">
+                                <select class="form-control" id="coursetype" th:field="*{coType}">
                                     <option th:each="test: ${coursetype}"
-                                        th:value="${test.description}" th:text="${test.description}">
+                                        th:value="${test.idTy}" th:text="${test.description}">
                                     </option>
                                 </select>
                             </div>
