@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h1>Informacija par darbinieku</h1>
+                <h1>Informacija par kursu</h1>
                 <p><strong>ID</strong></p>
                 <p th:text="${object.getIdCou()}" />
                 <p><strong>Nosaukums</strong></p>
@@ -41,7 +41,7 @@
                 <p><strong>Apraksts</strong></p>
                 <p th:text="${object.getDescription()}" />
                 <p><strong>Type ID</strong></p>
-                <p th:text="${object.getCoType()}" />
+                <p th:text="${object.getCoType().getIdTy}" />
             </div>
         </div>
     </div>
