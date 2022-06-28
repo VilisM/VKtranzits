@@ -64,7 +64,7 @@ public class DemoApplication {
 				departmentRepo.save(d3);
 				departmentRepo.save(d4);
 
-				Position position = new Position("IT", "Informacijas tehnologijas");
+				Position position = new Position("Junior Java developer", "Java dev");
 				Employee employee1 = new Employee("Janis", "Berzins", 22222222, "janisberzins@inbox.lv", "test123");
 				Employee employee2 = new Employee("Pēteris", "Peters", 22222223, "peterispeters@inbox.lv", "test123");
 				employee1.setPosition(position);

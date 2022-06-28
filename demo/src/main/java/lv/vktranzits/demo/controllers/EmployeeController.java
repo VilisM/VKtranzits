@@ -12,13 +12,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.vktranzits.demo.models.Employee;
+import lv.vktranzits.demo.services.DepartmentService;
 import lv.vktranzits.demo.services.IEmployeeService;
+import lv.vktranzits.demo.services.IPositionService;
 
 @Controller
 public class EmployeeController {
 
     @Autowired
     private IEmployeeService employeeService;
+
+    @Autowired
+    private DepartmentService depService;
+
+    @Autowired
+    private IPositionService posService;
+
 
     @GetMapping("/employee/showAll")
     public String selectAllEmployees(Model model){
@@ -107,6 +116,8 @@ public class EmployeeController {
         if (employeeService.isLoggedIn()) {
             try {
                 model.addAttribute("employee", employeeService.selectEmployeeById(id));
+                model.addAttribute("department", depService.readAllDepartments());
+                model.addAttribute("position", posService.selectAllPositions());
                 return "update-employee-page";
             }
             catch(Exception e){

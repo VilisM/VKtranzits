@@ -10,10 +10,12 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
 
     boolean existsByNameAndSurname(String name, String surname);
 
-	public abstract ArrayList<Employee> findAllByDepartmentIdDe(int departmentId);
+	ArrayList<Employee> findAllByDepartmentIdDe(int departmentId);
 
     ArrayList<Employee> findAllByPositionTitle(String position);
 
-    boolean existsByEmailAndPassword(String email, String password);
+    boolean existsByEmail(String email);
+
+    Employee findByEmail(String email);
     
 }

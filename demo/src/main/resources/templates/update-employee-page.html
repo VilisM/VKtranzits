@@ -64,6 +64,26 @@
                                 <input type="password" id="password" th:field="*{password}" class="form-control">
                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="position.title">Amats</label>
+                                <select class="form-control" id="position.title" th:field="*{position.title}">
+                                    <option th:each="test: ${position}"
+                                        th:value="${test.title}" th:text="${test.title}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="department.title">Struktūrvienības</label>
+                                <select class="form-control" id="department.title" th:field="*{department.title}">
+                                    <option th:each="test: ${department}"
+                                        th:value="${test.title}" th:text="${test.title}">
+                                    </option>
+                                </select>
+                            </div>
+
+
                             <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
                         </form>
                 </div>

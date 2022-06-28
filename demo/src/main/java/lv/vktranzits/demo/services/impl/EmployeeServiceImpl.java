@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements IEmployeeService  {
             em.setSurname(employee.getSurname());
             em.setPhone(employee.getPhone());
             em.setEmail(employee.getEmail());
-            em.setPassword(employee.getPassword());
+            em.setPasswordHashed(employee.getPassword());
             employeeRepo.save(em);
         
             return true;
@@ -81,7 +81,15 @@ public class EmployeeServiceImpl implements IEmployeeService  {
 
     @Override
     public boolean getEmployeeByEmailAndPassword(String email, String password) {
-        return employeeRepo.existsByEmailAndPassword(email, password);
+        if(employeeRepo.existsByEmail(email)){
+            Employee em = employeeRepo.findByEmail(email);
+            if(em.checkPassword(password)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override

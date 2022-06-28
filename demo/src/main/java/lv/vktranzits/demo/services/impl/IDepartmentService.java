@@ -14,7 +14,6 @@ public class IDepartmentService implements DepartmentService {
 	private IEmployeeRepo employeeRepo;
 	
 	@Autowired
-	
 	private IDepartmentRepo departmentRepo;
 	 
 	

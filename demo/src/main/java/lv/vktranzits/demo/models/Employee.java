@@ -1,5 +1,6 @@
 package lv.vktranzits.demo.models;
 
+import java.security.SecureRandom;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -90,13 +92,19 @@ public class Employee {
         setSurname(surname);
         setPhone(phone);
         setEmail(email);
-        setPassword(password);
+        setPasswordHashed(password);
     }
 
 
-//int strength = 10; // work factor of bcrypt
-//BCryptPasswordEncoder bCryptPasswordEncoder =
-// new BCryptPasswordEncoder(strength, new SecureRandom());
-//String encodedPassword = bCryptPasswordEncoder.encode(plainPassword);
+    // hash password
+    public void setPasswordHashed(String password) {
+        setPassword(new BCryptPasswordEncoder().encode(password));
+    }
+
+    // check password
+    public boolean checkPassword(String password) {
+        return new BCryptPasswordEncoder().matches(password, this.password);
+    }
+
     
 }

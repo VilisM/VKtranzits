@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lv.vktranzits.demo.models.Course;
 import lv.vktranzits.demo.services.ICourseService;
+import lv.vktranzits.demo.services.ICourseTypeService;
 
 @Controller
 public class CourseController {
     
     @Autowired
     private ICourseService courseService;
+
+    @Autowired
+    private ICourseTypeService courseTypeService;
 
     @GetMapping("/course/showAll")
     public String selectAllCourses(Model model){
@@ -69,6 +73,7 @@ public class CourseController {
     public String getUpdateCourse(@PathVariable(name = "id") int id, Model model){
         try{
             model.addAttribute("course", courseService.selectCourseById(id));
+            model.addAttribute("coursetype", courseTypeService.selectAllCourseTypes());
             return "course-update";
         }
         catch(Exception e){
