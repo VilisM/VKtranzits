@@ -50,7 +50,7 @@
                             <select th:field="*{coType}">
                                 <option th:each="type : ${coType}"
                                         th:value="${coType.idTy}"
-                                        th:text="#{${ coType.title }}"/>
+                                        th:text="#{${coType.title}}"/>
                             </select>
 
                             <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>

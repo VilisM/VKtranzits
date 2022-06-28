@@ -47,10 +47,10 @@
                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
                             </div>
 
-                            <select th:field="*{coType}">
+                            <select th:field="*{coType.idTy}">
                                 <option th:each="type : ${coType}"
                                         th:value="${coType.idTy}"
-                                        th:text="#{${ coType.title }}"/>
+                                        th:text="${coType.title}"/>
                             </select>
 
                             <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
