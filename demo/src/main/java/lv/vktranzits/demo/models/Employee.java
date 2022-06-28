@@ -71,8 +71,7 @@ public class Employee {
 	@Pattern (regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,10}$")
     private String email;
     
-	@NonNull
-	@NotBlank(message = "New password is mandatory")
+    @Column(name="Password")
 	private String password;
 
     @ManyToOne

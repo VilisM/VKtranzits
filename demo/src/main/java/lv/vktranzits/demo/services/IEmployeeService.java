@@ -14,7 +14,7 @@ public interface IEmployeeService {
 
     public abstract boolean insertNewEmployee(Employee course);
 
-    public abstract boolean updateEmployeeById(int id, Employee course);
+    public abstract boolean updateEmployeeById(int id, Employee employee);
 
     public abstract ArrayList<Employee> selectAllEmployeesByPosition(String position);
 

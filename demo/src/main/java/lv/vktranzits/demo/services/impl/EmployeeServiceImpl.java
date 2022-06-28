@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.vktranzits.demo.models.Department;
 import lv.vktranzits.demo.models.Employee;
-import lv.vktranzits.demo.repos.IEmployeeRepo;
+import lv.vktranzits.demo.models.Position;
+import lv.vktranzits.demo.repos.*;
 import lv.vktranzits.demo.services.IEmployeeService;
 
 @Service
@@ -14,6 +16,12 @@ public class EmployeeServiceImpl implements IEmployeeService  {
 
     @Autowired
     private IEmployeeRepo employeeRepo;
+
+    @Autowired
+    private IDepartmentRepo depRepo;
+
+    @Autowired
+    private IPositionRepo posRepo;
 
     private static boolean isLoggedIn = false;
 
@@ -66,7 +74,11 @@ public class EmployeeServiceImpl implements IEmployeeService  {
             em.setSurname(employee.getSurname());
             em.setPhone(employee.getPhone());
             em.setEmail(employee.getEmail());
-            em.setPasswordHashed(employee.getPassword());
+            Department dep = depRepo.findById(employee.getDepartment().getIdDe()).get();
+            Position pos = posRepo.findById(employee.getPosition().getIdPos()).get();
+            em.setDepartment(dep);
+            em.setPosition(pos);
+            // em.setPasswordHashed(employee.getPassword());
             employeeRepo.save(em);
         
             return true;
