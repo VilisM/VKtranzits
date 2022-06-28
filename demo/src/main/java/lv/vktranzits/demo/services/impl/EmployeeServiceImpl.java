@@ -48,19 +48,26 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     @Override
     public boolean deleteEmployeeById(int id) {
         if(employeeRepo.existsById(id)){
+            Employee em = employeeRepo.findById(id).get();
+            em.setPosition(null);
+            em.setDepartment(null);
             employeeRepo.deleteById(id);
+            
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean insertNewEmployee(Employee course) {
-        if(employeeRepo.existsByNameAndSurname(course.getName(), course.getSurname())){
+    public boolean insertNewEmployee(Employee employee) {
+        if(employeeRepo.existsByNameAndSurname(employee.getName(), employee.getSurname())){
             return false;
         }
         else {
-            employeeRepo.save(course);
+            employeeRepo.save(employee);
+            Employee em = employeeRepo.findById(employee.getIdEm()).get();
+            em.setPasswordHashed(employee.getPassword());
+            employeeRepo.save(employee);
             return true;
         }
     }

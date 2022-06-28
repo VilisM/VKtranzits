@@ -94,7 +94,6 @@ public class Employee {
         setPasswordHashed(password);
     }
 
-
     // hash password
     public void setPasswordHashed(String password) {
         setPassword(new BCryptPasswordEncoder().encode(password));
@@ -104,6 +103,5 @@ public class Employee {
     public boolean checkPassword(String password) {
         return new BCryptPasswordEncoder().matches(password, this.password);
     }
-
     
 }
