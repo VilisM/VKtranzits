@@ -81,10 +81,8 @@ public class IDepartmentService implements DepartmentService {
 		
 		if(departmentRepo.existsById(departmentId))
 		{
-			
 			Department dep = departmentRepo.findById(departmentId).get();
 			return dep;
-			
 		}
 		
 
@@ -97,7 +95,6 @@ public class IDepartmentService implements DepartmentService {
 		
 		if(departmentRepo.existsById(departmentId))
 		{
-			
 			Department dep = departmentRepo.findById(departmentId).get();
 			dep.setTitle(department.getTitle());
 			dep.setV_name(department.getV_name());
@@ -110,7 +107,6 @@ public class IDepartmentService implements DepartmentService {
 		}
 		
 		
-
 		return false;
 	}
 

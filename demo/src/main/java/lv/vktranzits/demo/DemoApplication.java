@@ -54,11 +54,7 @@ public class DemoApplication {
 				courseRepo.save(c2);
 				courseRepo.save(c3);
 				courseRepo.save(c4);
-				Position position = new Position("IT", "Informacijas tehnologijas");
-				Employee employee = new Employee("Janis", "Berzins", 22222222, "janisberzins@inbox.lv", "test123");
-				employee.setPosition(position);
-				employeeRepo.save(employee);
-				
+
 				Department d1 = new Department("Krāvēji", "Joņs", "Joņs");
 				Department d2 = new Department("Cēlēji", "Pēters", "Peters");
 				Department d3 = new Department("Stiepēji", "Džonis", "Bravo");
@@ -67,6 +63,15 @@ public class DemoApplication {
 				departmentRepo.save(d2);
 				departmentRepo.save(d3);
 				departmentRepo.save(d4);
+
+				Position position = new Position("IT", "Informacijas tehnologijas");
+				Employee employee1 = new Employee("Janis", "Berzins", 22222222, "janisberzins@inbox.lv", "test123");
+				Employee employee2 = new Employee("Pēteris", "Peters", 22222223, "peterispeters@inbox.lv", "test123");
+				employee1.setPosition(position);
+				employee1.setDepartment(d1);
+				employee2.setDepartment(d1);
+				employeeRepo.save(employee1);
+				employeeRepo.save(employee2);
 				
 				
 				

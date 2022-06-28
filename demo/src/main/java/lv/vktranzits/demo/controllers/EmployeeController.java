@@ -123,7 +123,7 @@ public class EmployeeController {
         if (employeeService.isLoggedIn()) {
             if(!result.hasErrors()){
                 if(employeeService.updateEmployeeById(id, employee))
-                    return "redirect:/employee/showAll" + id;
+                    return "redirect:/employee/showAll/" + id;
                 else
                     return "redirect:/error";
             }
