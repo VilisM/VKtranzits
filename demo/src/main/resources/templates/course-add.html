@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darbinieku labošana</title>
+    <title>Kursa pievienošana</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 
@@ -26,7 +26,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Iziet no konta</a>
                     </li>
-                </ul>
+                </ul>title
             </div>
         </div>
     </nav>
@@ -34,7 +34,10 @@
             <div class="row">
                 <div class="col-6 mx-auto">
                     <h1>Lūdzu ievadiet kursa parametrus</h1>
-                        <form action="#" th:action="@{/employee/update/__${id}__}" th:object="${employee}" method="post">
+                        <form action="#" th:action="@{/course/add}" th:object="${course}" method="post">
+                            
+
+
                             <div class="form-group">
                                 <label for="title">Nosaukums</label>
                                 <input type="text" id="title" th:field="*{title}" class="form-control">
@@ -47,8 +50,11 @@
                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
                             </div>
 
-                            
-                            
+                            <select th:field="*{idTy}">
+                                <option th:each="type : ${courseType}"
+                                        th:value="${courseType.idTy}"
+                                        th:text="#{${ courseType.title }}"/>
+                            </select>
                             <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
                         </form>
                 </div>

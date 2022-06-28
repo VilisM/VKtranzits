@@ -8,29 +8,31 @@
     </head>
     <body>
 		
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-		    <div class="container">		        
-		        <div class="collapse navbar-collapse" id="navbarResponsive">
-		            <ul class="navbar-nav ml-auto">
-		                <li class="nav-item active">
-		                    <a class="nav-link" href="/course/showAll">Course</a>
-		                </li>
-		                <li class="nav-item">
-		                    <a class="nav-link" href="/....">....</a>
-		                </li>
-		                <li class="nav-item">
-		                    <a class="nav-link" href="/....">.....</a>
-		                </li>
-		                <li class="nav-item">
-		                    <a class="nav-link" href="/....">.....</a>
-		                </li>
-		            </ul>
-		        </div>
-		    </div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
+			<div class="container">		        
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item ">
+							<a class="nav-link" href="/employee/showAll">Darbinieki</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/department/showAll">Strukturvienības</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="/course/showAll">Kursi</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/logout">Iziet no konta</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</nav>
-      	<a th:href="@{/course/add}" class="btn-sm btn-success text-white" role="button">ADD COURSE</a>
-      	<div th:if="${ not#lists.isEmpty(object)}">
-          <table class="table table-bordered table-striped">
+		</nav>
+		<div class="container">
+        <a th:href="@{/course/add}" class="btn-sm btn-success text-white" role="button">PIEVIENOT KURSU</a>
+        <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
+        <table class="table table-bordered table-striped">
             <tr>
               <th>Id</th>
 			  <th>Type Id</th>
@@ -46,9 +48,9 @@
               <td th:text="${temp.getTitle()}"/>
               <td th:text="${temp.getDescription()}"/>
               <td class="col-md-4">
-					<a th:href="@{/course/showAll/{id}(id=${temp.getIdCou})}" class="btn-sm btn-info text-white" role="button">SHOW</a>
-					<a th:href="@{/course/update/{id}(id=${temp.getIdCou})}" class="btn-sm btn-primary text-white" role="button">EDIT</a>
-					<a th:href="@{/course/remove/{id}(id=${temp.getIdCou})}" class="btn-sm btn-danger text-white" role="button">DELETE</a>
+					<a th:href="@{/course/showAll/{id}(id=${temp.getIdCou})}" class="btn-sm btn-info text-white" role="button">PARĀDĪT</a>
+					<a th:href="@{/course/update/{id}(id=${temp.getIdCou})}" class="btn-sm btn-primary text-white" role="button">LABOT</a>
+					<a th:href="@{/course/delete/{id}(id=${temp.getIdCou})}" class="btn-sm btn-danger text-white" role="button">DZĒST</a>
 				</td>
             </tr>
           </table>
