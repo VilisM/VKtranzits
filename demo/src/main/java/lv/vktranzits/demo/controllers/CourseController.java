@@ -82,7 +82,8 @@ public class CourseController {
     }
 
     @PostMapping("/course/update/{id}")
-    public String postUpdateCourse(@PathVariable(name = "id") int id,@Valid Course course, BindingResult result){
+    public String postUpdateCourse(@PathVariable(name = "id") int id,@Valid Course course, BindingResult result, Model model){
+        
         if(!result.hasErrors()){
             if(courseService.updateCourseById(id, course))
                 return "redirect:/course/showAll/" + id;
@@ -90,6 +91,7 @@ public class CourseController {
                 return"redirect:/error";
         }
         else{
+            model.addAttribute("position", courseTypeService.selectAllCourseTypes());
             return "course-update";
         }
     }
