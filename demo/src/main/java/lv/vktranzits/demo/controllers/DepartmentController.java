@@ -20,16 +20,9 @@ public class DepartmentController {
 	
 	@Autowired
 	private DepartmentService departmentService; //te liek tikai interface, lai sasaitītu ar impl lieto autowired
-<<<<<<< HEAD
 	
 	@Autowired
-	private EmployeeService employeeService;
-=======
-
-	@Autowired
 	private IEmployeeService employeeService;
-			
->>>>>>> ad03bf5e8567a7e1954f061c10d08f1dbebb9a6d
 	
 
 	
@@ -199,36 +192,4 @@ public String getDeleteDepartment (@PathVariable (name = "id")int id, Model mode
 	
 }
 
-<<<<<<< HEAD
-//@GetMapping ("/allDepartmentEmployees/{id}")
-//public String getAllEmployeesInDepartmentByDepartmentId (@PathVariable (name = "id")int id, Model model)
-//{
-//	try {
-//		model.addAttribute("object", departmentService.readDepartmentById(id));
-//		
-//		return "one-department-page";
-//		
-//		
-//		
-//	} catch (Exception e) {
-//		// TODO: handle exception
-//		return "error-page";
-//	}
-//	
-	
-	
-	
-}
-
-//@GetMapping("/employees/dept/{id}") //localhost:8080/employees/dept/3
-//public String getEmployeesByDepartmentId(Model model, 
-//                @PathVariable(name="id") int id)
-//{
-//        model.addAttribute("object", employeeService.getAllEmployeesFromDepartmentById(id));
-//        return "employees-page";//atvers grades-page.html
-//}
-
-
-=======
->>>>>>> ad03bf5e8567a7e1954f061c10d08f1dbebb9a6d
 }
