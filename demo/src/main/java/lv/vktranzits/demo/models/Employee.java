@@ -89,9 +89,10 @@ public class Employee {
 	@ToString.Exclude
     private Collection<Position> allPositions = new ArrayList<Position>();
 	
-	public Collection<Position> getAllPositions() {
-		return allPositions;
+	public void addPosition(Position position) {
+		allPositions.add(position);
 	}
+	
     
     public Employee(String name, String surname, int phone, String email, String password) {
         setName(name);

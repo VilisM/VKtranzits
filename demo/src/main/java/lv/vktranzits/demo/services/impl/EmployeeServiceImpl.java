@@ -1,6 +1,7 @@
 package lv.vktranzits.demo.services.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     public boolean deleteEmployeeById(int id) {
         if(employeeRepo.existsById(id)){
             Employee em = employeeRepo.findById(id).get();
-            em.setPosition(null);
+            em.setAllPositions(null);
             em.setDepartment(null);
             employeeRepo.deleteById(id);
             
@@ -70,9 +71,9 @@ public class EmployeeServiceImpl implements IEmployeeService  {
             em.setPhone(employee.getPhone());
             em.setEmail(employee.getEmail());
             Department dep = depRepo.findById(employee.getDepartment().getIdDe()).get();
-            Position pos = posRepo.findById(employee.getPosition().getIdPos()).get();
+//            Collection<Position> pos = posRepo.findById(employee.getAllPositions()).get();
             em.setDepartment(dep);
-            em.setPosition(pos);
+//            em.setAllPositions(pos);
             employeeRepo.save(em);
         
             return true;
