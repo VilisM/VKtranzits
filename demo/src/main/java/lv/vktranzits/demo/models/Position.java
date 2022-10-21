@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +18,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.ToString;;
 
 @Setter
 @Getter
@@ -37,10 +39,14 @@ public class Position {
 
     @Column(name = "Description")
     private String description;
-
-    @OneToMany(mappedBy = "position")
+    
+    @ManyToMany
+	@JoinTable(name = "employee_positions",
+	joinColumns = @JoinColumn(name = "IdEm"),
+	inverseJoinColumns = @JoinColumn(name="IdPos")
+	)
     @ToString.Exclude
-    private Collection<Employee> employees;
+    private Collection<Employee> employees = new ArrayList<Employee>();
 
     @ManyToMany(mappedBy="positions")
     private Collection<CourseCalendar> courseCal = new ArrayList<CourseCalendar>();

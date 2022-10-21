@@ -1,15 +1,18 @@
 package lv.vktranzits.demo.models;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -81,10 +84,14 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @ToString.Exclude
     private Collection<EmployeeCourse> emCourse;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="IdPos")
-    private Position position;
+    
+	@ManyToMany(mappedBy="employees", fetch = FetchType.EAGER)
+	@ToString.Exclude
+    private Collection<Position> allPositions = new ArrayList<Position>();
+	
+	public Collection<Position> getAllPositions() {
+		return allPositions;
+	}
     
     public Employee(String name, String surname, int phone, String email, String password) {
         setName(name);
