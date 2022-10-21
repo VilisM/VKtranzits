@@ -52,7 +52,9 @@ public class CourseController {
     }
 
     @GetMapping("/course/add")
-    public String getInsertNewCourse(Course course){
+    public String getInsertNewCourse(Model model){
+        model.addAttribute("course", new Course());
+        model.addAttribute("coursetype", courseTypeService.selectAllCourseTypes());
         return "course-add";
     }
 

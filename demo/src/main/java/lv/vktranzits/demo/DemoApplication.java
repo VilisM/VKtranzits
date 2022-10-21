@@ -45,6 +45,10 @@ public class DemoApplication {
 				// posRepo.save(position);
 				CourseType t1 = new CourseType(true, "Vienu reizi gadā");
 				courseTypeRepo.save(t1);
+				CourseType t2 = new CourseType(true, "Divas reizes gadā");
+				courseTypeRepo.save(t2);
+				CourseType t3 = new CourseType(true, "Tris reizes gadā");
+				courseTypeRepo.save(t3);
 				
 				Course c1 = new Course("Java tests", "Tests par Java pamatiem", t1);
 				Course c2 = new Course("Java tests", "Tests par Java pamatiem", t1);
