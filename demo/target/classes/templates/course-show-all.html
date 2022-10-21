@@ -35,7 +35,7 @@
         <table class="table table-bordered table-striped">
             <tr>
               <th>Id</th>
-			  <th>Type Id</th>
+			  <th>Type</th>
 			  <!-- <th>Department Id</th>  -->
               <th>Title</th>
               <th>Description</th>
@@ -43,7 +43,7 @@
             <tr th:each="temp : ${object}">
             
               <td th:text="${temp.getIdCou()}"/>
-			  <td th:text="${temp.getCoType().getIdTy()}"/>
+			  <td th:text="${temp.getCoType().getDescription()}"/>
 			  <!-- <td th:text="${temp.getIdDe()}"/> -->
               <td th:text="${temp.getTitle()}"/>
               <td th:text="${temp.getDescription()}"/>
