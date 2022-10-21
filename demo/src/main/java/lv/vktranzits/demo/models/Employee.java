@@ -39,7 +39,7 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class Employee {
+public class Employee extends Auditable<String> {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

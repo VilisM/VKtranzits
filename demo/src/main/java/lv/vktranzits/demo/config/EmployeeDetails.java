@@ -66,5 +66,9 @@ public class EmployeeDetails implements UserDetails  {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public Employee getEmployee() {
+        return employee;
+    }
 
 }

@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class Course {
+public class Course extends Auditable<String> {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
