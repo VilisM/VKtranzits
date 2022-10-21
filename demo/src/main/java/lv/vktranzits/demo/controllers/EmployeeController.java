@@ -33,18 +33,12 @@ public class EmployeeController {
 
     @GetMapping("/employee/showAll")
     public String selectAllEmployees(Model model){
-        if (employeeService.isLoggedIn()) {
             model.addAttribute("object", employeeService.selectAllEmployees());
             return "employee-show-all";
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @GetMapping("/employee/showAll/{id}")
     public String selectEmployeeById(@PathVariable(name = "id") int id, Model model){
-        if (employeeService.isLoggedIn()) {
             try {
                 model.addAttribute("object", employeeService.selectEmployeeById(id));
                 return "one-employee-page";
@@ -52,26 +46,16 @@ public class EmployeeController {
             catch(Exception e){
                 return "error";
             }
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @GetMapping("/employee/show")
     public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
-        if (employeeService.isLoggedIn()) {
             model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
             return "employee-show-all";
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @GetMapping("/employee/delete/{id}")
     public String deleteEmployee(@PathVariable(name = "id") int id, Model model){
-        if (employeeService.isLoggedIn()) {
             if(employeeService.deleteEmployeeById(id)){
                 model.addAttribute("object", employeeService.selectAllEmployees());
                 return "employee-show-all";
@@ -79,25 +63,15 @@ public class EmployeeController {
             else{
                 return"redirect:/employee/showAll";
             }
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @GetMapping("/employee/add")
     public String getInsertNewEmployee(Employee employee){
-        if (employeeService.isLoggedIn()) {
             return "add-employee-page";
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @PostMapping("/employee/add")
     public String postInsertNewEmployee(@Valid Employee employee, BindingResult result){
-        if (employeeService.isLoggedIn()) {
             if(!result.hasErrors()){
                 if(employeeService.insertNewEmployee(employee))
                     return "redirect:/employee/showAll";
@@ -107,15 +81,10 @@ public class EmployeeController {
             else{
                 return"add-employee-page";
             }
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @GetMapping("/employee/update/{id}")
     public String getUpdateEmployee(@PathVariable(name = "id") int id, Model model){
-        if (employeeService.isLoggedIn()) {
             try {
                 model.addAttribute("employee", employeeService.selectEmployeeById(id));
                 model.addAttribute("department", depService.readAllDepartments());
@@ -125,15 +94,10 @@ public class EmployeeController {
             catch(Exception e){
                 return "error";
             }
-        }
-        else {
-            return "redirect:/login";
-        }
     }
 
     @PostMapping("/employee/update/{id}")
     public String postUpdateEmployee(@PathVariable(name = "id") int id,@Valid Employee employee, BindingResult result, Model model){
-        if (employeeService.isLoggedIn()) {
             if(!result.hasErrors()){
                 if(employeeService.updateEmployeeById(id, employee))
                     return "redirect:/employee/showAll/" + id;
@@ -145,10 +109,6 @@ public class EmployeeController {
                 model.addAttribute("position", posService.selectAllPositions());
                 return"update-employee-page";
             }
-        }
-        else {
-            return "redirect:/login";
-        }
     }
     
 }

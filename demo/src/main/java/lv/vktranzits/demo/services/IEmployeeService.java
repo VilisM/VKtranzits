@@ -18,12 +18,6 @@ public interface IEmployeeService {
 
     public abstract ArrayList<Employee> selectAllEmployeesByPosition(String position);
 
-    public abstract boolean getEmployeeByEmailAndPassword(String email, String password);
-
-    public abstract void setLoggedIn(boolean loggedIn);
-
-    public abstract boolean isLoggedIn();
-
     public abstract ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
     
 }
