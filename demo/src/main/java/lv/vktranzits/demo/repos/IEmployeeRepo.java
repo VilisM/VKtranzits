@@ -12,8 +12,6 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
 
 	ArrayList<Employee> findAllByDepartmentIdDe(int departmentId);
 
-    ArrayList<Employee> findAllByPositionTitle(String position);
-
     boolean existsByEmail(String email);
 
     Employee findByEmail(String email);

@@ -34,13 +34,13 @@ public class EmployeeDetails implements UserDetails  {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return employee.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return employee.getEmail();
 	}
 
 	@Override
