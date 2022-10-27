@@ -3,6 +3,7 @@ package lv.vktranzits.demo.models;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

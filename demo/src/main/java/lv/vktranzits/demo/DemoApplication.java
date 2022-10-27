@@ -51,9 +51,9 @@ public class DemoApplication {
 				courseTypeRepo.save(t3);
 				
 				Course c1 = new Course("Java tests", "Tests par Java pamatiem", t1);
-				Course c2 = new Course("Java tests", "Tests par Java pamatiem", t1);
-				Course c3 = new Course("Java tests", "Tests par Java pamatiem", t1);
-				Course c4 = new Course("Java tests", "Tests par Java pamatiem", t1);
+				Course c2 = new Course("Java tests2", "Tests par Java pamatiem", t1);
+				Course c3 = new Course("Java tests3", "Tests par Java pamatiem", t1);
+				Course c4 = new Course("Java tests4", "Tests par Java pamatiem", t1);
 				courseRepo.save(c1);
 				courseRepo.save(c2);
 				courseRepo.save(c3);
