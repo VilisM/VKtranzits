@@ -1,5 +1,6 @@
 package lv.vktranzits.demo.models;
 
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +40,7 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
