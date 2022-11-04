@@ -16,4 +16,6 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
 
     Employee findByEmail(String email);
     
+    ArrayList<Employee> findAllByAllPositionsTitle(String title);
+    
 }

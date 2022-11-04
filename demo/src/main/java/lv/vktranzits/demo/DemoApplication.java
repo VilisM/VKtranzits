@@ -68,17 +68,23 @@ public class DemoApplication {
 				departmentRepo.save(d3);
 				departmentRepo.save(d4);
 
-				Position position = new Position("ROLE_ADMIN", "Junior Java developer");
+				Position position = new Position("ROLE_DEVELOPER", "Junior Java developer");
+				Position position2 = new Position("ROLE_ADMIN", "Sistēmas administrātors");
+				Position position3 = new Position("ROLE_EMPLOYEE", "Darbinieks");
 				posRepo.save(position);
+				posRepo.save(position2);
+				posRepo.save(position3);
 				Employee employee1 = new Employee("Janis", "Berzins", 22222222, "janisberzins@inbox.lv", "test123");
 				Employee employee2 = new Employee("Pēteris", "Peters", 22222223, "peterispeters@inbox.lv", "test123");
-				employee1.addPosition(position);
+				employee1.addPosition(position2);
 				employee1.setDepartment(d1);
 				employee2.setDepartment(d1);
 				employeeRepo.save(employee1);
 				employeeRepo.save(employee2);
 
+				position2.addEmployee(employee1);
 				position.addEmployee(employee1);
+				posRepo.save(position2);
 				posRepo.save(position);
 				
 				

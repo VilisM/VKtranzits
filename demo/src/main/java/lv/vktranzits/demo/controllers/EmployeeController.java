@@ -41,6 +41,7 @@ public class EmployeeController {
     public String selectEmployeeById(@PathVariable(name = "id") int id, Model model){
             try {
                 model.addAttribute("object", employeeService.selectEmployeeById(id));
+                model.addAttribute("position", posService.selectAllEmployeePositions(id));
                 return "one-employee-page";
             }
             catch(Exception e){
@@ -48,11 +49,11 @@ public class EmployeeController {
             }
     }
 
-//    @GetMapping("/employee/show")
-//    public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
-//            model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
-//            return "employee-show-all";
-//    }
+    @GetMapping("/employee/show")
+    public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
+            model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
+            return "employee-show-all";
+    }
 
     @GetMapping("/employee/delete/{id}")
     public String deleteEmployee(@PathVariable(name = "id") int id, Model model){

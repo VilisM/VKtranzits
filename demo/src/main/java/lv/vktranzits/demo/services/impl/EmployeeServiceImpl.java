@@ -81,10 +81,11 @@ public class EmployeeServiceImpl implements IEmployeeService  {
         return false;
     }
 
-//    @Override
-//    public ArrayList<Employee> selectAllEmployeesByPosition(String position) {
-//        return employeeRepo.findAllByPositionTitle(position);
-//    }
+    @Override
+    public ArrayList<Employee> selectAllEmployeesByPosition(String position) {
+        return employeeRepo.findAllByAllPositionsTitle(position);
+    }
+   
 
     @Override
     public ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId) {
