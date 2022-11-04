@@ -56,6 +56,10 @@ public class Position implements Serializable {
         employees.add(employee);
     }
 
+    public void deleteEmployee(Employee employee){
+        employees.remove(employee);
+    }
+
     public Position(String title, String description) {
         setTitle(title);
         setDescription(description);

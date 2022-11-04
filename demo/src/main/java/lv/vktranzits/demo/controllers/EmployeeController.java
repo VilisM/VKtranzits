@@ -67,7 +67,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/add")
-    public String getInsertNewEmployee(Employee employee){
+    public String getInsertNewEmployee(Model model){
+            model.addAttribute("employee", new Employee());
+            model.addAttribute("positions", posService.selectAllPositions());
             return "add-employee-page";
     }
 

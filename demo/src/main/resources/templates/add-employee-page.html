@@ -64,6 +64,17 @@
                                 <input type="password" id="password" th:field="*{password}" class="form-control">
                                 <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="position.title">Amats</label>
+                                <br>
+                                <input type="checkbox" id="position.title" th:field="*{allPositions}"
+						            th:each="pos : ${positions}"
+						            th:text="${pos.description}"
+						            th:value="${pos.IdPos}"
+						        />
+                            </div>    
+
                             <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
                         </form>
                 </div>

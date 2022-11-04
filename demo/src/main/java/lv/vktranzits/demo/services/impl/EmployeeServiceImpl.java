@@ -56,6 +56,11 @@ public class EmployeeServiceImpl implements IEmployeeService  {
             employeeRepo.save(employee);
             Employee em = employeeRepo.findById(employee.getIdEm()).get();
             em.setPasswordHashed(employee.getPassword());
+            em.setAllPositions(employee.getAllPositions());
+            for (Position pos : employee.getAllPositions()) {
+                pos.addEmployee(em);
+                posRepo.save(pos);
+            }
             employeeRepo.save(employee);
             return true;
         }
@@ -71,11 +76,20 @@ public class EmployeeServiceImpl implements IEmployeeService  {
             em.setPhone(employee.getPhone());
             em.setEmail(employee.getEmail());
             Department dep = depRepo.findById(employee.getDepartment().getIdDe()).get();
-//            Collection<Position> pos = posRepo.findById(employee.getAllPositions()).get();
             em.setDepartment(dep);
-//            em.setAllPositions(pos);
+
+            for (Position pos : em.getAllPositions()) {
+                pos.deleteEmployee(em);
+                posRepo.save(pos);
+            }
+
+            em.setAllPositions(employee.getAllPositions());
+            for (Position pos : employee.getAllPositions()) {
+                pos.addEmployee(em);
+                posRepo.save(pos);
+            }
+
             employeeRepo.save(em);
-        
             return true;
         }
         return false;
