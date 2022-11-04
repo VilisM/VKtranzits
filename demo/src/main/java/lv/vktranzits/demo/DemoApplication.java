@@ -78,6 +78,7 @@ public class DemoApplication {
 				employeeRepo.save(employee1);
 				employeeRepo.save(employee2);
 
+				position.addEmployee(employee2);
 				position.addEmployee(employee1);
 				posRepo.save(position);
 				

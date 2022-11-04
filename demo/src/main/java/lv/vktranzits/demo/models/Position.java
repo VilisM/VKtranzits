@@ -1,4 +1,5 @@
 package lv.vktranzits.demo.models;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -26,7 +27,7 @@ import lombok.ToString;;
 @ToString
 @Table
 @Entity
-public class Position {
+public class Position implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
