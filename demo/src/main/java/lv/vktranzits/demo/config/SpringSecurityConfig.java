@@ -2,7 +2,12 @@ package lv.vktranzits.demo.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
@@ -23,19 +28,33 @@ import lv.vktranzits.demo.services.impl.EmployeeDetailsService;
 
 @Configurable
 @EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+public class SpringSecurityConfig{
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-	}
-
+	
 	@Bean
 	protected UserDetailsService userDetailsService() {
 		
 		return new EmployeeDetailsService();
 	}
 	
+
+	@Bean
+	public AuthenticationManager authenticationManager(
+			AuthenticationConfiguration authConfig) throws Exception {
+    	return authConfig.getAuthenticationManager();
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+	
+		return authProvider;
+	}
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -55,30 +74,48 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new HttpSessionEventPublisher();
 	}
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	// @Bean
+	// public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	// 	http
+	// 		.sessionManagement(session -> session
+	// 			.maximumSessions(1)
+	// 			.maxSessionsPreventsLogin(true)
+	// 			.expiredUrl("/sessionExpired.html").and()
+	// 			.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+	// 			.invalidSessionUrl("/login")
+	// 		);
+	// 	return http.build();
+	// }
+
+	@Bean
+	protected SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
+		
+		http.authenticationProvider(authenticationProvider());
 		http.authorizeRequests()
 		.antMatchers("/course/**").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/department/**").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
 		.and()
-		.formLogin().permitAll().and().sessionManagement()
-        .maximumSessions(1)
-        .expiredUrl("/sessionExpired.html").and()
-		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-		.invalidSessionUrl("/login")
+		.formLogin().permitAll()
 		.and()
 		.logout().permitAll()
-		.invalidateHttpSession(true);
+		.invalidateHttpSession(true)
+		.and()
+		.sessionManagement(session -> session
+			.maximumSessions(1)
+			.maxSessionsPreventsLogin(true)
+			.expiredUrl("/sessionExpired.html").and()
+			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+			.invalidSessionUrl("/login"));
+		
+		
 		
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 		
-		// http.sessionManagement()
-        // .maximumSessions(1)
-        // .expiredUrl("/sessionExpired.html").and()
-		// .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-		// .invalidSessionUrl("/login");
+		
+
+		return http.build();
 	}
 
 	
