@@ -24,8 +24,11 @@ public class ExcelController {
             System.out.println("Excel file has been created");
 
             excelService.saveDataInExcel();
-            return "employee-show-all";
             
+            excelService.saveDataInExcel();
+			model.addAttribute("object",employeeService.selectAllEmployees());
+			return "employee-show-all";
+
         
     }
 	

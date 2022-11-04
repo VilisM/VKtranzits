@@ -39,9 +39,7 @@ public class ExcelServiceImpl implements IExcelService{
 
 
     @Override
-	public void loadDataFromExcel() {
-		// TODO Auto-generated method stub
-		
+	public void loadDataFromExcel() {		
 		
 		 try
 	        {
@@ -89,19 +87,16 @@ public class ExcelServiceImpl implements IExcelService{
 		
 	}
 
-
-
-	@Override
-	public void saveDataInExcel() {
-		
-		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
-
-		
 		//  (Arrays.asList(new Employee("Janis","Krumins",29879894,"krumins@gmail.com", "123"),
 		//  new Employee("Juris","Jurevics", 21234567,"juris@gmail.com", "456"),
 		//  new Employee("Leons","Jurevics", 21234567,"juris@gmail.com", "456")
 		//  ));
 		
+
+	@Override
+	public void saveDataInExcel() {
+		
+		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
 		 
 		  XSSFWorkbook workbook = new XSSFWorkbook(); 
 	         
@@ -110,7 +105,6 @@ public class ExcelServiceImpl implements IExcelService{
 	        int rownum = 0;
 	        for (Employee emp: allEmployees)
 	        {
-	        	
 	            Row row = sheet.createRow(rownum++);
 	            
 	            Cell cell = row.createCell(1);
@@ -125,12 +119,11 @@ public class ExcelServiceImpl implements IExcelService{
                 Cell cell5 = row.createCell(5);
                 cell5.setCellValue(emp.getPassword());
                 
-                
-                
                 try
                 {
                     //Write the workbook in file system
-                    FileOutputStream out = new FileOutputStream(new File("employees.xlsx"));
+                    FileOutputStream out = new FileOutputStream
+					(new File("employees.xlsx"));
                     workbook.write(out);
                     out.close();
                     System.out.println("employees.xlsx written successfully on disk.");
