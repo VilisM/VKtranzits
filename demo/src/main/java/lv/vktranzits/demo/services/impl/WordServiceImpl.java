@@ -1,21 +1,12 @@
 package lv.vktranzits.demo.services.impl;
 
-import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Course;
 import lv.vktranzits.demo.repos.ICourseRepo;

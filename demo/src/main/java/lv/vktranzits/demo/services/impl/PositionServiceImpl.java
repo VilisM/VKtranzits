@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lv.vktranzits.demo.models.Employee;
 import lv.vktranzits.demo.models.Position;
 import lv.vktranzits.demo.repos.IPositionRepo;
 import lv.vktranzits.demo.services.IPositionService;

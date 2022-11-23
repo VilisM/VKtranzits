@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import lv.vktranzits.demo.models.Department;
 import lv.vktranzits.demo.models.Employee;
-import lv.vktranzits.demo.models.Position;
 import lv.vktranzits.demo.services.DepartmentService;
 import lv.vktranzits.demo.services.IEmployeeService;
 import lv.vktranzits.demo.services.IPositionService;
