@@ -31,6 +31,17 @@ public class ExcelController {
 
         
     }
+
+	@GetMapping("/results/load/Excel")
+    public String loadDataFromExcel(Model model){
+        
+            System.out.println("Excel file has been created");
+
+            excelService.loadResultsFromExcel();
+        
+			return "error";
+
+    }
 	
 	
 	

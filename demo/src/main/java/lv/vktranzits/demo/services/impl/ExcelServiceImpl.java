@@ -4,8 +4,12 @@ package lv.vktranzits.demo.services.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,6 +37,66 @@ public class ExcelServiceImpl implements IExcelService{
     // public ArrayList<Employee> selectAllEmployees() {
     //     return (ArrayList<Employee>) employeeRepo.findAll();
     // }
+
+	@Override
+	public void loadResultsFromExcel() {
+		try
+		{
+			FileInputStream file = new FileInputStream(new File("resultsExcel.xlsx"));
+ 
+			//Create Workbook instance holding reference to .xlsx file
+			XSSFWorkbook workbook = new XSSFWorkbook(file);
+	 
+			//Get first/desired sheet from the workbook
+			XSSFSheet sheet = workbook.getSheetAt(0);
+
+			Map<String, Integer> map = new HashMap<String,Integer>();
+			Row row = sheet.getRow(0);
+			short minColIx = row.getFirstCellNum();
+			short maxColIx = row.getLastCellNum();
+			for(short colIx=minColIx; colIx<maxColIx; colIx++) {
+				Cell cell = row.getCell(colIx);
+				map.put(cell.getStringCellValue(),cell.getColumnIndex());
+			}
+
+			//Iterate through each rows one by one
+			Iterator<Row> rowIterator = sheet.iterator();
+			while (rowIterator.hasNext()) 
+	            {
+				Row dataRow = rowIterator.next(); //get row 1 to row n (rows containing data)
+				if(dataRow.getRowNum() == 0) {
+					continue;
+				}
+			   
+				int idxForColumn1 = map.get("Uzvārds"); //get the column index for the column with header name = "Column1"
+				int idxForColumn2 = map.get("Vārds"); //get the column index for the column with header name = "Column2"
+				int idxForColumn3 = map.get("Pabeigts"); //get the column index for the column with header name = "Column3"
+				int idxForColumn4 = map.get("Vērtējums/10,00"); //get the column index for the column with header name = "Column3"
+			   
+				Cell cell1 = dataRow.getCell(idxForColumn1); //Get the cells for each of the indexes
+				Cell cell2 = dataRow.getCell(idxForColumn2); 
+				if (cell1.getStringCellValue() == "" && cell2.getStringCellValue() == "") {
+					break;
+				}
+				Cell cell3 = dataRow.getCell(idxForColumn3);  
+				Cell cell4 = dataRow.getCell(idxForColumn4);  
+				//NOTE THAT YOU HAVE TO KNOW THE DATA TYPES OF THE DATA YOU'RE EXTRACTING.
+				//FOR EXAMPLE I DON'T THINK YOU CAN USE cell.getStringCellValue IF YOU'RE TRYING TO GET A NUMBER
+				System.out.println(cell1.getStringCellValue() + " \t");
+				System.out.println(cell2.getStringCellValue() + " \t");
+				System.out.println(cell3.getStringCellValue() + " \t");
+				System.out.println(Double.parseDouble(cell4.getStringCellValue().replace(',','.')) + " \t");
+			   
+			   }
+
+			file.close();
+			workbook.close();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+}
 
 
 
@@ -69,11 +133,14 @@ public class ExcelServiceImpl implements IExcelService{
 	                        case STRING:
 	                            System.out.print(cell.getStringCellValue() + "t");
 	                            break;
+							default:
+								break;
 	                    }
 	                }
 	                System.out.println("");
 	            }
 	            file.close();
+				workbook.close();
 	        } 
 	        catch (Exception e) 
 	        {
@@ -96,7 +163,7 @@ public class ExcelServiceImpl implements IExcelService{
 		
 		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
 		 
-		  XSSFWorkbook workbook = new XSSFWorkbook(); 
+		  	XSSFWorkbook workbook = new XSSFWorkbook(); 
 	         
 	        //Create a blank sheet
 	        XSSFSheet sheet = workbook.createSheet("Employees Data");
@@ -125,14 +192,12 @@ public class ExcelServiceImpl implements IExcelService{
                     workbook.write(out);
                     out.close();
                     System.out.println("employees.xlsx written successfully on disk.");
+					workbook.close();
                 } 
                 catch (Exception e) 
                 {
                     e.printStackTrace();
                 }
-               
-
-
 	        }
 	}
 	

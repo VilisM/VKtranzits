@@ -131,7 +131,6 @@ public class WordServiceImpl implements IWordService{
 
     @Override
     public void loadDataFromWord() {
-        // TODO Auto-generated method stub
         
     }
 

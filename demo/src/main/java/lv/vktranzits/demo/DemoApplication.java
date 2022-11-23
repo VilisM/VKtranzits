@@ -1,5 +1,8 @@
 package lv.vktranzits.demo;
 
+
+import java.util.Date;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +27,7 @@ public class DemoApplication {
 	@Bean
 	public CommandLineRunner runner(ICompanyRepo companyRepo, ICourseCalendarRepo courseCalRepo,
 	 ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo,
-	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo, IEmployeeRepo employeeRepo)
+	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo, IEmployeeRepo employeeRepo, IEmployeeCourseRepo empCourseRepo)
 	{
 
 		return new CommandLineRunner() {
@@ -50,10 +53,10 @@ public class DemoApplication {
 				CourseType t3 = new CourseType(true, "Tris reizes gadā");
 				courseTypeRepo.save(t3);
 				
-				Course c1 = new Course("Java tests", "Tests par Java pamatiem", t1);
-				Course c2 = new Course("Java tests2", "Tests par Java pamatiem", t1);
-				Course c3 = new Course("Java tests3", "Tests par Java pamatiem", t1);
-				Course c4 = new Course("Java tests4", "Tests par Java pamatiem", t1);
+				Course c1 = new Course("Programmētājs", "te kaut kada informācija", t1);
+				Course c2 = new Course("Datorzinātnes", "te kaut kada informācija", t1);
+				Course c3 = new Course("Celtnieki", "te kaut kada informācija", t1);
+				Course c4 = new Course("Celtnieki2", "te kaut kada informācija", t1);
 				courseRepo.save(c1);
 				courseRepo.save(c2);
 				courseRepo.save(c3);
@@ -63,7 +66,7 @@ public class DemoApplication {
 				Department d2 = new Department("Cēlēji", "Pēters", "Peters");
 				Department d3 = new Department("Stiepēji", "Džonis", "Bravo");
 				Department d4 = new Department("Forklift dievi", "Antons", "Leons");
-				Department d5 = new Department("IT", "Janis", "Berzins");
+				Department d5 = new Department("IT speciālists", "Janis", "Berzins");
 				departmentRepo.save(d1);
 				departmentRepo.save(d2);
 				departmentRepo.save(d3);
@@ -95,9 +98,14 @@ public class DemoApplication {
 				Employee employee4 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
 				employeeRepo.save(employee3);
 				employeeRepo.save(employee4);
-				
-				
-				
+
+				Date date = new Date();
+				EmployeeCourse empCourse1 = new EmployeeCourse("Programminženierija", 4, date, employee3, c2);
+				EmployeeCourse empCourse2 = new EmployeeCourse("Programminženierija", 6, date, employee3, c1);
+				EmployeeCourse empCourse3 = new EmployeeCourse("Programminženierija", 5, date, employee4, c1);
+				empCourseRepo.save(empCourse1);
+				empCourseRepo.save(empCourse2);
+				empCourseRepo.save(empCourse3);
 				
 				
 			}

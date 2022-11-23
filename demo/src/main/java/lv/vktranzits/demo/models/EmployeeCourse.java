@@ -9,7 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -36,7 +37,8 @@ public class EmployeeCourse {
     private String title;
     
     @Column(name="ValuePr")
-    @Size(min = 0, max = 10)
+    @Min(0)
+    @Max(10)
     private float valuePr;
 
     @Column(name="Date")

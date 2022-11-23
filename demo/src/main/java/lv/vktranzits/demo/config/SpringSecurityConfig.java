@@ -87,6 +87,7 @@ public class SpringSecurityConfig{
 		.antMatchers("/course/**").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/department/**").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
+		.antMatchers("/results/**").hasAuthority("ROLE_ADMIN")
 		.and()
 		.formLogin().permitAll()
 		.and()
@@ -97,8 +98,8 @@ public class SpringSecurityConfig{
 			.maximumSessions(1)
 			.maxSessionsPreventsLogin(true)
 			.expiredUrl("/sessionExpired.html").and()
-			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-			.invalidSessionUrl("/login"));
+			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+			// .invalidSessionUrl("/login")); <-- makes page go to homepage
 		
 		
 		

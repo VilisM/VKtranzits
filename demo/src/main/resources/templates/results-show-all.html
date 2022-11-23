@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Rezultāti</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
+                <div class="container">		        
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/employee/showAll">Darbinieki</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/department/showAll">Strukturvienības</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/course/showAll">Kursi</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/results/showAll">Vērtējumi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Iziet no konta</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+            <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
+            <table class="table table-bordered table-striped">
+                <tr>
+                <th>Vārds, uzvārds</th>
+                <th>Nosaukums</th>
+                <th>Vērtējums</th> 
+                <th>Datums</th>
+                </tr>
+                <tr th:each="temp : ${object}">
+                
+                <td th:text="${temp.getEmployee().getName() + ' ' + temp.getEmployee().getSurname()}"/>
+                <td th:text="${temp.getTitle()}"/>
+                <td th:text="${temp.getValuePr()}"/>
+                <td th:text="${temp.getDate()}"/>
+                <!-- <td class="col-md-4">
+                        <a th:href="@{/results/showAll/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-info text-white" role="button">PARĀDĪT</a>
+                        <a th:href="@{/results/update/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-primary text-white" role="button">LABOT</a>
+                        <a th:href="@{/results/delete/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-danger text-white" role="button">DZĒST</a>
+                </td> -->
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div class="container">
+            <a th:href="@{/results/load/Excel}" class="btn-sm btn-info text-white" role="button">Importēt rezultātus</a>
+            <a th:href="@{/results/save/Excel}" class="btn-sm btn-info text-white" role="button">Saglabāt .xls</a>
+        </div>
+        
+    </body>
+</html>
