@@ -63,10 +63,13 @@ public class DemoApplication {
 				Department d2 = new Department("Cēlēji", "Pēters", "Peters");
 				Department d3 = new Department("Stiepēji", "Džonis", "Bravo");
 				Department d4 = new Department("Forklift dievi", "Antons", "Leons");
+				Department d5 = new Department("IT", "Janis", "Berzins");
 				departmentRepo.save(d1);
 				departmentRepo.save(d2);
 				departmentRepo.save(d3);
 				departmentRepo.save(d4);
+				departmentRepo.save(d5);
+
 
 				Position position = new Position("ROLE_DEVELOPER", "Junior Java developer");
 				Position position2 = new Position("ROLE_ADMIN", "Sistēmas administrātors");
@@ -86,6 +89,12 @@ public class DemoApplication {
 				position.addEmployee(employee1);
 				posRepo.save(position2);
 				posRepo.save(position);
+
+				// Vērtējumu pārbaudei
+				Employee employee3 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
+				Employee employee4 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
+				employeeRepo.save(employee3);
+				employeeRepo.save(employee4);
 				
 				
 				
