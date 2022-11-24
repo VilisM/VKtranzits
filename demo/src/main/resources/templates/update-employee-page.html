@@ -66,14 +66,17 @@
                             </div> -->
 
                             <div class="form-group">
-                                <label for="position.title">Amats</label>
-                                <br>
-                                <input type="checkbox" id="position.title" th:field="*{allPositions}"
-						            th:each="pos : ${position}"
-						            th:text="${pos.description}"
-						            th:value="${pos.IdPos}"
+                                <label>Amati</label>
+                            <div class="form-group" th:field="*{allPositions}" th:each="pos : ${position}">
+                                <input type="checkbox" id="postitle" 
+                                th:field="*{allPositions}" 
+                                th:value="${pos.IdPos}"
 						        />
-                            </div>    
+                                <label class="form-check-label" 
+                                for="postitle" 
+                                th:text="${pos.description}"></label>
+                            </div>
+                        </div>
 
                             <div class="form-group">
                                 <label for="department.title">Struktūrvienības</label>

@@ -4,11 +4,12 @@ package lv.vktranzits.demo.services.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,7 +19,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.vktranzits.demo.models.Course;
 import lv.vktranzits.demo.models.Employee;
+import lv.vktranzits.demo.models.EmployeeCourse;
+import lv.vktranzits.demo.models.ResultView;
+import lv.vktranzits.demo.repos.IEmployeeCourseRepo;
 import lv.vktranzits.demo.repos.IEmployeeRepo;
 import lv.vktranzits.demo.services.IExcelService;
 
@@ -28,9 +33,14 @@ public class ExcelServiceImpl implements IExcelService{
 	@Autowired
     private IEmployeeRepo employeeRepo;
 
-	
+	@Autowired
+	private IEmployeeCourseRepo empCourseRepo;
 
-
+	private Date parseDate(String date, String format) throws ParseException
+	{
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		return formatter.parse(date);
+	}
 
 
 	// @Override
@@ -39,7 +49,78 @@ public class ExcelServiceImpl implements IExcelService{
     // }
 
 	@Override
-	public void loadResultsFromExcel() {
+	public boolean saveResultDataInExcel(ResultView resultView) {
+
+		ArrayList<EmployeeCourse> allGrades = (ArrayList<EmployeeCourse>) empCourseRepo.findAll();
+		 
+		  	XSSFWorkbook workbook = new XSSFWorkbook(); 
+	        int num = 0;
+	        //Create a blank sheet
+	        XSSFSheet sheet = workbook.createSheet("Employee ratings for courses");
+			Row firstRow = sheet.createRow(0);
+
+			if(resultView.isFullNameEnabled == 1) {
+				Cell cellFirst = firstRow.createCell(num++);
+				cellFirst.setCellValue("Vārds, uzvārds");
+			}
+			if(resultView.isTitleEnabled == 1) {
+            	Cell cellFirst2 = firstRow.createCell(num++);
+            	cellFirst2.setCellValue("Nosaukums");
+			}
+			if(resultView.isRatingEnabled == 1) {
+				Cell cellFirst3 = firstRow.createCell(num++);
+				cellFirst3.setCellValue("Vērtējums");
+			}
+			if(resultView.isDateEnabled == 1) {
+				Cell cellFirst4 = firstRow.createCell(num++);
+				cellFirst4.setCellValue("Datums");
+			}
+	        int rownum = 1;
+	        for (EmployeeCourse grade: allGrades)
+	        {
+	            Row row = sheet.createRow(rownum++);
+	            num = 0;
+				if(resultView.isFullNameEnabled == 1) {
+					Cell cell = row.createCell(num++);
+					cell.setCellValue(grade.getEmployee().getName() + " " + grade.getEmployee().getSurname());
+				}
+				if(resultView.isTitleEnabled == 1) {
+					Cell cell2 = row.createCell(num++);
+					cell2.setCellValue(grade.getTitle());
+				}
+				if(resultView.isRatingEnabled == 1) {
+                	Cell cell3 = row.createCell(num++);
+                	cell3.setCellValue(grade.getValuePr());
+				}
+				if(resultView.isDateEnabled == 1) {
+                	Cell cell4 = row.createCell(num++);
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+                	cell4.setCellValue(dateFormat.format(grade.getDate()));
+				}
+			}
+                try
+                {
+					Date date = new Date();
+                    //Write the workbook in file system
+                    FileOutputStream out = new FileOutputStream
+					(new File("results_" + date.getTime() + ".xlsx"));
+                    workbook.write(out);
+                    out.close();
+                    System.out.println("results_" + date.getTime() + ".xlsx written successfully on disk.");
+					workbook.close();
+                } 
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                }
+			return true;
+	}
+
+	@Override
+	public boolean loadResultsFromExcel(String courseTitle, Course course) {
+		if(courseTitle.isEmpty() || courseTitle.isBlank()) {
+			return false;
+		}
 		try
 		{
 			FileInputStream file = new FileInputStream(new File("resultsExcel.xlsx"));
@@ -59,43 +140,44 @@ public class ExcelServiceImpl implements IExcelService{
 				map.put(cell.getStringCellValue(),cell.getColumnIndex());
 			}
 
-			//Iterate through each rows one by one
 			Iterator<Row> rowIterator = sheet.iterator();
 			while (rowIterator.hasNext()) 
 	            {
-				Row dataRow = rowIterator.next(); //get row 1 to row n (rows containing data)
+				Row dataRow = rowIterator.next();
 				if(dataRow.getRowNum() == 0) {
 					continue;
 				}
 			   
-				int idxForColumn1 = map.get("Uzvārds"); //get the column index for the column with header name = "Column1"
-				int idxForColumn2 = map.get("Vārds"); //get the column index for the column with header name = "Column2"
-				int idxForColumn3 = map.get("Pabeigts"); //get the column index for the column with header name = "Column3"
-				int idxForColumn4 = map.get("Vērtējums/10,00"); //get the column index for the column with header name = "Column3"
+				int idxForColumn1 = map.get("Uzvārds");
+				int idxForColumn2 = map.get("Vārds"); 
+				int idxForColumn3 = map.get("Pabeigts");
+				int idxForColumn4 = map.get("Vērtējums/10,00"); 
 			   
-				Cell cell1 = dataRow.getCell(idxForColumn1); //Get the cells for each of the indexes
+				Cell cell1 = dataRow.getCell(idxForColumn1);
 				Cell cell2 = dataRow.getCell(idxForColumn2); 
 				if (cell1.getStringCellValue() == "" && cell2.getStringCellValue() == "") {
 					break;
 				}
 				Cell cell3 = dataRow.getCell(idxForColumn3);  
 				Cell cell4 = dataRow.getCell(idxForColumn4);  
-				//NOTE THAT YOU HAVE TO KNOW THE DATA TYPES OF THE DATA YOU'RE EXTRACTING.
-				//FOR EXAMPLE I DON'T THINK YOU CAN USE cell.getStringCellValue IF YOU'RE TRYING TO GET A NUMBER
-				System.out.println(cell1.getStringCellValue() + " \t");
-				System.out.println(cell2.getStringCellValue() + " \t");
-				System.out.println(cell3.getStringCellValue() + " \t");
-				System.out.println(Double.parseDouble(cell4.getStringCellValue().replace(',','.')) + " \t");
-			   
+				if(employeeRepo.existsByNameAndSurname(cell2.getStringCellValue(), cell1.getStringCellValue())){
+					Employee employee = employeeRepo.findByNameAndSurname(cell2.getStringCellValue(), cell1.getStringCellValue());
+					float valuePr = Float.parseFloat(cell4.getStringCellValue().replace(',','.'));
+					Date date = parseDate(cell3.getStringCellValue(), "yyyy'. gada' dd'.' MMM HH:mm");
+					EmployeeCourse empCourse1 = new EmployeeCourse(courseTitle, valuePr, date, employee, course);
+					empCourseRepo.save(empCourse1);
+				}	   
 			   }
 
 			file.close();
 			workbook.close();
+			return true;
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
+		return false;
 }
 
 
@@ -146,10 +228,6 @@ public class ExcelServiceImpl implements IExcelService{
 	        {
 	            e.printStackTrace();
 	        }
-		
-		
-		
-		
 	}
 
 		//  (Arrays.asList(new Employee("Janis","Krumins",29879894,"krumins@gmail.com", "123"),
@@ -174,7 +252,6 @@ public class ExcelServiceImpl implements IExcelService{
 	            
 	            Cell cell = row.createCell(1);
                 cell.setCellValue(emp.getName());
-
                 Cell cell2 = row.createCell(2);
                 cell2.setCellValue(emp.getSurname());
                 Cell cell3 = row.createCell(3);
