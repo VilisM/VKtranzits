@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Department;
@@ -23,6 +26,13 @@ public class EmployeeServiceImpl implements IEmployeeService  {
 
     @Autowired
     private IPositionRepo posRepo;
+
+ 
+    @Override
+    public Page<Employee> findAll (int pageNr) {
+		PageRequest pageable = PageRequest.of(pageNr-1, 10);
+		return employeeRepo.findAll(pageable);
+	}
 
     @Override
     public ArrayList<Employee> selectAllEmployees() {

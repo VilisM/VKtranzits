@@ -1,10 +1,16 @@
 package lv.vktranzits.demo.services;
 
 import java.util.ArrayList;
+
+import org.springframework.data.domain.Page;
+
 import lv.vktranzits.demo.models.*;
 
 
 public interface IEmployeeService {
+
+    public Page<Employee> findAll(int pageNr);
+
 
     public abstract ArrayList<Employee> selectAllEmployees();
 

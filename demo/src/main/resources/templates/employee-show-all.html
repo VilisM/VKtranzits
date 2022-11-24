@@ -12,7 +12,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/employee/showAll">Darbinieki</a>
+                                <a class="nav-link" href="/employee/page/1">Darbinieki</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/department/showAll">Strukturvienības</a>
@@ -46,7 +46,7 @@
                 <td th:text="${temp.getPhone()}"/>
                 <td th:text="${temp.getEmail()}"/>
                 <td class="col-md-4">
-                        <a th:href="@{/employee/showAll/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-info text-white" role="button">PARĀDĪT</a>
+                        <a th:href="@{/employee/page/1/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-info text-white" role="button">PARĀDĪT</a>
                         <a th:href="@{/employee/update/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-primary text-white" role="button">LABOT</a>
                         <a th:href="@{/employee/delete/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-danger text-white" role="button">DZĒST</a>
                     </td>
@@ -54,6 +54,34 @@
             </table>
             </div>
         </div>
+        <div>
+			<nav aria-label="Page navigation ">
+			  <ul class="pagination justify-content-center">
+			  
+			    <li th:if= "${currentPage == 1}" class="page-item disabled">
+			      <a class="page-link" href="#" tabindex="-1">Previous</a>
+			    </li>
+			    <li th:if= "${currentPage != 1}" class="page-item">
+			      <a class="page-link" th:href="${currentPage - 1}">Previous</a>
+			    </li>
+			    
+			    
+			    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">[[${currentPage}]]</a></li>
+
+
+			    <li th:if= "${currentPage == totalPages}" class="page-item disabled">
+			      <a class="page-link" href="#" tabindex="-1">Next</a>
+			    </li>
+			    <li th:if= "${currentPage != totalPages}" class="page-item">
+			      <a class="page-link" th:href="${currentPage + 1}">Next</a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+		<div>
+			<a> Total Items: [[${totalElements}]] - page [[${currentPage}]] of [[${totalPages}]] </a>
+		</div>
+
         <div class="container">
             <a th:href="@{/employee/showAll/Excel}" class="btn-sm btn-info text-white" role="button">Ģenerēt Darbinieku excel Failu</a>
 
