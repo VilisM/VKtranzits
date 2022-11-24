@@ -1,12 +1,24 @@
 package lv.vktranzits.demo.repos;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import lv.vktranzits.demo.models.Employee;
 
-public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
+public interface IEmployeeRepo extends PagingAndSortingRepository<Employee, Integer> {
+
+    
+//Page<Employee> findAll ( Pageable pageable);
+
+//     PageRequest firstPageWithTwoElements = PageRequest.of(0, 2);
+
+// PageRequest secondPageWithFiveElements = PageRequest.of(1, 5);
 
     boolean existsByNameAndSurname(String name, String surname);
 
@@ -21,3 +33,6 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
     Employee findByNameAndSurname(String name, String surname);
     
 }
+
+
+//

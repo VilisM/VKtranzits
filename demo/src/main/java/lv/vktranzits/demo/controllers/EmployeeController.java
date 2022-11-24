@@ -3,12 +3,14 @@ package lv.vktranzits.demo.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -31,11 +33,11 @@ public class EmployeeController {
     private IPositionService posService;
 
 
-    @GetMapping("/employee/showAll")
-    public String selectAllEmployees(Model model){
-            model.addAttribute("object", employeeService.selectAllEmployees());
-            return "employee-show-all";
-    }
+    // @GetMapping("/employee/showAll")
+    // public String selectAllEmployees(Model model){
+    //         model.addAttribute("object", employeeService.selectAllEmployees());
+    //         return "employee-show-all";
+    // }
 
     @GetMapping("/employee/showAll/{id}")
     public String selectEmployeeById(@PathVariable(name = "id") int id, Model model){
@@ -49,11 +51,46 @@ public class EmployeeController {
             }
     }
 
-    @GetMapping("/employee/show")
-    public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
-            model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
-            return "employee-show-all";
-    }
+    // @GetMapping("/employee/page/{pageNr}/{id}")
+    // public String selectEmployeeById( @PathVariable("pageNr") int currentPage, @PathVariable(name = "id")  int id, Model model){
+    //         try {
+    //             model.addAttribute("object", employeeService.selectEmployeeById(id));
+    //             return "one-employee-page";
+    //         }
+    //         catch(Exception e){
+    //             return "error";
+    //         }
+    // }
+
+    // @RequestMapping("/employee/showAll")
+	// public String getEmployees(Model model) {
+	// 	return employeesByPage(model,10);
+	// }
+	
+	// private String employeesByPage(Model model, int i) {
+    //     return null;
+    // }
+
+    @GetMapping("/employee/page/{pageNr}")
+	public String productsByPage(Model model, @PathVariable("pageNr") int currentPage) {
+		Page<Employee> page = employeeService.findAll(currentPage);
+		System.out.println(currentPage);
+        System.out.println(page.getTotalElements());
+        System.out.println(page.getTotalPages());
+        System.out.println(page);
+        
+		model.addAttribute("object", page);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("totalElements", page.getTotalElements());
+		model.addAttribute("totalPages", page.getTotalPages());
+		return "employee-show-all";
+	}
+
+//    @GetMapping("/employee/show")
+//    public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
+//            model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
+//            return "employee-show-all";
+//    }
 
     @GetMapping("/employee/delete/{id}")
     public String deleteEmployee(@PathVariable(name = "id") int id, Model model){
@@ -62,7 +99,7 @@ public class EmployeeController {
                 return "employee-show-all";
             }
             else{
-                return"redirect:/employee/showAll";
+                return"redirect:/employee/page/1";
             }
     }
 
@@ -77,7 +114,7 @@ public class EmployeeController {
     public String postInsertNewEmployee(@Valid Employee employee, BindingResult result){
             if(!result.hasErrors()){
                 if(employeeService.insertNewEmployee(employee))
-                    return "redirect:/employee/showAll";
+                    return "redirect:/employee/page/1";
                 else
                     return "redirect:/error";
             }
@@ -103,7 +140,7 @@ public class EmployeeController {
     public String postUpdateEmployee(@PathVariable(name = "id") int id,@Valid Employee employee, BindingResult result, Model model){
             if(!result.hasErrors()){
                 if(employeeService.updateEmployeeById(id, employee))
-                    return "redirect:/employee/showAll/" + id;
+                    return "redirect:/employee/page/1" + id;
                 else
                     return "redirect:/error";
             }
