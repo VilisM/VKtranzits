@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Darbinieki</title>
+        <title th:text="#{lang.employee}"></title>
         <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="/demo/src/main/resources/templates/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>
@@ -20,34 +21,34 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/employee/page/1">Darbinieki</a>
+                                <a class="nav-link" href="/employee/page/1" th:text="#{lang.employee}"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/department/showAll">Strukturvienības</a>
+                                <a class="nav-link" href="/department/showAll" th:text="#{lang.department}"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/course/showAll">Kursi</a>
+                                <a class="nav-link" href="/course/showAll" th:text="#{lang.course}"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/results/showAll">Vērtējumi</a>
+                                <a class="nav-link" href="/results/showAll" th:text="#{lang.grade}"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout">Iziet no konta</a>
+                                <a class="nav-link" href="/logout" th:text="#{lang.logout}"></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <div class="container">
-            <a th:href="@{/employee/add}" class="btn-sm btn-success text-white" role="button">PIEVIENOT DARBINIEKU</a>
+            <a th:href="@{/employee/add}" class="btn-sm btn-success text-white" role="button" th:text="#{lang.addEmployee}"></a>
             <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
             <table class="table table-bordered table-striped">
                 <tr>
                 <th>ID</th>
-                <th>Vārds</th>
-                <th>Uzvārds</th> 
-                <th>Telefona numurs</th>
-                <th>E-pasts</th>
+                <th th:text="#{lang.name}"></th>
+                <th th:text="#{lang.surname}"></th> 
+                <th th:text="#{lang.phone}"></th>
+                <th th:text="#{lang.email}"></th>
                 </tr>
                 <tr th:each="temp : ${object}">
                 
@@ -70,10 +71,10 @@
 			  <ul class="pagination justify-content-center">
 			  
 			    <li th:if= "${currentPage == 1}" class="page-item disabled">
-			      <a class="page-link" href="#" tabindex="-1">Previous</a>
+			      <a class="page-link" href="#" tabindex="-1" th:text="#{lang.previous}"></a>
 			    </li>
 			    <li th:if= "${currentPage > 1}" class="page-item">
-			      <a class="page-link" th:href="${currentPage - 1} ">Previous</a>
+			      <a class="page-link" th:href="${currentPage - 1} " th:text="#{lang.previous}"></a>
 			    </li>
 			    
 			    
@@ -81,10 +82,10 @@
 
 
 			    <li th:if= "${currentPage == totalPages}" class="page-item disabled">
-			      <a class="page-link" href="#" tabindex="-1">Next</a>
+			      <a class="page-link" href="#" tabindex="-1" th:text="#{lang.next}"></a>
 			    </li>
 			    <li th:if= "${currentPage != totalPages}" class="page-item">
-			      <a class="page-link" th:href="${currentPage + 1}">Next</a>
+			      <a class="page-link" th:href="${currentPage + 1}" th:text="#{lang.next}"></a>
 			    </li>
 			  </ul>
 			</nav>
@@ -92,7 +93,7 @@
 		
 
         <div class="container">
-            <a th:href="@{/employee/showAll/Excel}" class="btn-sm btn-info text-white" role="button">Ģenerēt Darbinieku excel Failu</a>
+            <a th:href="@{/employee/showAll/Excel}" class="btn-sm btn-info text-white" role="button" th:text="#{lang.generateEmployeeExcel}"></a>
 
         </div>
         
