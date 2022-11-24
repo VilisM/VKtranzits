@@ -44,8 +44,8 @@
                 <p th:text="${object.getPhone()}" />
                 <p><strong>E-pasts</strong></p>
                 <p th:text="${object.getEmail()}" />
-                <p th:if="${ not#lists.isEmpty(object.getPosition())}"><strong>Amats</strong></p>
-                <p th:if="${ not#lists.isEmpty(object.getPosition())}" th:text="${object.getPosition().getTitle()}" />
+                <p><strong>Amats</strong></p>
+                <p th:field="*{position}" th:each="test : ${position}" th:text="${test.getDescription()}" />
             </div>
         </div>
     </div>
