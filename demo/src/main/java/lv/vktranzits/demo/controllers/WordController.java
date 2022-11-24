@@ -23,7 +23,9 @@ public class WordController {
         
             System.out.println("Word file has been created");
 
-            wordService.saveDataInWord();model.addAttribute("object",courseService.selectAllCourses());
+            wordService.saveDataInWord();
+            
+            model.addAttribute("object",courseService.selectAllCourses());
             return "course-show-all";
             
         
