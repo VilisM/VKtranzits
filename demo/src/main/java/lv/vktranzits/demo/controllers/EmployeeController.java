@@ -74,10 +74,6 @@ public class EmployeeController {
     @GetMapping("/employee/page/{pageNr}")
 	public String productsByPage(Model model, @PathVariable("pageNr") int currentPage) {
 		Page<Employee> page = employeeService.findAll(currentPage);
-		System.out.println(currentPage);
-        System.out.println(page.getTotalElements());
-        System.out.println(page.getTotalPages());
-        System.out.println(page);
         
 		model.addAttribute("object", page);
 		model.addAttribute("currentPage",currentPage);
