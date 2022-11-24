@@ -96,7 +96,7 @@ public class EmployeeController {
     public String deleteEmployee(@PathVariable(name = "id") int id, Model model){
             if(employeeService.deleteEmployeeById(id)){
                 model.addAttribute("object", employeeService.selectAllEmployees());
-                return "employee-show-all";
+                return "redirect:/employee/page/1";
             }
             else{
                 return"redirect:/employee/page/1";
@@ -140,7 +140,7 @@ public class EmployeeController {
     public String postUpdateEmployee(@PathVariable(name = "id") int id,@Valid Employee employee, BindingResult result, Model model){
             if(!result.hasErrors()){
                 if(employeeService.updateEmployeeById(id, employee))
-                    return "redirect:/employee/page/1" + id;
+                    return "redirect:/employee/page/1";
                 else
                     return "redirect:/error";
             }
