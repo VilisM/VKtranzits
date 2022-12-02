@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Rezultāti</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Importēt rezultātus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 mx-auto">
+                                        <form action="#" th:action="@{/results/load/Excel}" method="post">
+                                            <div class="form-group">
+                                                <label for="name">Nosaukums</label>
+                                                <input type="text" id="employeecourse.title" th:field="*{employeecourse.title}" class="form-control">
+                                                <div class="alert alert-warning" th:if="${#fields.hasErrors('employeecourse.title')}" th:errors="*{employeecourse.title}"></div>
+                                            </div>
+                
+                                            <div class="form-group">
+                                                <label for="course">Kurss</label>
+                                                <select class="form-control" id="employeecourse.emCourse" th:field="*{employeecourse.emCourse}">
+                                                    <option th:each="test: ${course}"
+                                                        th:value="${test.idCou}" th:text="${test.title}">
+                                                    </option>
+                                                </select>
+                                            </div>   
+                
+                                            <button type="submit" class="btn btn-primary btn-block mt-2">Importēt</button>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kuras kolonnas vēlies eksportēt?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 mx-auto">
+                                        <form action="#" th:action="@{/results/save/Excel}" method="post" th:object="${result}">
+                                            
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" th:field="*{isFullNameEnabled}" id="fullname" checked>
+                                                <label class="form-check-label" for="fullname">
+                                                  Vārds, uzvārds
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" th:field="*{isTitleEnabled}" id="title" checked>
+                                                <label class="form-check-label" for="title">
+                                                  Nosaukums
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" th:field="*{isRatingEnabled}" id="rating" checked>
+                                                <label class="form-check-label" for="rating">
+                                                  Vērtējums
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="0" th:field="*{isDateEnabled}" id="date" checked>
+                                                <label class="form-check-label" for="date">
+                                                  Datums
+                                                </label>
+                                              </div>
+
+                                            <button type="submit" class="btn btn-primary btn-block mt-2">Eksportēt</button>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
+			<li class="nav-item">
+				<span th:style="${'color: white;'}" th:text="#{lang.change}"></span>:
+				<select title="Lang" id="locales">
+					<option value=""></option>
+					<option value="lv" th:text="#{lang.lv}"></option>
+					<option value="US" th:text="#{lang.US}"></option>
+				</select>
+			</li>
+                <div class="container">		        
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/employee/page/1">Darbinieki</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/department/showAll">Strukturvienības</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/course/showAll">Kursi</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/results/showAll">Vērtējumi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Iziet no konta</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+            <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
+            <table class="table table-bordered table-striped">
+                <tr>
+                <th>Vārds, uzvārds</th>
+                <th>Nosaukums</th>
+                <th>Vērtējums</th> 
+                <th>Datums</th>
+                </tr>
+                <tr th:each="temp : ${object}">
+                
+                <td th:text="${temp.getEmployee().getName() + ' ' + temp.getEmployee().getSurname()}"/>
+                <td th:text="${temp.getTitle()}"/>
+                <td th:text="${temp.getValuePr()}"/>
+                <td th:text="${temp.getDate()}"/>
+                <!-- <td class="col-md-4">
+                        <a th:href="@{/results/showAll/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-info text-white" role="button" th:text="#{lang.show}"></a>
+                        <a th:href="@{/results/update/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-primary text-white" role="button" th:text="#{lang.edit}"></a>
+                        <a th:href="@{/results/delete/{id}(id=${temp.getIdEm()})}" class="btn-sm btn-danger text-white" role="button" th:text="#{lang.delete}"></a>
+                </td> -->
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div class="container">
+            <a class="btn-sm btn-info text-white" data-toggle="modal" data-target="#exampleModal" role="button">Importēt rezultātus</a>
+            <a data-toggle="modal" data-target="#exampleModal2" class="btn-sm btn-info text-white" role="button">Saglabāt .xls</a>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
+    </body>
+</html>
