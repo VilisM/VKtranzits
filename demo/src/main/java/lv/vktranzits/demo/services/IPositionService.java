@@ -8,4 +8,6 @@ public interface IPositionService {
 
     public abstract ArrayList<Position> selectAllPositions();
     
+    public abstract ArrayList<Position> selectAllEmployeePositions(int employeeId);
+    
 }

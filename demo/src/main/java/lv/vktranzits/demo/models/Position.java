@@ -1,4 +1,5 @@
 package lv.vktranzits.demo.models;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,9 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,7 +25,7 @@ import lombok.ToString;;
 @ToString
 @Table
 @Entity
-public class Position {
+public class Position implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +52,10 @@ public class Position {
 
     public void addEmployee(Employee employee){
         employees.add(employee);
+    }
+
+    public void deleteEmployee(Employee employee){
+        employees.remove(employee);
     }
 
     public Position(String title, String description) {

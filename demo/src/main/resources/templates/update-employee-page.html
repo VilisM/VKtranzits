@@ -66,13 +66,17 @@
                             </div> -->
 
                             <div class="form-group">
-                                <label for="position.title">Amats</label>
-                                <select class="form-control" id="position.title" th:field="*{position}">
-                                    <option th:each="test: ${position}"
-                                        th:value="${test.IdPos}" th:text="${test.title}">
-                                    </option>
-                                </select>
+                                <label>Amati</label>
+                            <div class="form-group" th:field="*{allPositions}" th:each="pos : ${position}">
+                                <input type="checkbox" id="postitle" 
+                                th:field="*{allPositions}" 
+                                th:value="${pos.IdPos}"
+						        />
+                                <label class="form-check-label" 
+                                for="postitle" 
+                                th:text="${pos.description}"></label>
                             </div>
+                        </div>
 
                             <div class="form-group">
                                 <label for="department.title">Struktūrvienības</label>

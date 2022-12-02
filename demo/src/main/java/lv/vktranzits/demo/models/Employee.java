@@ -1,11 +1,9 @@
 package lv.vktranzits.demo.models;
 
-import java.security.SecureRandom;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +38,7 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class Employee extends Auditable<String> {
+public class Employee extends Auditable<String> implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

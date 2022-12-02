@@ -1,4 +1,5 @@
 package lv.vktranzits.demo.models;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AccessLevel;
@@ -28,7 +28,7 @@ import lombok.ToString;
 @ToString
 @Table
 @Entity
-public class Department {
+public class Department implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

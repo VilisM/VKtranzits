@@ -19,5 +19,10 @@ public class PositionServiceImpl implements IPositionService {
     public ArrayList<Position> selectAllPositions() {
         return (ArrayList<Position>) positionRepo.findAll();
     }
+
+	@Override
+	public ArrayList<Position> selectAllEmployeePositions(int employeeId) {
+		return (ArrayList<Position>) positionRepo.findAllByEmployeesIdEm(employeeId);
+	}
     
 }
