@@ -13,7 +13,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Importēt rezultātus</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Importēt rezultātus</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -24,8 +24,8 @@
                         <div class="col-6 mx-auto">
                             <form action="#" th:action="@{/results/load/Excel}" method="post">
                                 <div class="form-group">
-                                    <label for="name">Nosaukums</label>
-                                    <input type="text" id="employeecourse.title" th:field="*{employeecourse.title}"
+                                    <label for="emTitle">Nosaukums</label>
+                                    <input type="text" id="emTitle" th:field="*{employeecourse.title}"
                                            class="form-control">
                                     <div class="alert alert-warning"
                                          th:if="${#fields.hasErrors('employeecourse.title')}"
@@ -33,8 +33,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="course">Kurss</label>
-                                    <select class="form-control" id="employeecourse.emCourse"
+                                    <label for="emCourse">Kurss</label>
+                                    <select class="form-control" id="emCourse"
                                             th:field="*{employeecourse.emCourse}">
                                         <option th:each="test: ${course}"
                                                 th:value="${test.idCou}" th:text="${test.title}">
@@ -57,7 +57,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Kuras kolonnas vēlies eksportēt?</h5>
+                <h5 class="modal-title" id="exampleModalLabel2">Kuras kolonnas vēlies eksportēt?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

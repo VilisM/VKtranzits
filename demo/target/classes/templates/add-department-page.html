@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-6 mx-auto">
             <h1>Lūdzu ievadiet darbinieka parametrus</h1>
-            <form action="#" th:action="@{/addDepartment}" th:object="${department}" method="post">
+            <form action="#" th:action="@{/department/addDepartment}" th:object="${department}" method="post">
                 <div class="form-group">
                     <label for="title">Nosaukums</label>
                     <input type="text" id="title" th:field="*{title}" class="form-control">
@@ -24,15 +24,15 @@
 
                 <div class="form-group">
                     <label for="V_name">Vadītāja vārds</label>
-                    <input type="text" id="V_name" th:field="*{V_name}" class="form-control">
-                    <div class="alert alert-warning" th:if="${#fields.hasErrors('V_name')}" th:errors="*{V_name}"></div>
+                    <input type="text" id="V_name" th:field="*{v_name}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('V_name')}" th:errors="*{v_name}"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="V_surname">Vadītāja uzvārds</label>
-                    <input type="text" id="V_surname" th:field="*{V_surname}" class="form-control">
+                    <input type="text" id="V_surname" th:field="*{v_surname}" class="form-control">
                     <div class="alert alert-warning" th:if="${#fields.hasErrors('V_surname')}"
-                         th:errors="*{V_surname}"></div>
+                         th:errors="*{v_surname}"></div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
             </form>
