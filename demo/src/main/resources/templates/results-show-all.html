@@ -5,6 +5,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 </head>
 <body>
 <!-- Modal -->
@@ -21,15 +22,12 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-6 mx-auto">
-                            <form action="#" th:action="@{/results/load/Excel}" method="post">
+                        <div class="col-12 mx-auto">
+                            <form action="#" th:action="@{/results/load/Excel}" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="emTitle">Nosaukums</label>
                                     <input type="text" id="emTitle" th:field="*{employeecourse.title}"
                                            class="form-control">
-                                    <div class="alert alert-warning"
-                                         th:if="${#fields.hasErrors('employeecourse.title')}"
-                                         th:errors="*{employeecourse.title}"></div>
                                 </div>
 
                                 <div class="form-group">
@@ -42,7 +40,18 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary btn-block mt-2">Importēt</button>
+                                <div class="form-group">
+                                    <label for="emCourse">Fails</label>
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file">
+                                            <input type="file" name="file" class="custom-file-input" id="file">
+                                            <label class="custom-file-label" for="file">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block mt-2">
+                                    Importēt
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -65,8 +74,8 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-6 mx-auto">
-                            <form action="#" th:action="@{/results/save/Excel}" method="post" th:object="${result}">
+                        <div class="col-8 mx-auto">
+                            <form th:action="@{/results/save/Excel}" method="POST" th:object="${resultview}">
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1"
@@ -90,7 +99,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="0"
+                                    <input class="form-check-input" type="checkbox" value="1"
                                            th:field="*{isDateEnabled}" id="date" checked>
                                     <label class="form-check-label" for="date">
                                         Datums
@@ -108,6 +117,10 @@
 </div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
+    <!-- Alert -->
+    <div th:if="${message}" class="alert alert-danger" role="alert" th:text="${message}">
+    </div>
+    <!-- Alert -->
     <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
         <table class="table table-bordered table-striped">
             <tr>
@@ -145,6 +158,12 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        bsCustomFileInput.init()
+    });
+
+</script>
 <script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
 </body>
 </html>

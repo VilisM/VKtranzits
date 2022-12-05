@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    ...
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3" th:fragment="header">
-    <li class="nav-item">
-        <span th:style="${'color: white;'}" th:text="#{lang.change}"></span>:
+    <li th:style="${'list-style: none'}" class="nav-item">
+        <span th:style="${'color: white; '}" th:text="#{lang.change}"></span>:
         <select title="Lang" id="locales">
             <option value=""></option>
-            <option value="lv" th:text="#{lang.lv}"></option>
-            <option value="US" th:text="#{lang.US}"></option>
+            <option class="flag-icon flag-icon-lv" value="lv" th:text="#{lang.lv}"></option>
+            <option class="flag-icon flag-icon-us" value="US" th:text="#{lang.US}"></option>
         </select>
+
     </li>
     <div class="collapse navbar-collapse container" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
