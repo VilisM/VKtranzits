@@ -10,102 +10,74 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-			<li class="nav-item">
-				<span th:style="${'color: white;'}" th:text="#{lang.change}"></span>:
-				<select title="Lang" id="locales">
-					<option value=""></option>
-					<option value="lv" th:text="#{lang.lv}"></option>
-					<option value="US" th:text="#{lang.US}"></option>
-				</select>
-			</li>
-        <div class="container">		        
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/employee/page/1">Darbinieki</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/department/showAll">Strukturvienības</a>
-                    </li>
-                    <li class="nav-item">
-                                <a class="nav-link" href="/course/showAll">Kursi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/results/showAll">Vērtējumi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">Iziet no konta</a>
-                            </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-6 mx-auto">
-                    <h1>Lūdzu ievadiet darbinieka parametrus</h1>
-                        <form action="#" th:action="@{/employee/update/__${id}__}" th:object="${employee}" method="post">
-                            <div class="form-group">
-                                <label for="name">Vārds</label>
-                                <input type="text" id="name" th:field="*{name}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="surname">Uzvārds</label>
-                                <input type="text" id="surname" th:field="*{surname}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="phone">Telefona numurs</label>
-                                <input type="text" id="phone" th:field="*{phone}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">E-pasts</label>
-                                <input type="text" id="email" th:field="*{email}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-                            </div>
-
-                            <!-- <div class="form-group">
-                                <label for="password">Parole</label>
-                                <input type="password" id="password" th:field="*{password}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-                            </div> -->
-
-                            <div class="form-group">
-                                <label>Amati</label>
-                            <div class="form-group" th:field="*{allPositions}" th:each="pos : ${position}">
-                                <input type="checkbox" id="postitle" 
-                                th:field="*{allPositions}" 
-                                th:value="${pos.IdPos}"
-						        />
-                                <label class="form-check-label" 
-                                for="postitle" 
-                                th:text="${pos.description}"></label>
-                            </div>
-                        </div>
-
-                            <div class="form-group">
-                                <label for="department.title">Struktūrvienības</label>
-                                <select class="form-control" id="department.title" th:field="*{department}">
-                                    <option th:each="test: ${department}"
-                                        th:value="${test.idDe}" th:text="${test.title}">
-                                    </option>
-                                </select>
-                            </div>
-
-
-                            <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
-                        </form>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <h1>Lūdzu ievadiet darbinieka parametrus</h1>
+            <form action="#" th:action="@{/employee/update/__${id}__}" th:object="${employee}" method="post">
+                <div class="form-group">
+                    <label for="name">Vārds</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="surname">Uzvārds</label>
+                    <input type="text" id="surname" th:field="*{surname}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('surname')}"
+                         th:errors="*{surname}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefona numurs</label>
+                    <input type="text" id="phone" th:field="*{phone}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-pasts</label>
+                    <input type="text" id="email" th:field="*{email}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label for="password">Parole</label>
+                    <input type="password" id="password" th:field="*{password}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </div> -->
+
+                <div class="form-group">
+                    <label>Amati</label>
+                    <div class="form-group" th:field="*{allPositions}" th:each="pos : ${position}">
+                        <input type="checkbox" id="postitle"
+                               th:field="*{allPositions}"
+                               th:value="${pos.IdPos}"
+                        />
+                        <label class="form-check-label"
+                               for="postitle"
+                               th:text="${pos.description}"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="department.title">Struktūrvienības</label>
+                    <select class="form-control" id="department.title" th:field="*{department}">
+                        <option th:each="test: ${department}"
+                                th:value="${test.idDe}" th:text="${test.title}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
+            </form>
         </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
-    </body>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
+</body>
 
 </html>

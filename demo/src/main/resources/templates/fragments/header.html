@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3" th:fragment="header">
+    <li th:style="${'list-style: none'}" class="nav-item">
+        <span th:style="${'color: white; '}" th:text="#{lang.change}"></span>:
+        <select title="Lang" id="locales">
+            <option value=""></option>
+            <option class="flag-icon flag-icon-lv" value="lv" th:text="#{lang.lv}"></option>
+            <option class="flag-icon flag-icon-us" value="US" th:text="#{lang.US}"></option>
+        </select>
+
+    </li>
+    <div class="collapse navbar-collapse container" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/employee') ? 'active':''}">
+                <a class="nav-link" href="/employee/page/1" th:text="#{lang.employee}"></a>
+            </li>
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/department') ? 'active':''}">
+                <a class="nav-link" href="/department/showAll" th:text="#{lang.department}">Strukturvienības</a>
+            </li>
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/course') ? 'active':''}">
+                <a class="nav-link" href="/course/showAll" th:text="#{lang.course}">Kursi</a>
+            </li>
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/results') ? 'active':''}">
+                <a class="nav-link" href="/results/showAll" th:text="#{lang.grade}">Vērtējumi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Iziet no konta</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>
