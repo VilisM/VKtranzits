@@ -1,70 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Departmenti</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    </head>
-    <body>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-			<li class="nav-item">
-				<span th:style="${'color: white;'}" th:text="#{lang.change}"></span>:
-				<select title="Lang" id="locales">
-					<option value=""></option>
-					<option value="lv" th:text="#{lang.lv}"></option>
-					<option value="US" th:text="#{lang.US}"></option>
-				</select>
-			</li>
-                <div class="container">		        
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/employee/page/1">Darbinieki</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/department/showAll">Strukturvienības</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/course/showAll">Kursi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/results/showAll">Vērtējumi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">Iziet no konta</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div class="container">
-            <a th:href="@{/addDepartment}" class="btn-sm btn-success text-white" role="button">PIEVIENOT STRUKTŪRVIENĪBU</a>
-            <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
-            <table class="table table-bordered table-striped">
-                <tr>
+<head>
+    <title>Departmenti</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <a th:href="@{/addDepartment}" class="btn-sm btn-success text-white" role="button">PIEVIENOT STRUKTŪRVIENĪBU</a>
+    <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
+        <table class="table table-bordered table-striped">
+            <tr>
                 <th>ID</th>
                 <th>Nosaukums</th>
-                <th>Vadītāja vārds</th> 
+                <th>Vadītāja vārds</th>
                 <th>Vadītāja uzvārds</th>
-                </tr>
-                <tr th:each="temp : ${object}">
-                
+            </tr>
+            <tr th:each="temp : ${object}">
+
                 <td th:text="${temp.getIdDe()}"/>
                 <td th:text="${temp.getTitle()}"/>
                 <td th:text="${temp.getV_name()}"/>
                 <td th:text="${temp.getV_surname()}"/>
                 <td class="col-md-4">
-                        <a th:href="@{/allDepartmentsFilter?id={id}(id=${temp.getIdDe()})}" class="btn-sm btn-info text-white" role="button" th:text="#{lang.show}"></a>
-                        <a th:href="@{/updateDepartment/{id}(id=${temp.getIdDe()})}" class="btn-sm btn-primary text-white" role="button" th:text="#{lang.edit}"></a>
-                        <a th:href="@{/deleteDepartment/{id}(id=${temp.getIdDe()})}" class="btn-sm btn-danger text-white" role="button" th:text="#{lang.delete}"></a>
-                    </td>
-                </tr>
-            </table>
-            </div>
-        </div>
-        
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
-    </body>
+                    <a th:href="@{/allDepartmentsFilter?id={id}(id=${temp.getIdDe()})}"
+                       class="btn-sm btn-info text-white" role="button" th:text="#{lang.show}"></a>
+                    <a th:href="@{/updateDepartment/{id}(id=${temp.getIdDe()})}" class="btn-sm btn-primary text-white"
+                       role="button" th:text="#{lang.edit}"></a>
+                    <a th:href="@{/deleteDepartment/{id}(id=${temp.getIdDe()})}" class="btn-sm btn-danger text-white"
+                       role="button" th:text="#{lang.delete}"></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
+</body>
 </html>
