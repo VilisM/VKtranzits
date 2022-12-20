@@ -3,9 +3,13 @@ package lv.vktranzits.demo.services.impl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Course;
+import lv.vktranzits.demo.models.Employee;
 import lv.vktranzits.demo.repos.ICourseRepo;
 import lv.vktranzits.demo.services.ICourseService;
 
@@ -61,4 +65,13 @@ public class CourseServiceImpl implements ICourseService {
         }
         return false;
     }
+    
+    @Override
+	public Page<Course> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return courseRepo.findAll(pageable);
+	}
 }

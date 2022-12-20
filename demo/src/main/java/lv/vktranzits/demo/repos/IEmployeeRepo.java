@@ -13,13 +13,6 @@ import lv.vktranzits.demo.models.Employee;
 
 public interface IEmployeeRepo extends PagingAndSortingRepository<Employee, Integer> {
 
-    
-//Page<Employee> findAll ( Pageable pageable);
-
-//     PageRequest firstPageWithTwoElements = PageRequest.of(0, 2);
-
-// PageRequest secondPageWithFiveElements = PageRequest.of(1, 5);
-
     boolean existsByNameAndSurname(String name, String surname);
 
 	ArrayList<Employee> findAllByDepartmentIdDe(int departmentId);
@@ -33,6 +26,3 @@ public interface IEmployeeRepo extends PagingAndSortingRepository<Employee, Inte
     Employee findByNameAndSurname(String name, String surname);
     
 }
-
-
-//

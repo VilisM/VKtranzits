@@ -1,5 +1,7 @@
 package lv.vktranzits.demo.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +34,6 @@ public class EmployeeController {
     @Autowired
     private IPositionService posService;
 
-
-    // @GetMapping("/employee/showAll")
-    // public String selectAllEmployees(Model model){
-    //         model.addAttribute("object", employeeService.selectAllEmployees());
-    //         return "employee-show-all";
-    // }
-
     @GetMapping("/employee/showAll/{id}")
     public String selectEmployeeById(@PathVariable(name = "id") int id, Model model){
             try {
@@ -51,43 +46,26 @@ public class EmployeeController {
             }
     }
 
-    // @GetMapping("/employee/page/{pageNr}/{id}")
-    // public String selectEmployeeById( @PathVariable("pageNr") int currentPage, @PathVariable(name = "id")  int id, Model model){
-    //         try {
-    //             model.addAttribute("object", employeeService.selectEmployeeById(id));
-    //             return "one-employee-page";
-    //         }
-    //         catch(Exception e){
-    //             return "error";
-    //         }
-    // }
-
-    // @RequestMapping("/employee/showAll")
-	// public String getEmployees(Model model) {
-	// 	return employeesByPage(model,10);
-	// }
-	
-	// private String employeesByPage(Model model, int i) {
-    //     return null;
-    // }
-
-    @GetMapping("/employee/page/{pageNr}")
-	public String productsByPage(Model model, @PathVariable("pageNr") int currentPage) {
-		Page<Employee> page = employeeService.findAll(currentPage);
-        
-		model.addAttribute("object", page);
-		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("totalElements", page.getTotalElements());
+    @GetMapping("/employee/page/{pageNo}")
+	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+			@RequestParam(name="sortField", defaultValue = "idEm") String sortField,
+			@RequestParam(name="sortDir", defaultValue = "asc") String sortDir,
+			Model model) {
+		int pageSize = 5;
+		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Employee> listEmployees = page.getContent();
+		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalElements", page.getTotalElements());
+		
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		model.addAttribute("listEmployees", listEmployees);
 		return "employee-show-all";
 	}
-
-//    @GetMapping("/employee/show")
-//    public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
-//            model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
-//            return "employee-show-all";
-//    }
-
+    
     @GetMapping("/employee/delete/{id}")
     public String deleteEmployee(@PathVariable(name = "id") int id, Model model){
             if(employeeService.deleteEmployeeById(id)){

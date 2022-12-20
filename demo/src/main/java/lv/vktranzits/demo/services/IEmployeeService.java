@@ -1,6 +1,7 @@
 package lv.vktranzits.demo.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -9,7 +10,7 @@ import lv.vktranzits.demo.models.*;
 
 public interface IEmployeeService {
 
-    public Page<Employee> findAll(int pageNr);
+    //public Page<Employee> findAll(int pageNr);
 
 
     public abstract ArrayList<Employee> selectAllEmployees();
@@ -25,5 +26,9 @@ public interface IEmployeeService {
     public abstract ArrayList<Employee> selectAllEmployeesByPosition(String position);
 
     public abstract ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
+
+	List<Employee> getAllEmployees();
+
+	Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     
 }

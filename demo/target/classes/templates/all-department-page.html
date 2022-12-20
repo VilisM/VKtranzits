@@ -23,7 +23,7 @@
                                 <a class="nav-link" href="/employee/page/1">Darbinieki</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/department/showAll">Strukturvienības</a>
+                                <a class="nav-link" href="/department/page/1">Strukturvienības</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/course/showAll">Kursi</a>
@@ -40,20 +40,24 @@
             </nav>
             <div class="container">
             <a th:href="@{/addDepartment}" class="btn-sm btn-success text-white" role="button">PIEVIENOT STRUKTŪRVIENĪBU</a>
-            <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
+            <div th:if="${ not#lists.isEmpty(listDepartments)}" class="pt-3">
             <table class="table table-bordered table-striped">
                 <tr>
-                <th>ID</th>
-                <th>Nosaukums</th>
-                <th>Vadītāja vārds</th> 
-                <th>Vadītāja uzvārds</th>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=IdDe&sortDir=' + ${reverseSortDir}}">ID</a>
+	                </th>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Title&sortDir=' + ${reverseSortDir}}">Nosaukums</a>
+	                </th>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Vname&sortDir=' + ${reverseSortDir}}">Vadītāja vārds</a>
+	                </th>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Vsurname&sortDir=' + ${reverseSortDir}}">Vadītāja uzvārds</a>
+	                </th>
                 </tr>
-                <tr th:each="temp : ${object}">
+                <tr th:each="temp : ${listDepartments}">
                 
                 <td th:text="${temp.getIdDe()}"/>
                 <td th:text="${temp.getTitle()}"/>
-                <td th:text="${temp.getV_name()}"/>
-                <td th:text="${temp.getV_surname()}"/>
+                <td th:text="${temp.getVname()}"/>
+                <td th:text="${temp.getVsurname()}"/>
                 <td class="col-md-4">
                         <a th:href="@{/allDepartmentsFilter?id={id}(id=${temp.getIdDe()})}" class="btn-sm btn-info text-white" role="button" th:text="#{lang.show}"></a>
                         <a th:href="@{/updateDepartment/{id}(id=${temp.getIdDe()})}" class="btn-sm btn-primary text-white" role="button" th:text="#{lang.edit}"></a>
@@ -63,6 +67,33 @@
             </table>
             </div>
         </div>
+        <nav aria-label="Page navigation ">
+			<ul class="pagination justify-content-center" th:if="${totalPages > 1}">
+			    <div class="row col-sm-10">
+			        <div class="col-sm-2">
+			            Total Rows: [[${totalItems}]]
+			        </div>
+			        <div class="col-sm-1">
+						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+							<a th:if="${currentPage != i}"
+			                               th:href="@{'/employee/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+							<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+						</span>
+			        </div>
+			        <div class="col-sm-1">
+			            <a th:if="${currentPage < totalPages}"
+			               th:href="@{'/employee/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{lang.next}"></a>
+			            <span th:unless="${currentPage < totalPages}" th:text="#{lang.next}"></span>
+			        </div>
+			
+			        <div class="col-sm-1">
+			            <a th:if="${currentPage < totalPages}"
+			               th:href="@{'/employee/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{lang.previous}"></a>
+			            <span th:unless="${currentPage < totalPages}" th:text="#{lang.previous}"></span>
+			        </div>
+			    </div>
+			</ul>
+		</nav>
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/internationalization.js}"></script>

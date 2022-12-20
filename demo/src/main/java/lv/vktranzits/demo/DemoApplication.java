@@ -96,8 +96,12 @@ public class DemoApplication {
 				// Vērtējumu pārbaudei
 				Employee employee3 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
 				Employee employee4 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
+				Employee employee5 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
+				Employee employee6 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
 				employeeRepo.save(employee3);
 				employeeRepo.save(employee4);
+				employeeRepo.save(employee5);
+				employeeRepo.save(employee6);
 
 				Date date = new Date();
 				EmployeeCourse empCourse1 = new EmployeeCourse("Programminženierija", 4, date, employee3, c2);

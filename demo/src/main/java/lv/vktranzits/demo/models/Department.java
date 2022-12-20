@@ -40,13 +40,13 @@ public class Department implements Serializable {
     @Size(min = 4, max = 30)
     private String title;
 
-    @Column(name = "VName")
+    @Column(name = "Vname")
     @Size(min = 4, max = 30)
-    private String V_name;
+    private String vname;
 
-    @Column(name = "VSurname")
+    @Column(name = "Vsurname")
     @Size(min = 4, max = 30)
-    private String V_surname;
+    private String vsurname;
 
     @ManyToOne
     @JoinColumn(name="IdCo")
@@ -71,9 +71,9 @@ public class Department implements Serializable {
         employees.add(employee);
     }
 
-    public Department(String title, String V_name, String V_surname) {
+    public Department(String title, String vname, String vsurname) {
         setTitle(title);
-        setV_name(V_name);
-        setV_surname(V_surname);
+        setVname(vname);
+        setVsurname(vsurname);
     }
 }
