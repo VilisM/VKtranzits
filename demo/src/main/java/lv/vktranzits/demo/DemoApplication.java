@@ -29,7 +29,6 @@ public class DemoApplication {
 	 ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo,
 	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo, IEmployeeRepo employeeRepo, IEmployeeCourseRepo empCourseRepo)
 	{
-
 		return new CommandLineRunner() {
 
 			@Override

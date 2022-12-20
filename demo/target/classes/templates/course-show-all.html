@@ -100,11 +100,14 @@
 		</nav>
 
 
-		<div class="container">
-            <a th:href="@{/course/showAll/word}" class="btn-sm btn-info text-white" role="button">Ģenerēt kursu Word failu</a>
+<div class="container">
+    <a th:href="@{/course/showAll/word}" class="btn-sm btn-info text-white" role="button">Ģenerēt kursu Word
+        failu</a>
+</div>
 
-        </div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
-    </body>
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
+</body>
 </html>
