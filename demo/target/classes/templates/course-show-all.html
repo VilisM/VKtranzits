@@ -25,10 +25,10 @@
 							<a class="nav-link" href="/employee/page/1">Darbinieki</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/department/showAll">Strukturvienības</a>
+							<a class="nav-link" href="/department/page/1">Strukturvienības</a>
 						</li>
 						<li class="nav-item active">
-							<a class="nav-link" href="/course/showAll">Kursi</a>
+							<a class="nav-link" href="/course/page/1">Kursi</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="/results/showAll">Vērtējumi</a>
@@ -50,12 +50,6 @@
                 <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=CoType&sortDir=' + ${reverseSortDir}}">Type</a></th>
                 <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=Title&sortDir=' + ${reverseSortDir}}">Title</a></th>
                 <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=Description&sortDir=' + ${reverseSortDir}}">Description</a></th>
-            </tr>
-            <tr>
-              <th>Id</th>
-			  <th th:text="#{lang.type}"></th>
-              <th>Nosaukums</th>
-              <th>Apraksts</th>
             </tr>
             <tr th:each="temp : ${listCourse}">  
               <td th:text="${temp.getIdCou()}"/>

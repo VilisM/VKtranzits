@@ -24,10 +24,10 @@
                     <a class="nav-link" href="/employee/page/1" th:text="#{lang.employee}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/department/showAll" th:text="#{lang.department}"></a>
+                    <a class="nav-link" href="/department/page/1" th:text="#{lang.department}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/course/showAll" th:text="#{lang.course}"></a>
+                    <a class="nav-link" href="/course/page/1" th:text="#{lang.course}"></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/results/showAll" th:text="#{lang.grade}"></a>
@@ -129,10 +129,6 @@
 <div class="container">
     <a th:href="@{/employee/showAll/Excel}" class="btn-sm btn-info text-white" role="button"
        th:text="#{lang.generateEmployeeExcel}"></a>
-<div class="container">
-    <a th:href="@{/employee/showAll/Excel}" class="btn-sm btn-info text-white" role="button"
-       th:text="#{lang.generateEmployeeExcel}"></a>
-
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
