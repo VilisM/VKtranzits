@@ -1,55 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Departmenti</title>
+        <title th:text="#{lang.department}"></title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>
     <body>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-			<li class="nav-item">
-				<span th:style="${'color: white;'}" th:text="#{lang.change}"></span>:
-				<select title="Lang" id="locales">
-					<option value=""></option>
-					<option value="lv" th:text="#{lang.lv}"></option>
-					<option value="US" th:text="#{lang.US}"></option>
-				</select>
-			</li>
-                <div class="container">		        
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/employee/page/1">Darbinieki</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/department/page/1">Strukturvienības</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/course/page/1">Kursi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/results/showAll">Vērtējumi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">Iziet no konta</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        <div th:replace="fragments/header :: header"></div>
             <div class="container">
-            <a th:href="@{/addDepartment}" class="btn-sm btn-success text-white" role="button">PIEVIENOT STRUKTŪRVIENĪBU</a>
+            <a th:href="@{/addDepartment}" class="btn-sm btn-success text-white" role="button" th:text="#{lang.addDepartment}"></a>
             <div th:if="${ not#lists.isEmpty(listDepartments)}" class="pt-3">
             <table class="table table-bordered table-striped">
                 <tr>
 	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=IdDe&sortDir=' + ${reverseSortDir}}">ID</a>
 	                </th>
-	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Title&sortDir=' + ${reverseSortDir}}">Nosaukums</a>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Title&sortDir=' + ${reverseSortDir}}" th:text="#{lang.title}"></a>
 	                </th>
-	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Vname&sortDir=' + ${reverseSortDir}}">Vadītāja vārds</a>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Vname&sortDir=' + ${reverseSortDir}}" th:text="#{lang.managerName}"></a>
 	                </th>
-	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Vsurname&sortDir=' + ${reverseSortDir}}">Vadītāja uzvārds</a>
+	                <th><a th:href="@{'/department/page/' + ${currentPage} + '?sortField=Vsurname&sortDir=' + ${reverseSortDir}}" th:text="#{lang.managerSurname}"></a>
 	                </th>
                 </tr>
                 <tr th:each="temp : ${listDepartments}">

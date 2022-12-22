@@ -26,12 +26,12 @@ public class CalendarController {
     //     return "calender-page";
     // }
 
-    @RequestMapping("/calendar")
-    public ModelAndView calendar () {
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("calendar-page");
-    return modelAndView;
-}
+    // @RequestMapping("/calendar")
+    // public ModelAndView calendar () {
+    // ModelAndView modelAndView = new ModelAndView();
+    // modelAndView.setViewName("calendar-page");
+    // return modelAndView;
+//}
     @GetMapping("/api/events")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     Iterable<Event> events(@RequestParam("start") @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime start, @RequestParam("end") @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime end) {

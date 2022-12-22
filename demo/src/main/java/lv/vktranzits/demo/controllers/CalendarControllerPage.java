@@ -20,9 +20,9 @@ public class CalendarControllerPage {
     @Autowired
     EventRepository er;
 
-    // @GetMapping("/calendar")
-    // // @ResponseBody
-    // public String welcome() {
-    //     return "calendar-page";
-    // }
+    @GetMapping("/calendar")
+    // @ResponseBody
+    public String welcome() {
+        return "calendar";
+    }
 }

@@ -8,37 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-    <li class="nav-item">
-        <span th:style="${'color: white;'}" th:text="#{lang.change}"></span>:
-        <select title="Lang" id="locales">
-            <option value=""></option>
-            <option value="lv" th:text="#{lang.lv}"></option>
-            <option value="US" th:text="#{lang.US}"></option>
-        </select>
-    </li>
-    <div class="container">
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/employee/page/1" th:text="#{lang.employee}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/department/page/1" th:text="#{lang.department}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/course/page/1" th:text="#{lang.course}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/results/showAll" th:text="#{lang.grade}"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout" th:text="#{lang.logout}"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 <div class="container">
     <a th:href="@{/employee/add}" class="btn-sm btn-success text-white" role="button" th:text="#{lang.addEmployee}"></a>
     <div th:if="${ not#lists.isEmpty(listEmployees)}" class="pt-3">

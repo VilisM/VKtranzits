@@ -1,19 +1,22 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="css/main.css" rel="stylesheet" type="text/css">
-    <link href="icons/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script type="text/css" th:src="@{/css/main.css}"></script>
+    <script type="text/css" th:src="@{/icons/style.css}"></script>
 
 </head>
 <body>
-<div class="main">
-    <div class="wrap">
-        <div class="left">
+<div th:replace="fragments/header :: header"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
             <div id="nav"></div>
         </div>
-        <div class="right">
+        <div class="col-md-10">
             <div class="toolbar">
                 <button id="previous">Previous</button>
                 <button id="next">Next</button>
@@ -24,7 +27,8 @@
 </div>
 
 <!-- DayPilot library -->
-<script src="js/daypilot-all.min.js"></script>
+<!-- <script src="js/daypilot-all.min.js"></script> -->
+<script type="text/javascript" th:src="@{/js/daypilot-all.min.js}"></script>
 
 <script>
   const datePicker = new DayPilot.Navigator("nav", {
@@ -35,7 +39,7 @@
       calendar.update({
         startDate: args.day
       });
-      calendar.events.load("/api/events");
+      calendar.events.load("http://localhost:8082/api/events");
     }
   });
   datePicker.init();
@@ -55,7 +59,7 @@
         end: args.end,
         text: modal.result
       };
-      const {data} = await DayPilot.Http.post('/api/events/create', params);
+      const {data} = await DayPilot.Http.post('http://localhost:8082/api/events/create', params);
       calendar.events.add(data);
     },
     onEventMove: async (args) => {
@@ -64,7 +68,7 @@
           start: args.newStart,
           end: args.newEnd
         };
-        const {data} = await DayPilot.Http.post('/api/events/move', params);
+        const {data} = await DayPilot.Http.post('http://localhost:8082/api/events/move', params);
     },
     onEventResize: async (args) => {
         const params = {
@@ -72,7 +76,7 @@
           start: args.newStart,
           end: args.newEnd
         };
-        const {data} = await DayPilot.Http.post('/api/events/move', params);
+        const {data} = await DayPilot.Http.post('http://localhost:8082/api/events/move', params);
     },
     onBeforeEventRender: args => {
       const color = args.data.color || "#888888";
@@ -102,7 +106,7 @@
               id: e.id()
             };
 
-            const {data} = await DayPilot.Http.post('/api/events/delete', params);
+            const {data} = await DayPilot.Http.post('http://localhost:8082/api/events/delete', params);
             calendar.events.remove(e);
           }
         },
@@ -163,7 +167,7 @@
         id: e.id(),
         color: color
       };
-      const {data} = await DayPilot.Http.post('/api/events/setColor', params);
+      const {data} = await DayPilot.Http.post('http://localhost:8082/api/events/setColor', params);
       e.data.color = color;
       calendar.events.update(e);
     },
@@ -177,21 +181,13 @@
         datePicker.select(current.addMonths(1));
       });
 
-      calendar.events.load("/api/events");
+      calendar.events.load("http://localhost:8082/api/events");
     }
   };
 
   app.init();
 
 </script>
-
-
-<style>
-    .month_default_event_inner {
-        border-radius: 20px;
-    }
-
-</style>
 
 </body>
 </html>
