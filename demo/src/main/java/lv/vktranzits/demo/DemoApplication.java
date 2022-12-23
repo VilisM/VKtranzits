@@ -46,6 +46,7 @@ public class DemoApplication {
 				// // Create position
 				// Position position = new Position("Junior Java developer", "Random description");
 				// posRepo.save(position);
+				
 				CourseType t1 = new CourseType(true, "Vienu reizi gadā");
 				courseTypeRepo.save(t1);
 				CourseType t2 = new CourseType(true, "Divas reizes gadā");

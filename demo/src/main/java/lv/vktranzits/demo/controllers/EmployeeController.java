@@ -119,6 +119,35 @@ public class EmployeeController {
             }
     }
 
+	// @PostMapping("/addProduct2")
+	// public ResponseEntity<?> postAddProduct2(@RequestBody @Valid Product product, BindingResult result)//aizpildītais produkts
+	// {
+	// 	if(!result.hasErrors())
+	// 	{
+	// 		if(productCRUDService.createNewProduct(product))
+	// 			return new ResponseEntity<>(HttpStatus.OK);
+	// 		else
+	// 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	// 	}
+	// 	else
+	// 	{
+	// 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	// 	}
+			
+	// }
+	
+	
+	// //1.uztaisīt kontrolējošo funkciju, kas pados allProducts uz frontend
+	// 	@GetMapping("/allProducts2") //url - localhost:8080/allProducts2
+	// 	public ResponseEntity<?> getAllProducts2()
+	// 	{
+	// 		//model.addAttribute("object", productCRUDService.readAllProducts());
+	// 		//return "all-product-page";//all-product-page.html
+	// 		return new ResponseEntity<>(productCRUDService.readAllProducts(), HttpStatus.OK);
+	// 	}
+
+//todo 
+
     @GetMapping("/employee/update/{id}")
     public String getUpdateEmployee(@PathVariable(name = "id") int id, Model model){
             try {
