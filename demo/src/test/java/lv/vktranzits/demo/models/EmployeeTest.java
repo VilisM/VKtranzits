@@ -8,13 +8,13 @@ import lv.vktranzits.demo.models.Employee;
 
 public class EmployeeTest {
     
-    Employee e = new Employee("John", "Green", 20000000, "john@gmail.com", "password" ) ;
+    Employee e = new Employee("Joh", "Green", 20000000, "john@gmail.com", "password" ) ;
 	Employee e2 = new Employee(12345667, 3453456, "carry", "johngmail.com", "password");
 	
 	@Test
 	void testEmployeeCreation() {
 		//atļauto datu saglabāšana
-		assertEquals("John", e.getName());
+		assertEquals("Joh", e.getName());
 		assertEquals("Green", e.getSurname());
 		assertEquals(20000000, e.getPhone());
 		assertEquals("john@gmail.com", e.getEmail());
