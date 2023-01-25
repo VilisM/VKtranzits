@@ -8,4 +8,6 @@ public interface IEmployeeCourseService {
 
     public abstract ArrayList<EmployeeCourse> selectAllEmployeeResults();
 
+    public abstract ArrayList<EmployeeCourse> selectEmployeeResultsByEmployeeId(int employeeId);
+
 }

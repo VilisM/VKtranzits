@@ -31,4 +31,8 @@ public interface IEmployeeService {
 
 	Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     
+    public abstract Employee selectEmployeeByEmail(String email);
+
+    public abstract boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass);
+    
 }

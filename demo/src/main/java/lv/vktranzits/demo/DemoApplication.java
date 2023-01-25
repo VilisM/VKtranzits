@@ -84,23 +84,31 @@ public class DemoApplication {
 				employee1.addPosition(position2);
 				employee1.setDepartment(d1);
 				employee2.setDepartment(d1);
+				employee2.addPosition(position3);
 				employeeRepo.save(employee1);
 				employeeRepo.save(employee2);
 
 				position2.addEmployee(employee1);
 				position.addEmployee(employee1);
+				position3.addEmployee(employee2);
 				posRepo.save(position2);
 				posRepo.save(position);
+				posRepo.save(position3);
 
 				// Vērtējumu pārbaudei
 				Employee employee3 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
 				Employee employee4 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
 				Employee employee5 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
 				Employee employee6 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
+
+				employee3.addPosition(position3);
 				employeeRepo.save(employee3);
 				employeeRepo.save(employee4);
 				employeeRepo.save(employee5);
 				employeeRepo.save(employee6);
+
+				position3.addEmployee(employee3);
+				posRepo.save(position3);
 
 				Date date = new Date();
 				EmployeeCourse empCourse1 = new EmployeeCourse("Programminženierija", 4, date, employee3, c2);

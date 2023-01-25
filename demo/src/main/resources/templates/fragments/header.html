@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3" th:fragment="header">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark static-top mb-3" th:fragment="header">
     <li th:style="${'list-style: none'}" class="nav-item">
         <span th:style="${'color: white; '}" th:text="#{lang.change}"></span>:
         <select title="Lang" id="locales">
@@ -13,8 +13,11 @@
         </select>
 
     </li>
-    <div class="collapse navbar-collapse container" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/employee') ? 'active':''}">
                 <a class="nav-link" href="/employee/page/1" th:text="#{lang.employee}"></a>
             </li>
