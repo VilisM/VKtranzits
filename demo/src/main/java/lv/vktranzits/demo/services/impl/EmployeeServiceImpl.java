@@ -1,6 +1,7 @@
 package lv.vktranzits.demo.services.impl;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
@@ -114,5 +115,23 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     public ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId) {
         return employeeRepo.findAllByDepartmentIdDe(departmentId);
     }
+
+    @Override
+    public Employee selectEmployeeByEmail(String email) {
+        return employeeRepo.findByEmail(email);
+    }
+
+    @Override
+    public boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass) {
+        if(employeeRepo.existsById(id)){
+            Employee em = employeeRepo.findById(id).get();
+            if (em.checkPassword(oldPass)) {
+                em.setPasswordHashed(newPass);
+                return true;
+            }
+        }
+        return false;
+    }
+
     
 }

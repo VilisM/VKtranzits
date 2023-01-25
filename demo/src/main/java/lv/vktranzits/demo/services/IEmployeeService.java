@@ -25,5 +25,9 @@ public interface IEmployeeService {
     public abstract ArrayList<Employee> selectAllEmployeesByPosition(String position);
 
     public abstract ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
+
+    public abstract Employee selectEmployeeByEmail(String email);
+
+    public abstract boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass);
     
 }

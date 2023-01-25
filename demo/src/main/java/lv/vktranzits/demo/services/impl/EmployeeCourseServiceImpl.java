@@ -19,5 +19,10 @@ public class EmployeeCourseServiceImpl implements IEmployeeCourseService {
     public ArrayList<EmployeeCourse> selectAllEmployeeResults() {
         return (ArrayList<EmployeeCourse>) empCourseRepo.findAll();
     }
+
+    @Override
+    public ArrayList<EmployeeCourse> selectEmployeeResultsByEmployeeId(int employeeId) {
+        return (ArrayList<EmployeeCourse>) empCourseRepo.findAllByEmployeeIdEm(employeeId);
+    }
     
 }

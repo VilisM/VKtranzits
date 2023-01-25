@@ -1,5 +1,7 @@
 package lv.vktranzits.demo.repos;
 
+import java.util.ArrayList;
+
 import org.springframework.data.repository.CrudRepository;
 
 import lv.vktranzits.demo.models.EmployeeCourse;
@@ -7,6 +9,8 @@ import lv.vktranzits.demo.models.EmployeeCourse;
 public interface IEmployeeCourseRepo extends CrudRepository<EmployeeCourse , Integer> {
 
     boolean existsByTitle(String title);
+
+    ArrayList<EmployeeCourse> findAllByEmployeeIdEm(int employeeId);
     
     
 }
