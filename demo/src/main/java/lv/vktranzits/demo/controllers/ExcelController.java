@@ -85,11 +85,12 @@ public class ExcelController {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			if (excelService.loadResultsFromExcel(emCourse.getTitle(), emCourse.getEmCourse(), savedFile)) {
-				return "redirect:/results/showAll";
-			} else {
-				return "redirect:/results/showAll";
-			}
+//			if (excelService.loadResultsFromExcel(emCourse.getTitle(), emCourse.getEmCourse(), savedFile)) {
+//				return "redirect:/results/showAll";
+//			} else {
+//				
+//			}
+			return "redirect:/results/showAll";
 		}
 		else{
 			attributes.addFlashAttribute("message", "Complete all fields before importing!");

@@ -1,6 +1,7 @@
 package lv.vktranzits.demo.services.impl;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,8 +27,12 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public Course selectCourseById(int id){
-        Course result = courseRepo.findById(id).get();
-        return result;
+    	Optional<Course> course = courseRepo.findById(id);
+        if (course.isPresent()) {
+            return course.get();
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -53,15 +58,18 @@ public class CourseServiceImpl implements ICourseService {
     @Override
     public boolean updateCourseById(int id, Course course){
         if(courseRepo.existsById(id)){
-            Course co = courseRepo.findById(id).get();
-
-            co.setTitle(course.getTitle());
-            co.setCoType(course.getCoType());
-            co.setDepartments(course.getDepartments());
-            co.setDescription(course.getDescription());
-            
-            courseRepo.save(co);
-            return true;
+            Course co = courseRepo.findById(id).orElse(null);
+            if(co != null) {
+	            co.setTitle(course.getTitle());
+	            co.setCoType(course.getCoType());
+	            co.setDepartments(course.getDepartments());
+	            co.setDescription(course.getDescription());
+	            
+	            courseRepo.save(co);
+	            return true;
+            }else {
+            	return false;
+            }
         }
         return false;
     }

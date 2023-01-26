@@ -70,7 +70,7 @@ public class Employee extends Auditable<String> implements Serializable {
     @NotEmpty 
     @Email
     @Size(min=5, max=30)
-	@Pattern (regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,10}$")
+	@Pattern (regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
     
     @Column(name="Password")
@@ -94,7 +94,10 @@ public class Employee extends Auditable<String> implements Serializable {
 	
     
     public Employee(String name, String surname, int phone, String email, String password) {
-        setName(name);
+    	if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
+        this.name = name;
         setSurname(surname);
         setPhone(phone);
         setEmail(email);
