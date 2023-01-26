@@ -11,19 +11,19 @@ import lv.vktranzits.demo.models.Employee;
 
 public interface DepartmentService {
 	
-	public abstract boolean insertNewEmployeeInDepartmentById  (int departmentId, Employee employee) throws Exception;
+	boolean insertNewEmployeeInDepartmentById  (int departmentId, Employee employee) throws Exception;
 
-	public abstract ArrayList<Employee> selectAllEmployeesInDepartmentById  (int departmentId) throws Exception;
+	ArrayList<Employee> selectAllEmployeesInDepartmentById  (int departmentId) throws Exception;
 
-	public abstract boolean createNewDepartment (Department department);
+	boolean createNewDepartment (Department department);
 	
-	public abstract ArrayList<Department> readAllDepartments ();
+	ArrayList<Department> readAllDepartments ();
 
-	public abstract Department readDepartmentById (int departmentId) throws Exception;
+	Department readDepartmentById (int departmentId) throws Exception;
 	
-	public abstract boolean updateDepartmentById (int departmentId, Department department);
+	boolean updateDepartmentById (int departmentId, Department department);
 	
-	public abstract boolean deleteDepartmentById (int departmentId);
+	boolean deleteDepartmentById (int departmentId);
 	
 	List<Department> getAllDepartments();
 

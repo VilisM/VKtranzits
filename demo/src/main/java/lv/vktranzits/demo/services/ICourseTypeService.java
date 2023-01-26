@@ -6,5 +6,5 @@ import lv.vktranzits.demo.models.CourseType;
 
 public interface ICourseTypeService {
 
-    public abstract ArrayList<CourseType> selectAllCourseTypes();
+    ArrayList<CourseType> selectAllCourseTypes();
 }

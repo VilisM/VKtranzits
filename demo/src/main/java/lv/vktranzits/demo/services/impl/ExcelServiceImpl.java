@@ -238,7 +238,7 @@ public class ExcelServiceImpl implements IExcelService {
                             break;
                     }
                 }
-                System.out.println("");
+                System.out.println();
             }
             file.close();
             workbook.close();

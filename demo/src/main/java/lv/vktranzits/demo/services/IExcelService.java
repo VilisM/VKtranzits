@@ -8,11 +8,11 @@ import java.io.InputStream;
 
 public interface IExcelService {
     
-	public void loadDataFromExcel();
-	public void saveDataInExcel();
-	public boolean loadResultsFromExcel(String courseTitle, Course course, InputStream file);
-	public boolean saveResultDataInExcel(ResultView resultView);
-	public void exportExcelResult(HttpServletResponse response);
+	void loadDataFromExcel();
+	void saveDataInExcel();
+	boolean loadResultsFromExcel(String courseTitle, Course course, InputStream file);
+	boolean saveResultDataInExcel(ResultView resultView);
+	void exportExcelResult(HttpServletResponse response);
 }
 
 

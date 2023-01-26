@@ -15,8 +15,8 @@ public class DepartmentTest {
 	void testDepartmentCreation() {
 		//atļauto datu saglabāšana
 		assertEquals("Kraveji", d.getTitle());
-		assertEquals("Kraveji", d.getV_name());
-		assertEquals("Kraveji", d.getV_surname());
+		assertEquals("Janis", d.getVname());
+		assertEquals("Berzins", d.getVsurname());
 		
 	
 }

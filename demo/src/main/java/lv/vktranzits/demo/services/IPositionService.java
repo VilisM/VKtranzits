@@ -6,8 +6,8 @@ import lv.vktranzits.demo.models.Position;
 
 public interface IPositionService {
 
-    public abstract ArrayList<Position> selectAllPositions();
+    ArrayList<Position> selectAllPositions();
     
-    public abstract ArrayList<Position> selectAllEmployeePositions(int employeeId);
+    ArrayList<Position> selectAllEmployeePositions(int employeeId);
     
 }

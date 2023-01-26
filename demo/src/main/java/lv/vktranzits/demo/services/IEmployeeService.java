@@ -13,26 +13,26 @@ public interface IEmployeeService {
     //public Page<Employee> findAll(int pageNr);
 
 
-    public abstract ArrayList<Employee> selectAllEmployees();
+    ArrayList<Employee> selectAllEmployees();
 
-    public abstract Employee selectEmployeeById(int id);
+    Employee selectEmployeeById(int id);
 
-    public abstract boolean deleteEmployeeById(int id);
+    boolean deleteEmployeeById(int id);
 
-    public abstract boolean insertNewEmployee(Employee course);
+    boolean insertNewEmployee(Employee course);
 
-    public abstract boolean updateEmployeeById(int id, Employee employee);
+    boolean updateEmployeeById(int id, Employee employee);
 
-    public abstract ArrayList<Employee> selectAllEmployeesByPosition(String position);
+    ArrayList<Employee> selectAllEmployeesByPosition(String position);
 
-    public abstract ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
+    ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
 
 	List<Employee> getAllEmployees();
 
 	Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     
-    public abstract Employee selectEmployeeByEmail(String email);
+    Employee selectEmployeeByEmail(String email);
 
-    public abstract boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass);
+    boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass);
     
 }
