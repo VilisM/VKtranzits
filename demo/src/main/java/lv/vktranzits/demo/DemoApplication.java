@@ -96,10 +96,10 @@ public class DemoApplication {
 				posRepo.save(position3);
 
 				// Vērtējumu pārbaudei
-				Employee employee3 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
-				Employee employee4 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
-				Employee employee5 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
-				Employee employee6 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
+				Employee employee3 = new Employee("Roberts", "Ozoliņš", 22222223, "robertsozolins@inbox.lv", "test123");
+				Employee employee4 = new Employee("Emīls", "Kociņš", 22222223, "emilskocins@inbox.lv", "test123");
+				Employee employee5 = new Employee("Raitis", "Ozoliņš", 22222223, "raitisozolins@inbox.lv", "test123");
+				Employee employee6 = new Employee("Māris", "Kociņš", 22222223, "mariskocins@inbox.lv", "test123");
 
 				employee3.addPosition(position3);
 				employeeRepo.save(employee3);

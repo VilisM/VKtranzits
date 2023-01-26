@@ -89,7 +89,7 @@ public class SpringSecurityConfig{
 		.antMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/results/**").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/profile/**").hasAuthority("ROLE_EMPLOYEE")
-		.antMatchers("/calendar/**").hasAuthority("ROLE_ADMIN")
+		.antMatchers("/calendar/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
 		.antMatchers("/api/**").hasAuthority("ROLE_ADMIN")
 		.and()
 		.formLogin().permitAll()
