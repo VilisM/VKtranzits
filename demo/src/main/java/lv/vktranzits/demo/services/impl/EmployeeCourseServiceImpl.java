@@ -22,7 +22,22 @@ public class EmployeeCourseServiceImpl implements IEmployeeCourseService {
 
     @Override
     public ArrayList<EmployeeCourse> selectEmployeeResultsByEmployeeId(int employeeId) {
-        return (ArrayList<EmployeeCourse>) empCourseRepo.findAllByEmployeeIdEm(employeeId);
+        return (ArrayList<EmployeeCourse>) empCourseRepo.findTop5ByEmployeeIdEmOrderByDateDesc(employeeId);
+    }
+
+    @Override
+    public ArrayList<String> selectAllEmployeeCourses(int employeeId) {
+        return (ArrayList<String>) empCourseRepo.findDistinctTitleByEmployeeIdEm(employeeId);
+    }
+
+    @Override
+    public ArrayList<EmployeeCourse> selectEmployeeSpecificCourse(String title, int employeeId) {
+        return (ArrayList<EmployeeCourse>) empCourseRepo.findAllByTitleAndEmployeeIdEmOrderByDateDesc(title, employeeId);
+    }
+
+    @Override
+    public double getEmployeeSpecificCourseAverageGrade(String title, int employeeId) {
+        return empCourseRepo.getAverageGradeByTitleAndEmployeeId(title, employeeId);
     }
     
 }

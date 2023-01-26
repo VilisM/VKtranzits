@@ -1,10 +1,12 @@
 package lv.vktranzits.demo.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.vktranzits.demo.models.Employee;
+import lv.vktranzits.demo.models.EmployeeCourse;
 import lv.vktranzits.demo.services.IEmployeeCourseService;
 import lv.vktranzits.demo.services.IEmployeeService;
 
@@ -33,7 +36,22 @@ public class ProfileController {
                 Employee employee = employeeService.selectEmployeeByEmail(email);
                 model.addAttribute("employee", employee);
                 model.addAttribute("grades", employeeCourseService.selectEmployeeResultsByEmployeeId(employee.getIdEm()));
+                model.addAttribute("employeecourses", employeeCourseService.selectAllEmployeeCourses(employee.getIdEm()));
                 return "profile-page";
+            }
+            catch(Exception e){
+                return "error";
+            }
+    }
+
+    @GetMapping("/profile/viewCourse/{title}")
+    public String showEmployeeSpecificCourse(@PathVariable (value = "title") String title, Principal principal, Model model){
+            try {
+                String email = principal.getName();
+                Employee employee = employeeService.selectEmployeeByEmail(email);
+                model.addAttribute("grades", employeeCourseService.selectEmployeeSpecificCourse(title, employee.getIdEm()));
+                model.addAttribute("avgGrade", employeeCourseService.getEmployeeSpecificCourseAverageGrade(title, employee.getIdEm()));
+                return "profile-view-course";
             }
             catch(Exception e){
                 return "error";

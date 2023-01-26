@@ -1,6 +1,7 @@
 package lv.vktranzits.demo;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.boot.CommandLineRunner;
@@ -111,12 +112,23 @@ public class DemoApplication {
 				posRepo.save(position3);
 
 				Date date = new Date();
+
 				EmployeeCourse empCourse1 = new EmployeeCourse("Programminženierija", 4, date, employee3, c2);
-				EmployeeCourse empCourse2 = new EmployeeCourse("Programminženierija", 6, date, employee3, c1);
+				EmployeeCourse empCourse2 = new EmployeeCourse("Datubāzes II", 6, date, employee3, c1);
+				EmployeeCourse empCourse4 = new EmployeeCourse("Datubāzes II", 4, date, employee3, c1);
+				EmployeeCourse empCourse5 = new EmployeeCourse("Programminženierija", 10, date, employee3, c1);
+				EmployeeCourse empCourse6 = new EmployeeCourse("Programminženierija", 5, date, employee3, c1);
+				EmployeeCourse empCourse7 = new EmployeeCourse("Matemātika", 4, date, employee3, c1);
+				EmployeeCourse empCourse8 = new EmployeeCourse("Matemātika", 3, date, employee3, c1);
 				EmployeeCourse empCourse3 = new EmployeeCourse("Programminženierija", 5, date, employee4, c1);
 				empCourseRepo.save(empCourse1);
 				empCourseRepo.save(empCourse2);
 				empCourseRepo.save(empCourse3);
+				empCourseRepo.save(empCourse4);
+				empCourseRepo.save(empCourse5);
+				empCourseRepo.save(empCourse6);
+				empCourseRepo.save(empCourse7);
+				empCourseRepo.save(empCourse8);
 				
 				
 			}

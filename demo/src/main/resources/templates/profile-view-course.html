@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <a th:href="@{/profile/}" class="btn-sm btn-success text-white" role="button">Atpakaļ</a>
+        </div>
+        <div class="col-md-12">
+            <h1 th:text="${grades[0].getTitle()}"></h1>
+            <h3>Vid atzīme: <span th:text="${#numbers.formatDecimal(avgGrade,1,2)}" th:class="${avgGrade} >= 4 ? 'badge badge-success' : 'badge badge-danger'"/></h3>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th th:text="#{lang.course}"/>
+                    <th th:text="#{lang.grade}"/>
+                    <th th:text="#{lang.date}"/>
+                </tr>
+                <tr th:each="grade : ${grades}">
+    
+                    <td th:text="${grade.getTitle()}"/>
+                    <td th:text="${#numbers.formatInteger(grade.getValuePr(),1)}"/>
+                    <td th:text="${#dates.format(grade.getDate(), 'dd-MMM-yyyy HH:mm')}"/>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
+</body>
+</html>
