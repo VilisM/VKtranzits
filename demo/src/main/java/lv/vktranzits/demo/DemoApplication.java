@@ -1,7 +1,6 @@
 package lv.vktranzits.demo;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.boot.CommandLineRunner;

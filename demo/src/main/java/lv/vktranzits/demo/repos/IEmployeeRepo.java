@@ -1,12 +1,7 @@
 package lv.vktranzits.demo.repos;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import lv.vktranzits.demo.models.Employee;

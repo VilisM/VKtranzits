@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.data.domain.Page;
 
 import lv.vktranzits.demo.models.Course;
-import lv.vktranzits.demo.models.Employee;
 
 public interface ICourseService {
 

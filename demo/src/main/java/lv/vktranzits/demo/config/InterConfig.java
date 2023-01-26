@@ -1,9 +1,5 @@
 package lv.vktranzits.demo.config;
 
-import java.util.Locale;
-
-
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

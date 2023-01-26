@@ -2,7 +2,6 @@ package lv.vktranzits.demo.repos;
 
 import java.util.ArrayList;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

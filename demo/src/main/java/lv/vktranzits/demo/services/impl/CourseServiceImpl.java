@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Course;
-import lv.vktranzits.demo.models.Employee;
 import lv.vktranzits.demo.repos.ICourseRepo;
 import lv.vktranzits.demo.services.ICourseService;
 

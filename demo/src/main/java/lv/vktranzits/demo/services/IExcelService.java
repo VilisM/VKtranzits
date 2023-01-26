@@ -2,7 +2,6 @@ package lv.vktranzits.demo.services;
 
 import lv.vktranzits.demo.models.Course;
 import lv.vktranzits.demo.models.ResultView;
-import org.springframework.core.io.FileSystemResource;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;

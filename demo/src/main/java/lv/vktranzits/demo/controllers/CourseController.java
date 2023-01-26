@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.vktranzits.demo.models.Course;
-import lv.vktranzits.demo.models.Employee;
 import lv.vktranzits.demo.services.ICourseService;
 import lv.vktranzits.demo.services.ICourseTypeService;
 
