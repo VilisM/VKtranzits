@@ -8,4 +8,6 @@ public interface ICourseRepo extends CrudRepository<Course , Integer> {
 
     boolean existsByTitle(String title);
 
+    Course findByTitle(String title);
+
 }
