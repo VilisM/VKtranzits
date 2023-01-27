@@ -39,7 +39,7 @@ public class CourseCalendar {
     private int IdCal;
 
     @Column(name="calYear")
-    @Min(1900)
+    @Min(2022)
     @Max(2023)
     private int calYear;
 
@@ -61,6 +61,7 @@ public class CourseCalendar {
     @JoinTable(
         joinColumns=@JoinColumn(name="IdCal"),
         inverseJoinColumns=@JoinColumn(name="IdPos"))
+
     @ToString.Exclude
     private Collection<Position> positions = new ArrayList<Position>();
 

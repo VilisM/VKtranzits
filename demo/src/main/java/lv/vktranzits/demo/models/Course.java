@@ -12,10 +12,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -35,6 +37,8 @@ public class Course extends Auditable<String> {
 
    
     @Column(name = "Title")
+    @NonNull
+    @NotBlank(message = "Nosaukums ir obligāts")
     private String title;
 
     
