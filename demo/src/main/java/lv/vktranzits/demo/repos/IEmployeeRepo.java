@@ -2,11 +2,11 @@ package lv.vktranzits.demo.repos;
 
 import java.util.ArrayList;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import lv.vktranzits.demo.models.Employee;
 
-public interface IEmployeeRepo extends CrudRepository<Employee, Integer> {
+public interface IEmployeeRepo extends PagingAndSortingRepository<Employee, Integer> {
 
     boolean existsByNameAndSurname(String name, String surname);
 

@@ -1,8 +1,12 @@
 package lv.vktranzits.demo.services.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lv.vktranzits.demo.models.Department;
@@ -22,6 +26,22 @@ public class EmployeeServiceImpl implements IEmployeeService  {
 
     @Autowired
     private IPositionRepo posRepo;
+
+ 
+    
+    @Override
+	public List<Employee> getAllEmployees() {
+		return (List<Employee>) employeeRepo.findAll();
+	}
+	
+	@Override
+	public Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return employeeRepo.findAll(pageable);
+	}
 
     @Override
     public ArrayList<Employee> selectAllEmployees() {
@@ -104,5 +124,25 @@ public class EmployeeServiceImpl implements IEmployeeService  {
     public ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId) {
         return employeeRepo.findAllByDepartmentIdDe(departmentId);
     }
+
+    @Override
+    public Employee selectEmployeeByEmail(String email) {
+        return employeeRepo.findByEmail(email);
+    }
+
+    @Override
+    public boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass) {
+        if(employeeRepo.existsById(id)){
+            Employee em = employeeRepo.findById(id).get();
+            if (em.checkPassword(oldPass)) {
+                em.setPasswordHashed(newPass);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
+
     
 }

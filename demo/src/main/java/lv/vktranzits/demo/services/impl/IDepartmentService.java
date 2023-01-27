@@ -1,7 +1,12 @@
 package lv.vktranzits.demo.services.impl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import lv.vktranzits.demo.models.*;
 import lv.vktranzits.demo.repos.*;
@@ -15,7 +20,19 @@ public class IDepartmentService implements DepartmentService {
 	
 	@Autowired
 	private IDepartmentRepo departmentRepo;
+	
+	public List<Department> getAllDepartments(){
+		return (List<Department>) departmentRepo.findAll();
+	}
 	 
+	@Override
+	public Page<Department> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return departmentRepo.findAll(pageable);
+	}
 	
 	@Override
     public boolean insertNewEmployeeInDepartmentById(int departmentId, Employee employee) throws Exception {
@@ -96,8 +113,8 @@ public class IDepartmentService implements DepartmentService {
 		{
 			Department dep = departmentRepo.findById(departmentId).get();
 			dep.setTitle(department.getTitle());
-			dep.setV_name(department.getV_name());
-			dep.setV_surname(department.getV_surname());
+			dep.setVname(department.getVname());
+			dep.setVsurname(department.getVsurname());
 			
 			departmentRepo.save(dep);
 	

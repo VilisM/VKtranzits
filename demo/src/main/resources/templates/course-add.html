@@ -10,60 +10,44 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-        <div class="container">		        
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/employee/showAll">Darbinieki</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/department/showAll">Strukturvienības</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/course/showAll">Kursi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Iziet no konta</a>
-                    </li>
-                </ul>title
-            </div>
-        </div>
-    </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-6 mx-auto">
-                    <h1>Lūdzu ievadiet kursa parametrus</h1>
-                        <form action="#" th:action="@{/course/add}" th:object="${course}" method="post">
-                            
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <h1>Lūdzu ievadiet kursa parametrus</h1>
+            <form action="#" th:action="@{/course/add}" th:object="${course}" method="post">
 
 
-                            <div class="form-group">
-                                <label for="title">Nosaukums</label>
-                                <input type="text" id="title" th:field="*{title}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="description">Apraksts</label>
-                                <input type="text" id="description" th:field="*{description}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="coursetype">Kursa tips</label>
-                                <select class="form-control" id="coursetype" th:field="*{coType}">
-                                    <option th:each="test: ${coursetype}"
-                                        th:value="${test.idTy}" th:text="${test.description}">
-                                    </option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
-                        </form>
+                <div class="form-group">
+                    <label for="title">Nosaukums</label>
+                    <input type="text" id="title" th:field="*{title}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="description">Apraksts</label>
+                    <input type="text" id="description" th:field="*{description}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('description')}"
+                         th:errors="*{description}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="coursetype">Kursa tips</label>
+                    <select class="form-control" id="coursetype" th:field="*{coType}">
+                        <option th:each="test: ${coursetype}"
+                                th:value="${test.idTy}" th:text="${test.description}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
+            </form>
         </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
 </body>
 
 </html>

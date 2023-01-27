@@ -1,23 +1,38 @@
 package lv.vktranzits.demo.services;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+
 import lv.vktranzits.demo.models.*;
 
 
 public interface IEmployeeService {
 
-    public abstract ArrayList<Employee> selectAllEmployees();
+    //public Page<Employee> findAll(int pageNr);
 
-    public abstract Employee selectEmployeeById(int id);
 
-    public abstract boolean deleteEmployeeById(int id);
+    ArrayList<Employee> selectAllEmployees();
 
-    public abstract boolean insertNewEmployee(Employee course);
+    Employee selectEmployeeById(int id);
 
-    public abstract boolean updateEmployeeById(int id, Employee employee);
+    boolean deleteEmployeeById(int id);
 
-    public abstract ArrayList<Employee> selectAllEmployeesByPosition(String position);
+    boolean insertNewEmployee(Employee course);
 
-    public abstract ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
+    boolean updateEmployeeById(int id, Employee employee);
+
+    ArrayList<Employee> selectAllEmployeesByPosition(String position);
+
+    ArrayList<Employee> selectAllEmployeesByDepartmentId(int departmentId);
+
+	List<Employee> getAllEmployees();
+
+	Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    
+    Employee selectEmployeeByEmail(String email);
+
+    boolean checkIfValidOldPasswordAndChangePassword(int id, String oldPass, String newPass);
     
 }

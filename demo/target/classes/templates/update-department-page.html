@@ -10,53 +10,38 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-        <div class="container">		        
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/employee/showAll">Darbinieki</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/department/showAll">Strukturvienības</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/course/showAll">Kursi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Iziet no konta</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-6 mx-auto">
-                    <h1>Lūdzu ievadiet darbinieka parametrus</h1>
-                        <form action="#" th:action="@{/updateDepartment/__${id}__}" th:object="${department}" method="post">
-                            <div class="form-group">
-                                <label for="title">Nosaukums</label>
-                                <input type="text" id="title" th:field="*{title}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="V_name">Vadītāja vārds</label>
-                                <input type="text" id="V_name" th:field="*{V_name}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('V_name')}" th:errors="*{V_name}"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="V_surname">Vadītāja uzvārds</label>
-                                <input type="text" id="V_surname" th:field="*{V_surname}" class="form-control">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('V_surname')}" th:errors="*{V_surname}"></div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
-                        </form>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <h1>Lūdzu ievadiet darbinieka parametrus</h1>
+            <form action="#" th:action="@{/department/updateDepartment/__${id}__}" th:object="${department}" method="post">
+                <div class="form-group">
+                    <label for="title">Nosaukums</label>
+                    <input type="text" id="title" th:field="*{title}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="V_name">Vadītāja vārds</label>
+                    <input type="text" id="V_name" th:field="*{v_name}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('V_name')}" th:errors="*{v_name}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="V_surname">Vadītāja uzvārds</label>
+                    <input type="text" id="V_surname" th:field="*{v_surname}" class="form-control">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('V_surname')}"
+                         th:errors="*{v_surname}"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-2">Saglabāt</button>
+            </form>
         </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
 </body>
 
 </html>

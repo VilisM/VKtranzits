@@ -29,7 +29,6 @@ public class DemoApplication {
 	 ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo,
 	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo, IEmployeeRepo employeeRepo, IEmployeeCourseRepo empCourseRepo)
 	{
-
 		return new CommandLineRunner() {
 
 			@Override
@@ -85,27 +84,50 @@ public class DemoApplication {
 				employee1.addPosition(position2);
 				employee1.setDepartment(d1);
 				employee2.setDepartment(d1);
+				employee2.addPosition(position3);
 				employeeRepo.save(employee1);
 				employeeRepo.save(employee2);
 
 				position2.addEmployee(employee1);
 				position.addEmployee(employee1);
+				position3.addEmployee(employee2);
 				posRepo.save(position2);
 				posRepo.save(position);
+				posRepo.save(position3);
 
 				// Vērtējumu pārbaudei
-				Employee employee3 = new Employee("Gatis", "Ozoliņš", 22222223, "gatisozolins@inbox.lv", "test123");
-				Employee employee4 = new Employee("Jānis", "Kociņš", 22222223, "janiskocins@inbox.lv", "test123");
+				Employee employee3 = new Employee("Roberts", "Ozoliņš", 22222223, "robertsozolins@inbox.lv", "test123");
+				Employee employee4 = new Employee("Emīls", "Kociņš", 22222223, "emilskocins@inbox.lv", "test123");
+				Employee employee5 = new Employee("Raitis", "Ozoliņš", 22222223, "raitisozolins@inbox.lv", "test123");
+				Employee employee6 = new Employee("Māris", "Kociņš", 22222223, "mariskocins@inbox.lv", "test123");
+
+				employee3.addPosition(position3);
 				employeeRepo.save(employee3);
 				employeeRepo.save(employee4);
+				employeeRepo.save(employee5);
+				employeeRepo.save(employee6);
+
+				position3.addEmployee(employee3);
+				posRepo.save(position3);
 
 				Date date = new Date();
+
 				EmployeeCourse empCourse1 = new EmployeeCourse("Programminženierija", 4, date, employee3, c2);
-				EmployeeCourse empCourse2 = new EmployeeCourse("Programminženierija", 6, date, employee3, c1);
+				EmployeeCourse empCourse2 = new EmployeeCourse("Datubāzes II", 6, date, employee3, c1);
+				EmployeeCourse empCourse4 = new EmployeeCourse("Datubāzes II", 4, date, employee3, c1);
+				EmployeeCourse empCourse5 = new EmployeeCourse("Programminženierija", 10, date, employee3, c1);
+				EmployeeCourse empCourse6 = new EmployeeCourse("Programminženierija", 5, date, employee3, c1);
+				EmployeeCourse empCourse7 = new EmployeeCourse("Matemātika", 4, date, employee3, c1);
+				EmployeeCourse empCourse8 = new EmployeeCourse("Matemātika", 3, date, employee3, c1);
 				EmployeeCourse empCourse3 = new EmployeeCourse("Programminženierija", 5, date, employee4, c1);
 				empCourseRepo.save(empCourse1);
 				empCourseRepo.save(empCourse2);
 				empCourseRepo.save(empCourse3);
+				empCourseRepo.save(empCourse4);
+				empCourseRepo.save(empCourse5);
+				empCourseRepo.save(empCourse6);
+				empCourseRepo.save(empCourse7);
+				empCourseRepo.save(empCourse8);
 				
 				
 			}

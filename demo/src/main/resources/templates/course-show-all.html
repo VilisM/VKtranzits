@@ -5,61 +5,70 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    </head>
+	</head>
     <body>
-		
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-3">
-			<div class="container">		        
-				<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item ">
-							<a class="nav-link" href="/employee/showAll">Darbinieki</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/department/showAll">Strukturvienības</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="/course/showAll">Kursi</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/logout">Iziet no konta</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		</nav>
+		<div th:replace="fragments/header :: header"></div>
 		<div class="container">
-        <a th:href="@{/course/add}" class="btn-sm btn-success text-white" role="button">PIEVIENOT KURSU</a>
-        <div th:if="${ not#lists.isEmpty(object)}" class="pt-3">
+        <a th:href="@{/course/add}" class="btn-sm btn-success text-white" role="button" th:text="#{lang.addcourse}"></a>
+        <div th:if="${ not#lists.isEmpty(listCourse)}" class="pt-3">
         <table class="table table-bordered table-striped">
-            <tr>
-              <th>Id</th>
-			  <th>Type</th>
-			  <!-- <th>Department Id</th>  -->
-              <th>Title</th>
-              <th>Description</th>
+        	<tr>
+                <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=IdCou&sortDir=' + ${reverseSortDir}}">ID</a></th>
+                <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=CoType&sortDir=' + ${reverseSortDir}}" th:text="#{lang.type}"></a></th>
+                <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=Title&sortDir=' + ${reverseSortDir}}" th:text="#{lang.title}"></a></th>
+                <th><a th:href="@{'/course/page/' + ${currentPage} + '?sortField=Description&sortDir=' + ${reverseSortDir}}" th:text="#{lang.description}"></a></th>
             </tr>
-            <tr th:each="temp : ${object}">
-            
+            <tr th:each="temp : ${listCourse}">  
               <td th:text="${temp.getIdCou()}"/>
 			  <td th:text="${temp.getCoType().getDescription()}"/>
-			  <!-- <td th:text="${temp.getIdDe()}"/> -->
               <td th:text="${temp.getTitle()}"/>
               <td th:text="${temp.getDescription()}"/>
               <td class="col-md-4">
-					<a th:href="@{/course/showAll/{id}(id=${temp.getIdCou})}" class="btn-sm btn-info text-white" role="button">PARĀDĪT</a>
-					<a th:href="@{/course/update/{id}(id=${temp.getIdCou})}" class="btn-sm btn-primary text-white" role="button">LABOT</a>
-					<a th:href="@{/course/delete/{id}(id=${temp.getIdCou})}" class="btn-sm btn-danger text-white" role="button">DZĒST</a>
+					<a th:href="@{/course/showAll/{id}(id=${temp.getIdCou})}" class="btn-sm btn-info text-white" role="button" th:text="#{lang.show}"></a>
+					<a th:href="@{/course/update/{id}(id=${temp.getIdCou})}" class="btn-sm btn-primary text-white" role="button" th:text="#{lang.edit}"></a>
+					<a th:href="@{/course/delete/{id}(id=${temp.getIdCou})}" class="btn-sm btn-danger text-white" role="button" th:text="#{lang.delete}"></a>
 				</td>
             </tr>
           </table>
         </div>
+        
+        <nav aria-label="Page navigation ">
+			<ul class="pagination justify-content-center" th:if="${totalPages > 1}">
+			    <div class="row col-sm-10">
+			        <div class="col-sm-2">
+			            Total Rows: [[${totalItems}]]
+			        </div>
+			        <div class="col-sm-1">
+						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+							<a th:if="${currentPage != i}"
+			                               th:href="@{'/course/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+							<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+						</span>
+			        </div>
+			        <div class="col-sm-1">
+			            <a th:if="${currentPage < totalPages}"
+			               th:href="@{'/course/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{lang.next}"></a>
+			            <span th:unless="${currentPage < totalPages}" th:text="#{lang.next}"></span>
+			        </div>
+			
+			        <div class="col-sm-1">
+			            <a th:if="${currentPage < totalPages}"
+			               th:href="@{'/course/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{lang.previous}"></a>
+			            <span th:unless="${currentPage < totalPages}" th:text="#{lang.previous}"></span>
+			        </div>
+			    </div>
+			</ul>
+		</nav>
 
 
-		<div class="container">
-            <a th:href="@{/course/showAll/word}" class="btn-sm btn-info text-white" role="button">Ģenerēt kursu Word failu</a>
+<div class="container">
+    <a th:href="@{/course/showAll/word}" class="btn-sm btn-info text-white" role="button">Ģenerēt kursu Word
+        failu</a>
+</div>
 
-        </div>
-    </body>
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/internationalization.js}"></script>
+</body>
 </html>

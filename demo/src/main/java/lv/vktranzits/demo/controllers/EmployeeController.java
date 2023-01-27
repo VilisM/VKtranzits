@@ -1,8 +1,11 @@
 package lv.vktranzits.demo.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import lv.vktranzits.demo.models.Employee;
 import lv.vktranzits.demo.services.DepartmentService;
@@ -28,13 +32,6 @@ public class EmployeeController {
     @Autowired
     private IPositionService posService;
 
-
-    @GetMapping("/employee/showAll")
-    public String selectAllEmployees(Model model){
-            model.addAttribute("object", employeeService.selectAllEmployees());
-            return "employee-show-all";
-    }
-
     @GetMapping("/employee/showAll/{id}")
     public String selectEmployeeById(@PathVariable(name = "id") int id, Model model){
             try {
@@ -47,20 +44,34 @@ public class EmployeeController {
             }
     }
 
-    @GetMapping("/employee/show")
-    public String selectEmployeesByPosition(@RequestParam(name = "position") String position, Model model){
-            model.addAttribute("object", employeeService.selectAllEmployeesByPosition(position));
-            return "employee-show-all";
-    }
-
+    @GetMapping("/employee/page/{pageNo}")
+	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+			@RequestParam(name="sortField", defaultValue = "idEm") String sortField,
+			@RequestParam(name="sortDir", defaultValue = "asc") String sortDir,
+			Model model) {
+		int pageSize = 5;
+		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Employee> listEmployees = page.getContent();
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalElements", page.getTotalElements());
+		
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		model.addAttribute("listEmployees", listEmployees);
+		return "employee-show-all";
+	}
+    
     @GetMapping("/employee/delete/{id}")
     public String deleteEmployee(@PathVariable(name = "id") int id, Model model){
             if(employeeService.deleteEmployeeById(id)){
                 model.addAttribute("object", employeeService.selectAllEmployees());
-                return "employee-show-all";
+                return "redirect:/employee/page/1";
             }
             else{
-                return"redirect:/employee/showAll";
+                return"redirect:/employee/page/1";
             }
     }
 
@@ -75,7 +86,7 @@ public class EmployeeController {
     public String postInsertNewEmployee(@Valid Employee employee, BindingResult result){
             if(!result.hasErrors()){
                 if(employeeService.insertNewEmployee(employee))
-                    return "redirect:/employee/showAll";
+                    return "redirect:/employee/page/1";
                 else
                     return "redirect:/error";
             }
@@ -101,7 +112,7 @@ public class EmployeeController {
     public String postUpdateEmployee(@PathVariable(name = "id") int id,@Valid Employee employee, BindingResult result, Model model){
             if(!result.hasErrors()){
                 if(employeeService.updateEmployeeById(id, employee))
-                    return "redirect:/employee/showAll/" + id;
+                    return "redirect:/employee/page/1";
                 else
                     return "redirect:/error";
             }

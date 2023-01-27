@@ -6,6 +6,14 @@ import lv.vktranzits.demo.models.*;
 
 public interface IEmployeeCourseService {
 
-    public abstract ArrayList<EmployeeCourse> selectAllEmployeeResults();
+    ArrayList<EmployeeCourse> selectAllEmployeeResults();
+
+    ArrayList<EmployeeCourse> selectEmployeeResultsByEmployeeId(int employeeId);
+
+    ArrayList<String> selectAllEmployeeCourses(int employeeId);
+
+    ArrayList<EmployeeCourse> selectEmployeeSpecificCourse(String title, int employeeId);
+
+    double getEmployeeSpecificCourseAverageGrade(String title, int employeeId);
 
 }

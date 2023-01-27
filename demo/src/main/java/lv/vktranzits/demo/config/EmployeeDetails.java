@@ -14,7 +14,7 @@ import lv.vktranzits.demo.models.Position;
 
 public class EmployeeDetails implements UserDetails  {
 	
-	private Employee employee;
+	private final Employee employee;
 
 	public EmployeeDetails(Employee employee) {
 		this.employee = employee;

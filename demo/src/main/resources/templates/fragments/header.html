@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark static-top mb-3" th:fragment="header">
+    <li th:style="${'list-style: none'}" class="nav-item">
+        <span th:style="${'color: white; '}" th:text="#{lang.change}"></span>:
+        <select title="Lang" id="locales">
+            <option value=""></option>
+            <option class="flag-icon flag-icon-lv" value="lv" th:text="#{lang.lv}"></option>
+            <option class="flag-icon flag-icon-us" value="US" th:text="#{lang.US}"></option>
+        </select>
+
+    </li>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/employee') ? 'active':''}">
+                <a class="nav-link" href="/employee/page/1" th:text="#{lang.employee}"></a>
+            </li>
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/department') ? 'active':''}">
+                <a class="nav-link" href="/department/page/1" th:text="#{lang.department}"></a>
+            </li>
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/course') ? 'active':''}">
+                <a class="nav-link" href="/course/page/1" th:text="#{lang.course}"></a>
+            </li>
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/results') ? 'active':''}">
+                <a class="nav-link" href="/results/showAll" th:text="#{lang.grade}"></a>
+            </li>
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/calendar') ? 'active':''}">
+                <a class="nav-link" href="/calendar" th:text="#{lang.calendar}"></a>
+            </li>
+            <li sec:authorize="hasAuthority('ROLE_EMPLOYEE')" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/profile') ? 'active':''}">
+                <a class="nav-link" href="/profile" th:text="#{lang.profile}"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout" th:text="#{lang.logout}"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>
