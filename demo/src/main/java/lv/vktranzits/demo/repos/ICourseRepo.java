@@ -8,4 +8,6 @@ public interface ICourseRepo extends PagingAndSortingRepository<Course, Integer>
 
     boolean existsByTitle(String title);
 
+    Course findByTitle(String title);
+
 }

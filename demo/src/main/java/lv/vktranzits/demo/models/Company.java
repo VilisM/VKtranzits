@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -34,6 +35,7 @@ public class Company {
 
     @Pattern(regexp="[A-Z]{1}[a-z\s]+")
     @Size(min = 4, max = 40)
+    @NotBlank(message = "Nosaukums ir obligāts")
     @Column(name = "Title")
     private String title;
 
