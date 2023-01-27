@@ -97,8 +97,11 @@ public class Employee extends Auditable<String> implements Serializable {
     	if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
+    	else if(surname == null) {
+            throw new IllegalArgumentException("Surname cannot be null");
+        }
         this.name = name;
-        setSurname(surname);
+        this.surname = surname;
         setPhone(phone);
         setEmail(email);
         setPasswordHashed(password);

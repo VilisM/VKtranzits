@@ -184,7 +184,7 @@ public class ExcelServiceImpl implements IExcelService {
 
                 Cell cell1 = dataRow.getCell(idxForColumn1);
                 Cell cell2 = dataRow.getCell(idxForColumn2);
-                if (cell1.getStringCellValue() == "" && cell2.getStringCellValue() == "") {
+                if (cell1.getStringCellValue().equals("") && cell2.getStringCellValue().equals("")) {
                     break;
                 }
                 Cell cell3 = dataRow.getCell(idxForColumn3);
@@ -211,11 +211,12 @@ public class ExcelServiceImpl implements IExcelService {
     @Override
     public void loadDataFromExcel() {
 
-        try {
-            FileInputStream file = new FileInputStream(new File("products.xlsx"));
+        try(FileInputStream file = new FileInputStream(new File("products.xlsx"));
+        		XSSFWorkbook workbook = new XSSFWorkbook(file)){
+            
 
             //Create Workbook instance holding reference to .xlsx file
-            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            
 
             //Get first/desired sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
@@ -261,14 +262,12 @@ public class ExcelServiceImpl implements IExcelService {
 
         ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
-
-        //Create a blank sheet
-        XSSFSheet sheet = workbook.createSheet("Employees Data");
-        int rownum = 0;
-        for (Employee emp : allEmployees) {
+        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
+        	//Create a blank sheet
+        	XSSFSheet sheet = workbook.createSheet("Employees Data");
+        	int rownum = 0;
+        	for (Employee emp : allEmployees) {
             Row row = sheet.createRow(rownum++);
-
             Cell cell = row.createCell(1);
             cell.setCellValue(emp.getName());
             Cell cell2 = row.createCell(2);
@@ -280,7 +279,7 @@ public class ExcelServiceImpl implements IExcelService {
             Cell cell5 = row.createCell(5);
             cell5.setCellValue(emp.getPassword());
 
-            try {
+            
                 //Write the workbook in file system
                 FileOutputStream out = new FileOutputStream
                         (new File("employees.xlsx"));
@@ -288,11 +287,12 @@ public class ExcelServiceImpl implements IExcelService {
                 out.close();
                 System.out.println("employees.xlsx written successfully on disk.");
                 workbook.close();
-            } catch (Exception e) {
+        	}
+        } catch (Exception e) {
                 e.printStackTrace();
-            }
         }
     }
+    
 
 
 }

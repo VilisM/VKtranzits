@@ -25,7 +25,7 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner runner(ICompanyRepo companyRepo, ICourseCalendarRepo courseCalRepo,
+	public CommandLineRunner runner(ICompanyRepo companyRepo,
 	 ICourseTypeRepo courseTypeRepo, IPositionRepo posRepo,
 	 IDepartmentRepo departmentRepo, ICourseRepo courseRepo, IEmployeeRepo employeeRepo, IEmployeeCourseRepo empCourseRepo)
 	{
@@ -33,18 +33,6 @@ public class DemoApplication {
 
 			@Override
 			public void run(String... args) throws Exception {
-				
-				// // Create company
-				// Company company = new Company("VK tranzits");
-				// companyRepo.save(company);
-
-				// // Create department
-				// Department department = new Department("IT", "Janis", "Berzins");
-				// departmentRepo.save(department);
-
-				// // Create position
-				// Position position = new Position("Junior Java developer", "Random description");
-				// posRepo.save(position);
 				CourseType t1 = new CourseType(true, "Vienu reizi gadā");
 				courseTypeRepo.save(t1);
 				CourseType t2 = new CourseType(true, "Divas reizes gadā");

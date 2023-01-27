@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import lv.vktranzits.demo.models.Course;
@@ -24,9 +25,7 @@ public class WordServiceImpl implements IWordService{
     
 	@Override
     public void saveDataInWord() {
-        XWPFDocument document = new XWPFDocument();
-
-
+        try(XWPFDocument document = new XWPFDocument()){
 		ArrayList<Course> allCourses = (ArrayList<Course>) courseRepo.findAll();
 
         XWPFParagraph title = document.createParagraph();
@@ -64,27 +63,28 @@ public class WordServiceImpl implements IWordService{
         para2Run.setItalic(true);
 
     }
-        try
-        {
-            //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream("AllCourses.doc");
-            document.write(out);
-            out.close();
-            document.close();
+         
+        try (FileOutputStream out = new FileOutputStream("AllCourses.doc")) {
+            
+        	document.write(out);
             System.out.println("AllCourses.doc written successfully on disk.");
-        } 
-        catch (Exception e) 
-        {
+        
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
+        } catch (IOException e1) {
+        		e1.printStackTrace();
+        }
     //     XWPFParagraph image = document.createParagraph();
     //    image.setAlignment(ParagraphAlignment.CENTER);
     //     XWPFRun imageRun = image.createRun();
     //     imageRun.setTextPosition(20);
     //     Path imagePath = Paths.get(ClassLoader.getSystemResource(logo).toURI());
     //   imageRun.addPicture(Files.newInputStream(imagePath), XWPFDocument.PICTURE_TYPE_JPEG, imagePath.getFileName().toString(), Units.toEMU(50), Units.toEMU(50));
+
+		// TODO Auto-generated catch block
+	
 
         // XWPFParagraph sectionTitle = document.createParagraph();
         // XWPFRun sectionTRun = sectionTitle.createRun();
